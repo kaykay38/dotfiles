@@ -12,6 +12,6 @@ exec volumeicon &
 #############################################
 while true; do 
     xsetroot -name "$(date +"  %a   %b %d  | %l:%M %p  ")"
-    sleep 30
+    sleep 1m
 done &
 #############################################

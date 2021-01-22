@@ -350,6 +350,7 @@ else
     "nnoremap <leader>; :%s/\s*;\s*/;\r/g<CR>
     "nnoremap <leader>: :%s/\s*;\s*\n*/; /g<CR>
     noremap <F12> :vsp $MYVIMRC<CR>
+    nnoremap T :set splitbelow<CR>:sp<CR>:term<CR>
     inoremap <C-j> <Down>
     inoremap <C-k> <Up>
     inoremap <C-n> <Left>
