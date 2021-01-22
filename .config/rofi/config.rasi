@@ -1,0 +1,20 @@
+configuration {
+	width: 30;
+	lines: 5;
+	columns: 1;
+	font: "Noto Sans Nerd Font 12";
+	bw: 1;
+	padding: 7;
+	fixed-num-lines: true;
+	ssh-command: "{terminal} -e {ssh-client} {host}";
+	sidebar-mode: true;
+	eh: 1;
+	auto-select: false;
+	line-margin: 5;
+	separator-style: "none";
+	hide-scrollbar: false;
+	color-normal: "argb:00202A2e, #797979, argb:00202A2e, argb:00202A2e, #eeeeee";
+	color-urgent: "argb:00202A2e, #c9695f, argb:00202A2e, argb:00202A2e, #d14434";
+	color-active: "argb:00202A2e, #9f9557, argb:00202A2e, argb:00202A2e, #fced6a";
+	color-window: "argb:E6212121, #393939, argb:e6212121";
+}

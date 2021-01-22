@@ -1,0 +1,46 @@
+set showmode
+set ignorecase
+set smartcase
+set scrolloff=5 " 5 lines above/below cursor when scrolling
+
+" Use Idea to join lines smartly
+set ideajoin
+noremap c "*y
+noremap C "+y
+noremap <space>v "*p
+noremap <space>V "+p
+imap <A-j> <Down>
+imap <A-k> <Up>
+imap <A-h> <Left>
+imap <A-l> <Right>
+noremap c "*y
+noremap C "+y
+noremap <A-v> "*p
+"These create newlines like o and O but stay in normal mode
+nmap zj o<Esc>k
+nmap zk O<Esc>j
+nmap <space>q :action CloseContent<cr>
+nmap <space>Q :action ReopenClosedTab<cr>
+" Window navigation
+nmap <space>h <c-w>h
+nmap <space>l <c-w>l
+nmap <space>k <c-w>k
+nmap <space>j <c-w>j
+" To navigate between split panes
+nmap <space>sj :action NextSplitter<cr>
+nmap <space>sk :action PrevSplitter<cr>
+" Splits manipulation
+nmap <space>Z :action SplitHorizontally<cr>
+nmap <space>z :action SplitVertically<cr>
+nmap <space>zu :action Unsplit<cr>
+nmap <space>za :action UnsplitAll<cr>
+nmap <space>wd :action OpenEditorInOppositeTabGroup<cr>
+nmap <space><space> :action VimFilePrevious<cr>
+" nmap <space>ww :action JumpToLastWindow<cr>
+nmap m $
+nmap M ^
+nmap dm d$
+nmap dM d^
+nmap <space>b<C-v>
+nmap sa ggVG
+noremap <space>s :w<cr>
