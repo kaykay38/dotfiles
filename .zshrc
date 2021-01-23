@@ -6,8 +6,8 @@ GITSTATUS_LOG_LEVEL=DEBUG
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
-export DOTNET_ROOT=/opt/dotnet
-export PATH=$PATH:/opt/dotnet
+export DOTNET_ROOT=$HOME/dotnet
+export PATH=$PATH:$HOME/dotnet:$HOME/OneDrive/CodeWorkspace/Scripts
 # NNN CONFIG
 export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
 #export NNN_FCOLORS='00001e318f00000000000000'
@@ -166,6 +166,7 @@ alias codes="cd $HOME/OneDrive/CodeWorkspace"
 alias ctext="cd $HOME/OneDrive/CurrTextbooks"
 alias ewu="cd $HOME/OneDrive/2020-21Q2Winter"
 alias codes="cd $HOME/OneDrive/CodeWorkspace"
+alias scripts="cd $HOME/OneDrive/CodeWorkspace/Scripts"
 alias gitd="cd $HOME/OneDrive/CodeWorkspace/Github"
 alias netd="cd $HOME/OneDrive/CodeWorkspace/NET"
 alias cs240="cd $HOME/OneDrive/2020-21Q2Winter/CSCD240-CandUnix"

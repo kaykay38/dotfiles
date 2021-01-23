@@ -117,6 +117,7 @@ gitstatus.txt
 .config/GIMP/
 .config/Hacknet/
 .config/Microsoft/
+.config/Microsoft\ Teams\ -\ Preview/
 .config/Open\ Sorcery/
 .config/JetBrains/
 .config/Kvantum/
@@ -177,6 +178,7 @@ gitstatus.txt
 .config/pamac/refresh_timestamp
 .config/pamac/size
 .config/pcmanfm/
+.config/pipewire-media-session/
 .config/pulse/
 .config/qt5ct/
 .config/ranger/__pycache__/

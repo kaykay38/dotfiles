@@ -386,7 +386,7 @@ else
     nnoremap dM d^
     nnoremap m $
     nnoremap M ^
-    inoremap <S-Tab> <Esc>^i<BS><Esc>A
+    "inoremap <S-Tab> <Esc>^i<BS><Esc>A
     nnoremap <S-Tab> ^i<BS><Esc>$
     nnoremap <Tab> ^i<Tab><Esc>$
     nnoremap <S><CR> O<Esc>
