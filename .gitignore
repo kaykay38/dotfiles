@@ -133,6 +133,7 @@ gitstatus.txt
 .config/coc/commands
 .config/coc/extensions/
 .config/coc/list-commands-history.json
+.config/coc/list-explorerFiles-history.json
 .config/dconf/
 .config/discord/
 .config/dmenu-recent/
