@@ -28,15 +28,15 @@ Zoom=100
 ZoomMode=1
 
 [MainWindow]
-DP-0 Height 1080=1050
-DP-0 Width 1920=472
-DP-0 XPosition=964
-DP-0 YPosition=25
+DP-0 Height 1080=1057
+DP-0 Width 1920=765
+DP-0 XPosition=1
+DP-0 YPosition=22
 DP-2 Height 1080=1050
 DP-2 Width 1920=136
 DP-2 XPosition=964
 DP-2 YPosition=25
-State=AAAA/wAAAAD9AAAAAAAAAdgAAAPMAAAABAAAAAQAAAAIAAAACPwAAAACAAAAAgAAAAEAAAAiAGEAbgBuAG8AdABhAHQAaQBvAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+State=AAAA/wAAAAD9AAAAAAAAAv0AAAPqAAAABAAAAAQAAAAIAAAACPwAAAACAAAAAgAAAAEAAAAiAGEAbgBuAG8AdABhAHQAaQBvAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
 ToolBarsMovable=Disabled
 
 [MainWindow][Toolbar mainToolBar]
@@ -50,10 +50,14 @@ File1[$e]=$HOME/OneDrive/CodeWorkspace/CS350Project/cs350-project-v02-commands.p
 File2[$e]=$HOME/Downloads/Dead Souls.epub
 File3[$e]=$HOME/OneDrive/CodeWorkspace/CS350Project/cs350-project-v04-specs.pdf
 File4[$e]=$HOME/OneDrive/CodeWorkspace/CS350Project/cs350-task-TE.doc
+File5[$e]=$HOME/OneDrive/CurrTextbooks/Discrete mathematics and its applications by Rosen, Kenneth.pdf
+File6[$e]=$HOME/OneDrive/2020-21Q2Winter/MATH301-DiscreteMathematics/Assignments/assign1.ps
 Name1[$e]=cs350-project-v02-commands.pdf
 Name2[$e]=Dead Souls.epub
 Name3[$e]=cs350-project-v04-specs.pdf
 Name4[$e]=cs350-task-TE.doc
+Name5[$e]=Discrete mathematics and its applications by Rosen, Kenneth.pdf
+Name6[$e]=assign1.ps
 
 [Toolbar mainToolBar]
 ToolButtonStyle=IconOnly

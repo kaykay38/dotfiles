@@ -10,7 +10,7 @@ export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet:$HOME/OneDrive/CodeWorkspace/Scripts
 # NNN CONFIG
 export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
-#export NNN_FCOLORS='00001e318f00000000000000'
+export NNN_FCOLORS='00001e318f00000000000000'
 export NNN_BMS='c:$HOME/OneDrive/CodeWorkspace;j:$HOME/CodeWorkspace/Java'
 export NNN_FIFO="/tmp/nnn.fifo"
 #-------------------------------------------
@@ -92,7 +92,7 @@ if [ -f $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] 
     ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 fi
 #-------------------------------------------
-# COMPLETION 
+# COMPLETION & MISC.
 #-------------------------------------------
 setopt autocd              # change directory just by typing its name
 #setopt correct            # auto correct mistakes
@@ -109,9 +109,9 @@ compinit -d ~/.cache/zcompdump
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
 zstyle ':completion:*' menu yes select
+    # Take advantage of $LS_COLORS for completion as well
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:ls:*' menu yes select
-    # Take advantage of $LS_COLORS for completion as well
 zstyle ':completion:*:processes' command 'ps -U $(whoami)|sed "/ps/d"'
 zstyle ':completion:*:processes' insert-ids menu yes select
 zstyle ':completion:*:processes-names' command 'ps xho command|sed "s/://g"'
@@ -141,7 +141,7 @@ alias open="xdg-open"
 alias pac="sudo pacman -S"
 alias pacr="sudo pacman -Rs"
 alias v="nvim"
-alias sv="sudo nvim"
+alias sv="sudoedit"
 alias g="git"
 alias nn="nnn -eU"
 alias zrc="nvim $HOME/.zshrc"
@@ -162,13 +162,16 @@ alias conf="cd $HOME/.config"
 alias startup="cd $HOME/.config/.startup"
 alias dwmd="cd $HOME/suckless/dwm"
 alias dwmc="cd $HOME/suckless/dwm && nvim $HOME/suckless/dwm/config.h"
-alias codes="cd $HOME/OneDrive/CodeWorkspace"
-alias ctext="cd $HOME/OneDrive/CurrTextbooks"
+alias oned="cd $HOME/OneDrive"
 alias ewu="cd $HOME/OneDrive/2020-21Q2Winter"
 alias codes="cd $HOME/OneDrive/CodeWorkspace"
-alias scripts="cd $HOME/OneDrive/CodeWorkspace/Scripts"
 alias gitd="cd $HOME/OneDrive/CodeWorkspace/Github"
 alias netd="cd $HOME/OneDrive/CodeWorkspace/NET"
+alias javad="cd $HOME/OneDrive/CodeWorkspace/Java"
+alias clangd="cd $HOME/OneDrive/CodeWorkspace/C"
+alias pyd="cd $HOME/OneDrive/CodeWorkspace/Python"
+alias ctext="cd $HOME/OneDrive/CurrTextbooks"
+alias scripts="cd $HOME/OneDrive/CodeWorkspace/Scripts"
 alias cs240="cd $HOME/OneDrive/2020-21Q2Winter/CSCD240-CandUnix"
 alias cs327="cd $HOME/OneDrive/2020-21Q2Winter/CSCD327-RelationalDatabases"
 alias cs371="cd $HOME/OneDrive/CodeWorkspace/NET/CSCD371-NETProgramming"
@@ -186,3 +189,5 @@ alias m301="xdg-open https://canvas.ewu.edu/courses/1427319 &"
 alias m301b="zathura $HOME/OneDrive/CurrTextbooks/Discrete\ mathematics\ and\ its\ applications\ by\ Rosen,\ Kenneth.pdf &"
 alias vpn="sudo $HOME/security/ewuVPN.sh"
 alias bfg="java -jar /opt/bfg.jar"
+alias susp="systemctl suspend"
+alias off="poweroff"
