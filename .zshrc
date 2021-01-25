@@ -138,6 +138,7 @@ alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 alias open="xdg-open"
+alias pacs=pacSearch
 alias pac="sudo pacman -S"
 alias pacr="sudo pacman -Rs"
 alias v="nvim"
@@ -191,3 +192,7 @@ alias vpn="sudo $HOME/security/ewuVPN.sh"
 alias bfg="java -jar /opt/bfg.jar"
 alias susp="systemctl suspend"
 alias off="poweroff"
+
+function pacSearch() {
+    pacman -Ss "^$1"
+}
