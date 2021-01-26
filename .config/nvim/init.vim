@@ -406,5 +406,7 @@ else
     " FZF: {{{
     nnoremap <C-t> :Tags<CR>
     "nnoremap <leader>m :Marks<CR>
+    nmap gd <Plug>(coc-definition)    
+    nmap gr <Plug>(coc-references)    
 " }}}
 endif
