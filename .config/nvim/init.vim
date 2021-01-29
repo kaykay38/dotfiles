@@ -61,14 +61,14 @@ else
     Plug 'mbbill/undotree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'tpope/vim-surround'
+    " Plug 'tpope/vim-surround'
     Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'dense-analysis/ale'
-    Plug 'sirver/ultisnips'
+    " Plug 'sirver/ultisnips'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'neovim/nvim-lspconfig'
+    " Plug 'neovim/nvim-lspconfig'
     Plug 'PProvost/vim-ps1'
     Plug 'uiiaoo/java-syntax.vim'
     Plug 'OmniSharp/omnisharp-vim'

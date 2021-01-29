@@ -6,7 +6,7 @@ GITSTATUS_LOG_LEVEL=DEBUG
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
-export DOTNET_ROOT=$HOME/dotnet
+export DOTNET_ROOT=/usr/share/dotnet
 export PATH=$PATH:$HOME/dotnet:$HOME/OneDrive/CodeWorkspace/Scripts
 # NNN CONFIG
 export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
@@ -32,7 +32,7 @@ bindkey '^[[Z' undo                               # shift + tab undo last action
 # HISTORY
 #-------------------------------------------
 # History configurations
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000
 SAVEHIST=2000
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
@@ -46,8 +46,8 @@ alias history="history 0"
 #-------------------------------------------
 # COLORS
 #-------------------------------------------
-if [ -f $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
-    . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    . $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
     ZSH_HIGHLIGHT_STYLES[default]=none
     ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
@@ -105,7 +105,7 @@ setopt promptsubst         # enable command substitution in prompt
 WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # TAB COMPLETION 
 autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
+compinit -d $HOME/.cache/zcompdump
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
 zstyle ':completion:*' menu yes select
@@ -119,18 +119,19 @@ zstyle ':completion:*:processes' sort false
 #------------------------------------------
 # PLUGINS & SCRIPTS
 #-------------------------------------------
-source ~/.config/zsh/find.zsh
-source ~/.config/zsh/alacritty-win-title.zsh
-source ~/.config/zsh/websearch.zsh
-source ~/.config/zsh/zsh-autosuggestions
-source ~/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.config/zsh/find.zsh
+source $HOME/.config/zsh/alacritty-win-title.zsh
+source $HOME/.config/zsh/websearch.zsh
+source $HOME/.config/zsh/zsh-autosuggestions
+source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 #-------------------------------------------
 # ALIASES
 #-------------------------------------------
 alias s="sudo"
 alias l="exa -a --icons"
 alias ll="exa -al --icons"
-alias ls="ls -a --color"
+alias ls="ls --color"
+alias la="ls -a --color"
 alias lsl="ls -al --color"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -138,11 +139,12 @@ alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 alias open="xdg-open"
-alias pacs=pacSearch
 alias pac="sudo pacman -S"
 alias pacr="sudo pacman -Rs"
+alias pacs=pacSearch
 alias v="nvim"
 alias sv="sudoedit"
+alias za=zathuraOpen
 alias g="git"
 alias nn="nnn -eU"
 alias zrc="nvim $HOME/.zshrc"
@@ -150,19 +152,16 @@ alias src="source $HOME/.zshrc"
 alias vrc="nvim $HOME/.config/nvim/init.vim"
 alias rr="ranger"
 alias srr="sudo ranger"
+alias pc="pcmanfm . &"
+alias smake="sudo make clean install"
 alias dwn="cd $HOME/Downloads"
+alias scrshots="cd $HOME/Pictures/Screenshots"
 alias vd="cd $HOME/.config/nvim"
 alias svd="cd /opt/nvim/share/nvim/runtime"
-alias pc="pcmanfm . &"
-alias bar="killall -9 polybar & $HOME/.config/polybar/launch.sh"
-alias barc="nvim $HOME/.config/polybar/config.ini"
-alias cal='calcurse'
-alias pulse="killall pulseaudio"
-alias smake="sudo make clean install"
 alias conf="cd $HOME/.config"
 alias startup="cd $HOME/.config/.startup"
-alias dwmd="cd $HOME/suckless/dwm"
-alias dwmc="cd $HOME/suckless/dwm && nvim $HOME/suckless/dwm/config.h"
+alias dwmd="cd $HOME/Suckless/dwm"
+alias dwmc="cd $HOME/Suckless/dwm && nvim $HOME/Suckless/dwm/config.h"
 alias oned="cd $HOME/OneDrive"
 alias ewu="cd $HOME/OneDrive/2020-21Q2Winter"
 alias codes="cd $HOME/OneDrive/CodeWorkspace"
@@ -180,7 +179,7 @@ alias ma301="cd $HOME/OneDrive/2020-21Q2Winter/MATH301-DiscreteMathematics"
 alias 350proj="cd $HOME/OneDrive/CodeWorkspace/CS350Project"
 alias dotfiles="xdg-open https://github.com/kaykay38/dotfiles &"
 alias canvas="xdg-open https://canvas.ewu.edu/ &"
-alias ccal="xdg-open https://canvas.ewu.edu/calendar#view_name=month&view_start= &"
+alias ccal="xdg-open https://canvas.ewu.edu/calendar &"
 alias c371g="xdg-open https://github.com/IntelliTect-Samples/EWU-CSCD371-2021-Winter &"
 alias c240="xdg-open https://canvas.ewu.edu/courses/1427733 &"
 alias c327="xdg-open https://canvas.ewu.edu/courses/1427835 &"
@@ -188,11 +187,13 @@ alias c371="xdg-open https://canvas.ewu.edu/courses/1451913 &"
 alias m371b="zathura $HOME/OneDrive/CurrTextbooks/Essential\ C\ Sharp\ 8.0\ by\ Mark\ Michaelis.pdf&"
 alias m301="xdg-open https://canvas.ewu.edu/courses/1427319 &"
 alias m301b="zathura $HOME/OneDrive/CurrTextbooks/Discrete\ mathematics\ and\ its\ applications\ by\ Rosen,\ Kenneth.pdf &"
-alias vpn="sudo $HOME/security/ewuVPN.sh"
+alias vpn="sudo $HOME/Security/ewuVPN.sh"
 alias bfg="java -jar /opt/bfg.jar"
 alias susp="systemctl suspend"
 alias off="poweroff"
-
+function zathuraOpen() {
+    zathura $1 &
+}
 function pacSearch() {
     pacman -Ss "^$1"
 }

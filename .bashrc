@@ -1,7 +1,154 @@
+#
+# ~/.bashrc
+#
+[[ $- != *i* ]] && return
 #-------------------------------------------
 # PROMPT
 #-------------------------------------------
-source .p10k.zsh
+#autoload -Uz vcs_info
+#precmd_vcs_info() { vcs_info }
+#precmd_functions+=( precmd_vcs_info )
+# Format the vcs_inf_msg
+#zstyle ':vcs_info:git:*' formats ' %b'
+# Set up the prompt with git branch name on right side
+#setopt prompt_subst
+#RPROMPT='%F{30}${vcs_info_msg_0_}%f'
+PROMPT='%(?.%F{green}✓.%F{red}?%?)%f %F{209}%1~%f %F{36}$%f '
+
+#-------------------------------------------
+# COLORS
+#-------------------------------------------
+colors() {
+	local fgc bgc vals seq0
+
+	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+
+	# foreground colors
+	for fgc in {30..37}; do
+		# background colors
+		for bgc in {40..47}; do
+			fgc=${fgc#37} # white
+			bgc=${bgc#40} # black
+
+			vals="${fgc:+$fgc;}${bgc}"
+			vals=${vals%%;}
+
+			seq0="${vals:+\e[${vals}m}"
+			printf "  %-9s" "${seq0:-(default)}"
+			printf " ${seq0}TEXT\e[m"
+			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+		done
+		echo; echo
+	done
+}
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+# Change the window title of X terminals
+case ${TERM} in
+	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
+		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+		;;
+	screen*)
+		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+		;;
+esac
+
+use_color=true
+
+# Set colorful PS1 only on colorful terminals.
+# dircolors --print-database uses its own built-in database
+# instead of using /etc/DIR_COLORS.  Try to use the external file
+# first to take advantage of user additions.  Use internal bash
+# globbing instead of external grep binary.
+safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
+match_lhs=""
+[[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
+[[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
+[[ -z ${match_lhs}    ]] \
+	&& type -P dircolors >/dev/null \
+	&& match_lhs=$(dircolors --print-database)
+[[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
+
+if ${use_color} ; then
+	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+	if type -P dircolors >/dev/null ; then
+		if [[ -f ~/.dir_colors ]] ; then
+			eval $(dircolors -b ~/.dir_colors)
+		elif [[ -f /etc/DIR_COLORS ]] ; then
+			eval $(dircolors -b /etc/DIR_COLORS)
+		fi
+	fi
+
+	if [[ ${EUID} == 0 ]] ; then
+		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
+	else
+		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+	fi
+
+	alias egrep='egrep --colour=auto'
+	alias fgrep='fgrep --colour=auto'
+else
+	if [[ ${EUID} == 0 ]] ; then
+		# show root@ when we don't have colors
+		PS1='\u@\h \W \$ '
+	else
+		PS1='\u@\h \w \$ '
+	fi
+fi
+
+unset use_color safe_term match_lhs sh
+
+alias cp="cp -i"                          # confirm before overwriting something
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less
+
+xhost +local:root > /dev/null 2>&1
+
+complete -cf sudo
+
+# Bash won't get SIGWINCH if another process is in the foreground.
+# Enable checkwinsize so that bash will check the terminal size when
+# it regains control.  #65623
+# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+shopt -s checkwinsize
+
+shopt -s expand_aliases
+
+# export QT_SELECT=4
+
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
@@ -12,117 +159,6 @@ export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgv
 #export NNN_FCOLORS='00001e318f00000000000000'
 export NNN_BMS='c:$HOME/OneDrive/CodeWorkspace;j:$HOME/CodeWorkspace/Java'
 export NNN_FIFO="/tmp/nnn.fifo"
-#-------------------------------------------
-# KEY BINDINGS
-#-------------------------------------------
-# configure key keybindings
-bindkey -e                                        # emacs key bindings
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
-bindkey '^[[H' beginning-of-line                  # home
-bindkey '^[[F' end-of-line                        # end
-bindkey '^[[Z' undo                               # shift + tab undo last action
-#-------------------------------------------
-# HISTORY
-#-------------------------------------------
-# History configurations
-HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=2000
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-#setopt share_history         # share command history data
-
-# force zsh to show the complete history
-alias history="history 0"
-#-------------------------------------------
-# COLORS
-#-------------------------------------------
-if [ -f $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
-    . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-    ZSH_HIGHLIGHT_STYLES[default]=none
-    ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
-    ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=cyan,bold
-    ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
-    ZSH_HIGHLIGHT_STYLES[global-alias]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
-    ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
-    ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
-    ZSH_HIGHLIGHT_STYLES[path]=underline
-    ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
-    ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
-    ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
-    ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
-    ZSH_HIGHLIGHT_STYLES[command-substitution]=none
-    ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[process-substitution]=none
-    ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
-    ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=blue,bold
-    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
-    ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
-    ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[assign]=none
-    ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
-    ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
-    ZSH_HIGHLIGHT_STYLES[named-fd]=none
-    ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
-    ZSH_HIGHLIGHT_STYLES[arg0]=fg=green
-    ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red,bold
-    ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue,bold
-    ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=green,bold
-    ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=magenta,bold
-    ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
-    ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
-    ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
-fi
-#-------------------------------------------
-# COMPLETION 
-#-------------------------------------------
-setopt autocd              # change directory just by typing its name
-#setopt correct            # auto correct mistakes
-setopt interactivecomments # allow comments in interactive mode
-setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
-setopt nonomatch           # hide error message if there is no match for the pattern
-setopt notify              # report the status of background jobs immediately
-setopt numericglobsort     # sort filenames numerically when it makes sense
-setopt promptsubst         # enable command substitution in prompt
-WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
-# TAB COMPLETION 
-autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
-zstyle ':completion:*' menu yes select
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:ls:*' menu yes select
-    # Take advantage of $LS_COLORS for completion as well
-zstyle ':completion:*:processes' command 'ps -U $(whoami)|sed "/ps/d"'
-zstyle ':completion:*:processes' insert-ids menu yes select
-zstyle ':completion:*:processes-names' command 'ps xho command|sed "s/://g"'
-zstyle ':completion:*:processes' sort false 
-#------------------------------------------
-# PLUGINS & SCRIPTS
-#-------------------------------------------
-source ~/.config/zsh/find.zsh
-source ~/.config/zsh/alacritty-win-title.zsh
-source ~/.config/zsh/websearch.zsh
-source ~/.config/zsh/zsh-autosuggestions
-source ~/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 #-------------------------------------------
 # ALIASES
 #-------------------------------------------
@@ -141,8 +177,9 @@ alias v="nvim"
 alias sv="sudo nvim"
 alias g="git"
 alias nn="nnn -eU"
+alias brc="nvim $HOME/.bashrc"
 alias zrc="nvim $HOME/.zshrc"
-alias src="source $HOME/.zshrc"
+alias src="source $HOME/.bashrc"
 alias vrc="nvim $HOME/.config/nvim/init.vim"
 alias rr="ranger"
 alias srr="sudo ranger"
@@ -178,4 +215,4 @@ alias c371="xdg-open https://canvas.ewu.edu/courses/1451913 &"
 alias m371b="zathura $HOME/OneDrive/CurrTextbooks/Essential\ C\ Sharp\ 8.0\ by\ Mark\ Michaelis.pdf&"
 alias m301="xdg-open https://canvas.ewu.edu/courses/1427319 &"
 alias m301b="zathura $HOME/OneDrive/CurrTextbooks/Discrete\ mathematics\ and\ its\ applications\ by\ Rosen,\ Kenneth.pdf &"
-alias vpn="sudo $HOME/.config/.startup/ewuVPN.sh"
+alias vpn="sudo $HOME/.config/.startup/ewuVPN.sh &"
