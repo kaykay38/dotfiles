@@ -1,0 +1,5 @@
+#!/bin/sh
+[ $(pamixer --get-mute) = true ] && notify-send --hint=string:x-dunst-stack-tag:test "Volume Muted" && exit 0
+vol="$(pamixer --get-volume)"
+pamixer --allow-boost -d 5
+notify-send --hint=string:x-dunst-stack-tag:test "Volume $vol%"

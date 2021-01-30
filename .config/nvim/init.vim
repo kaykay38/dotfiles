@@ -73,6 +73,7 @@ else
     Plug 'uiiaoo/java-syntax.vim'
     Plug 'OmniSharp/omnisharp-vim'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    Plug 'lervag/vimtex'
     " Plug 'nvim-treesitter/nvim-treesitter', {'commit': '3c07232'}
     call plug#end()
 " }}}
@@ -346,7 +347,6 @@ else
     let mapleader = " "
     noremap <silent><leader>n :call ToggleNetrw()<CR>
     nnoremap <leader>r :%s/
-    nnoremap <leader>p :MarkdownPreview<CR>
     "nnoremap <leader>; :%s/\s*;\s*/;\r/g<CR>
     "nnoremap <leader>: :%s/\s*;\s*\n*/; /g<CR>
     noremap <F12> :vsp $MYVIMRC<CR>

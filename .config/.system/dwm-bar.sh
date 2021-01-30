@@ -14,12 +14,12 @@ done &
 vpn () {
     status="$(ip a | grep tun0 | grep inet | grep global | wc -l)"
     if [[ "$status" == '1' ]]; then
-        echo "   Connected "
+        printf "    Connected  |"
     fi
 }
 
 datetime () {
-    echo "$(date +"  %a   %b %d  ♦ %l:%M %p  ")"
+    printf "$(date +"  %a ◆  %b %d  ◆ %l:%M %p ")"
 }
 
 #############################################
