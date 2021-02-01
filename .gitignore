@@ -114,6 +114,7 @@ gitstatus.txt
 .config/Code/
 .config/Electron/
 .config/GIMP/
+.config/GitKraken/
 .config/Hacknet/
 .config/Microsoft/
 .config/Microsoft\ Teams\ -\ Preview/
@@ -149,7 +150,6 @@ gitstatus.txt
 .config/font-manager/
 .config/fontconfig/
 .config/gconf/
-.config/GitKraken/
 .config/google-chrome/
 .config/gtk-2.0/
 .config/gtk-3.0/
@@ -168,6 +168,7 @@ gitstatus.txt
 .config/mpd/
 .config/msmtp/
 .config/mutt/
+.config/newsboat/cache.db
 .config/nitrogen/
 .config/nomacs/
 .config/nvim/.netrwhist

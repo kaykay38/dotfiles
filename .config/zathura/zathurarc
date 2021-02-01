@@ -12,3 +12,4 @@ set inputbar-bg "#323232"
 set inputbar-fg "#ffffff"
 set statusbar-bg "#212121"
 set statusbar-fg "#bbbbbb"
+set window-title-basename true

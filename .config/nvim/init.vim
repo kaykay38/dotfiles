@@ -386,15 +386,16 @@ else
     nnoremap dM d^
     nnoremap m $
     nnoremap M ^
-    "inoremap <S-Tab> <Esc>^i<BS><Esc>A
-    nnoremap <S-Tab> ^i<BS><Esc>$
-    nnoremap <Tab> ^i<Tab><Esc>$
+    nnoremap <S-Tab> V:'<,'><<CR>
+    nnoremap <Tab> V:'<,'>><CR>
+    vnoremap <S-Tab> :'<,'><<CR>
+    vnoremap <Tab> :'<,'>><CR>
     nnoremap <S><CR> O<Esc>
     nnoremap <CR> o<Esc>
     nnoremap zk O<Esc>j
     nnoremap zj o<Esc>k
     nnoremap <leader>fi gg=G<C-o><C-o>
-    nnoremap <leader>sa ggVG
+    nnoremap <leader>a ggVG
     nnoremap <leader>u :UndotreeShow<CR>
     " coc-explorer: {{{
     nnoremap <leader>e :CocCommand explorer<CR>
