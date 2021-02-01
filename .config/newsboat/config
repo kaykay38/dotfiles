@@ -25,7 +25,7 @@ text-width 80
 
 goto-next-feed no
 
-browser "$BROWSER %U"
+browser "$BROWSER"
 
 bind-key j down feedlist
 bind-key k up feedlist

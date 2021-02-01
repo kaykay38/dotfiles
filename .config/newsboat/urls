@@ -1,5 +1,18 @@
+#------------------------------------------------------------------
+#                             Reddit                              
+#------------------------------------------------------------------
 https://www.reddit.com/r/wallstreetbets/.rss "~r/WallStreetBets" "Reddit"
-https://feeds.simplecast.com/54nAGcIl "~The Daily by NYT" "News Podcasts"
+https://www.reddit.com/r/wallstreetbets/.rss "~r/WallStreetBets" "Reddit"
+https://www.reddit.com/r/suckless/.rss "~r/suckless" "Reddit"
+
+#------------------------------------------------------------------
+#                              News                               
+#------------------------------------------------------------------
 http://feeds.bbci.co.uk/news/world/rss.xml "~BBC World News" "BBC"
 https://rss.nytimes.com/services/xml/rss/nyt/US.xml "~NYT US News" "New York Times"
 https://feeds.feedburner.com/yankodesign "~Yanko Design" "Design"
+
+#------------------------------------------------------------------
+#                          News Podcasts                          
+#------------------------------------------------------------------
+https://feeds.simplecast.com/54nAGcIl "~The Daily by NYT" "News Podcasts"
