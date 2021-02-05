@@ -357,12 +357,12 @@ else
     inoremap <C-k> <Up>
     inoremap <C-n> <Left>
     inoremap <C-l> <Right>
-    noremap <leader>c "*y
-    noremap <leader>C "+y
-    vnoremap <leader>c "*y
+    noremap <leader>c "+y
+    noremap <leader>y "*Y
     vnoremap <leader>C "+y
-    noremap <leader>v "*p
-    noremap <leader>V "+p
+    vnoremap <leader>Y "*Y
+    noremap <leader>v "+p
+    noremap <leader>V "+P
     nnoremap <silent><leader>h :wincmd h<CR>
     nnoremap <silent><leader>j :wincmd j<CR>
     nnoremap <silent><leader>k :wincmd k<CR>

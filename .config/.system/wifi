@@ -1,0 +1,5 @@
+#!/bin/sh
+
+wifiStatus="$(nmcli | grep 'wlp5s0: connected to ' | sed 's/wlp5s0: connected to //')"
+[ ! -z "$wifiStatus" ] && echo $wifiStatus && exit 0
+echo "Disconnected"

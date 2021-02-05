@@ -3,7 +3,7 @@ configuration {
 	lines: 5;
 	columns: 1;
 	font: "Noto Sans Nerd Font 14";
-	bw: 1;
+	bw: 20;
 	padding: 20;
 	fixed-num-lines: true;
 	ssh-command: "{terminal} -e {ssh-client} {host}";

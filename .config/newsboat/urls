@@ -15,3 +15,9 @@ https://feeds.feedburner.com/yankodesign "~Yanko Design" "Design"
 #                          News Podcasts                          
 #------------------------------------------------------------------
 https://feeds.simplecast.com/54nAGcIl "~The Daily by NYT" "News Podcasts"
+
+
+#------------------------------------------------------------------
+#                              Linux                          
+#------------------------------------------------------------------
+https://i-bsd.com/feed.xml "~i-BSD" "Linux & etc"

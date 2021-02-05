@@ -1,8 +1,10 @@
+#1/bin/sh
 #############################################
 #               DWM Statusbar               #
 #############################################
+killall "/bin/sh $HOME/.config/.system/dwm-bar.sh"
 while true; do 
-    vpnStatus="$(ip a | grep tun0 | grep inet | grep global | wc -l)"
+    vpnStatus="$(ip a | grep 'tun0' | grep 'inet' | wc -l)"
     vpnIcon=""
     if [[ "$vpnStatus" == '1' ]]; then
         vpnIcon="    Connected  |"
@@ -12,8 +14,8 @@ while true; do
 done &
 
 vpn () {
-    status="$(ip a | grep tun0 | grep inet | grep global | wc -l)"
-    if [[ "$status" == '1' ]]; then
+    vpnStatus="$(ip a | grep 'tun0' | grep 'inet')"
+    if [[ ! -z "$vpnStatus" ]]; then
         printf "    Connected  |"
     fi
 }

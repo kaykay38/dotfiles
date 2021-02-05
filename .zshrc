@@ -177,6 +177,7 @@ alias scripts="cd $HOME/OneDrive/CodeWorkspace/Scripts"
 alias cs240="cd $HOME/OneDrive/2020-21Q2Winter/CSCD240-CandUnix"
 alias cs327="cd $HOME/OneDrive/2020-21Q2Winter/CSCD327-RelationalDatabases"
 alias cs371="cd $HOME/OneDrive/CodeWorkspace/NET/CSCD371-NETProgramming"
+alias cs371a="cd $HOME/OneDrive/CodeWorkspace/NET/Alex_Mia_CSCD371"
 alias ma301="cd $HOME/OneDrive/2020-21Q2Winter/MATH301-DiscreteMathematics"
 alias 350proj="cd $HOME/OneDrive/CodeWorkspace/CS350Project"
 alias dotfiles="xdg-open https://github.com/kaykay38/dotfiles &"
@@ -190,7 +191,7 @@ alias c371="xdg-open https://canvas.ewu.edu/courses/1451913 &"
 alias m371b="zathura $HOME/OneDrive/CurrTextbooks/Essential\ C\ Sharp\ 8.0\ by\ Mark\ Michaelis.pdf&"
 alias m301="xdg-open https://canvas.ewu.edu/courses/1427319 &"
 alias m301b="zathura $HOME/OneDrive/CurrTextbooks/Discrete\ mathematics\ and\ its\ applications\ by\ Rosen,\ Kenneth.pdf &"
-alias vpn="$HOME/Security/ewuVPN.sh"
+alias vpn="$HOME/Security/autovpn"
 alias bfg="java -jar /opt/bfg.jar"
 alias susp="systemctl suspend"
 alias off="poweroff"
@@ -224,3 +225,5 @@ function ex ()
     echo "'$1' is not a valid file"
   fi
 }
+# Add .NET Core SDK tools
+export PATH="$PATH:/home/mia/.dotnet/tools"

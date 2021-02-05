@@ -59,6 +59,7 @@ perl5/
 .ssh/
 .steam/
 .swt/
+.templateengine/
 .thumbnails/
 .tooling/
 .urxvt/
@@ -135,6 +136,7 @@ gitstatus.txt
 .config/coc/list-commands-history.json
 .config/coc/list-explorerFiles-history.json
 .config/coc/list-location-history.json
+.config/clipboard-history/
 .config/dconf/
 .config/discord/
 .config/dmenu-recent/
