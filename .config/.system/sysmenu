@@ -32,7 +32,7 @@ case "$MENU" in
   *Lock) slock;;
   *Sleep) systemctl suspend;;
   *Logout) kill -9 -1;;
-  *Reboot) systemctl reboot ;;
+  *Reboot) reboot ;;
   *Shutdown) systemctl -i poweroff
 esac
 

@@ -18,14 +18,13 @@
 ;==========================================================
 
 [color]
-bg = #f2212121
-fg = #bbbbbb
+bg = #f2192124
+fg = #d8d8d8
 fg-alt = #A9ABB0
 
-cactive = #eeeeee
-cactiveBackground = #393939
+cactive = #16a085
 curgent = #EF5350
-coccupied = #bbbbbb
+coccupied = #78a177
 ;========================================================
 ;  _                    
 ; | |__   __ _ _ __ ___ 
@@ -46,7 +45,7 @@ fixed-center = true
 background = ${color.bg}
 foreground = ${color.fg}
 padding=0
-font-0="NotoSans Nerd Font:size=11;3"
+font-0="NotoSans NF:size=11;3"
 font-1="NotoSans Nerd Font:size=11;3"
 dpi = 100
 ;-------------------------Postions------------------------
@@ -95,7 +94,7 @@ format = <label-state> <label-mode>
 ; Default: %mode%
 label-mode = %mode%
 label-mode-padding = 2
-label-mode-background = #636363
+label-mode-background = #16a085
 
 ; Available tokens:
 ;   %name%
@@ -105,7 +104,6 @@ label-mode-background = #636363
 ; Default: %icon%  %name%
 label-focused = %name%
 label-focused-foreground = ${color.cactive}
-label-focused-background = #393939
 label-focused-padding = 2
 
 ; Available tokens:
@@ -134,8 +132,7 @@ label-visible-padding = 2
 ;   %output%
 ; Default: %icon%  %name%
 label-urgent = %index%
-label-urgent-foreground = #212121 
-label-urgent-background = ${color.curgent} 
+label-urgent-foreground = ${color.curgent} 
 label-urgent-padding = 2
 ;===============================================================
 [module/github]
@@ -231,7 +228,7 @@ type = internal/date
 interval = 10
 time = "%l:%M %p"
 date = "%a %b %d"
-label =%date% ◆ %time%   
+label =%date% | %time%   
 label-font= 2
 
 ; [module/temperature]

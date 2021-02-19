@@ -24,7 +24,7 @@ else
     set shiftwidth=4
     set mouse=a
     set smartindent
-    set nu
+    set relativenumber
     set smartcase
     set noswapfile
     set nobackup
@@ -72,6 +72,7 @@ else
     Plug 'PProvost/vim-ps1'
     Plug 'uiiaoo/java-syntax.vim'
     Plug 'OmniSharp/omnisharp-vim'
+    Plug 'jackguo380/vim-lsp-cxx-highlight'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     Plug 'lervag/vimtex'
     " Plug 'nvim-treesitter/nvim-treesitter', {'commit': '3c07232'}
@@ -95,15 +96,6 @@ else
     hi! Todo       ctermbg=NONE guibg=NONE
     " Syntax Highlighting: {{{
     " }}}
-" }}}
-" ALE: {{{
-    let g:ale_sign_error = '•'
-    let g:ale_sign_warning = '•'
-    let g:ale_sign_info = '·'
-    let g:ale_sign_style_error = '·'
-    let g:ale_sign_style_warning = '·'
-    let g:ale_linters = { 'cs': ['syntax','semantic', 'issues'], 'python': ['pylint'],'java':['javac'] }
-    let g:ale_fixers={'*':[],'python':['black','isort']}
 " }}}
 " Lightline: {{{
     let g:lightline = {
@@ -171,6 +163,30 @@ else
     "let g:ycm_global_ycm_extra_conf = '$HOME/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" }}}
+" ALE: {{{
+    let g:ale_sign_error = '•'
+    let g:ale_sign_warning = '•'
+    let g:ale_sign_info = '·'
+    let g:ale_sign_style_error = '·'
+    let g:ale_sign_style_warning = '·'
+    let g:ale_linters = { 'cs': ['syntax','semantic', 'issues'], 'python': ['pylint'],'java':['javac']}
+    let g:ale_fixers={'*':[],'python':['black','isort']}
+" }}}
+" COC: {{{
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
 " }}}
 " Snippets: {{{
     " Set this to 1 to use ultisnips for snippet handling
@@ -358,9 +374,9 @@ else
     inoremap <C-n> <Left>
     inoremap <C-l> <Right>
     noremap <leader>c "+y
-    noremap <leader>y "*Y
+    noremap <leader>y "+Y
     vnoremap <leader>C "+y
-    vnoremap <leader>Y "*Y
+    vnoremap <leader>Y "+Y
     noremap <leader>v "+p
     noremap <leader>V "+P
     nnoremap <silent><leader>h :wincmd h<CR>
@@ -388,8 +404,8 @@ else
     nnoremap dM d^
     nnoremap m $
     nnoremap M ^
-    nnoremap <S-Tab> V:'<,'><<CR>
-    nnoremap <Tab> V:'<,'>><CR>
+    nnoremap <S-Tab> :<<CR>
+    nnoremap <Tab> :><CR>
     vnoremap <S-Tab> :'<,'><<CR>
     vnoremap <Tab> :'<,'>><CR>
     nnoremap <S><CR> O<Esc>
@@ -399,17 +415,18 @@ else
     nnoremap <leader>fi gg=G<C-o><C-o>
     nnoremap <leader>a ggVG
     nnoremap <leader>u :UndotreeShow<CR>
-    " coc-explorer: {{{
+    " coc-explorer
     nnoremap <leader>e :CocCommand explorer<CR>
     nnoremap <leader>f :Files<CR>
     nnoremap <leader>bb :Buffers<CR>
     " Ripgrep
     nnoremap <leader>g :Rg<CR>
-    " }}}
-    " FZF: {{{
+    " FZF
     nnoremap <C-t> :Tags<CR>
     "nnoremap <leader>m :Marks<CR>
-    nmap gd <Plug>(coc-definition)    
-    nmap gr <Plug>(coc-references)    
+    " CoC
+    nmap <silent> gd <Plug>(coc-definition)    
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)    
 " }}}
 endif

@@ -215,3 +215,4 @@ gitstatus.txt
 .config/picomDefault.conf
 .config/zoom.conf
 .config/zoomus.conf
+node_modules

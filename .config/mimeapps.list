@@ -1,6 +1,6 @@
 [Default Applications]
-x-scheme-handler/http=brave.desktop
-x-scheme-handler/https=brave.desktop
+x-scheme-handler/http=brave-browser.desktop
+x-scheme-handler/https=brave-browser.desktop
 x-scheme-handler/ftp=brave.desktop
 x-scheme-handler/chrome=brave.desktop
 text/html=brave.desktop
@@ -23,10 +23,11 @@ application/x-trash=sublime_text.desktop
 x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_usr_lib_eclipse_.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/gitkraken=GitKraken.desktop
+x-scheme-handler/obsidian=obsidian.desktop
 
 [Added Associations]
-x-scheme-handler/http=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;
-x-scheme-handler/https=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;
+x-scheme-handler/http=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;brave-browser.desktop;
+x-scheme-handler/https=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;brave-browser.desktop;
 x-scheme-handler/ftp=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;
 x-scheme-handler/chrome=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;
 text/html=userapp-Pale Moon.desktop;brave.desktop;firefox.desktop;

@@ -5,7 +5,7 @@
 # Set mod key ($alt=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $alt Mod1
-set $terminal alacritty
+set $terminal kitty
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
@@ -33,17 +33,17 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+Return exec urxvt
 
 # Open i3 Config File
-bindsym $alt+i exec alacritty -e nvim $HOME/.i3/config
+bindsym $alt+i exec kitty -e nvim $HOME/.i3/config
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # Open Pamac-manager
 bindsym $alt+p exec pamac-manager
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $alt+space exec --no-startup-id rofi -show drun -display-drun "applications" -drun-display-format "{name}" -show-icons
+bindsym $alt+space exec --no-startup-id rofi -show drun -show-icons
 bindsym $alt+r exec --no-startup-id rofi -show run -show-icons
 
 # launch categorized menu
@@ -53,7 +53,10 @@ bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $alt+w exec --no-startup-id rofi -show window -show-icons
 
 # Start Spotify
-bindsym $alt+s exec "i3-msg 'workspace $ws3'; exec spotify" 
+bindsym $alt+s exec /usr/local/bin/spotify 
+
+# Clipboard
+bindsym $mod+v exec --no-startup-id rofi -modi 'Clipboard:greenclip print' -show Clipboard -run-command '{cmd}'
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -73,35 +76,34 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 # Start Applications
 #bindsym $mod+Ctrl+b exec $terminal 'bmenu'
-bindsym $mod+F1 exec brave 
-bindsym $mod+Shift+F1 exec --no-startup-id brave https://www.youtube.com
+bindsym $mod+$alt+Enter exec brave 
+bindsym $mod+F1 exec --no-startup-id brave https://www.youtube.com
 bindsym $mod+F2 exec --no-startup-id pcmanfm
 bindsym $mod+Shift+F2 exec urxvt -e ranger
-bindsym $mod+F3 exec nvim 
+bindsym $mod+F3 exec $terminal -e nvim 
 bindsym $mod+Shift+F3 exec code 
 bindsym $mod+F4 exec discord
 bindsym $mod+Shift+F4 exec zoom
-bindsym $mod+F5 exec intellij
-bindsym $mod+Shift+F5 exec eclipse
-bindsym $mod+F6 exec terminal -e 'mocp'
+bindsym $mod+F5 exec rider
+bindsym $mod+Shift+F5 exec intellij
+bindsym $mod+F6 exec $terminal -e 'mocp'
 bindsym $mod+Shift+p exec --no-startup-id pkill picom
 bindsym $mod+p exec_always --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 
-bindsym Print exec --no-startup-id "scrot /home/mia/Pictures/Screenshots/%Y-%m-%d_%Hh%Mm%S.png; exec notify-send 'Full screenshot saved to Pictures/Screenshots'"
-bindsym $mod+Print --release exec --no-startup-id "scrot -u /home/mia/Pictures/Screenshots/%Y-%m-%d_%Hh%Mm%S.png; exec notify-send 'Current window screenshot saved to Pictures/Screenshots'"
-bindsym $mod+Shift+Print --release exec --no-startup-id "scrot -s /home/mia/Pictures/Screenshots/%Y-%m-%d_%Hh%Mm%S.png; exec notify-send 'Selected screenshot saved to Pictures/Screenshots'"
+bindsym Print exec --no-startup-id "/home/mia/.config/.system/fullScreenshot.sh"
+bindsym $mod+Print --release exec --no-startup-id "/home/mia/.config/.system/curWindowScreenshot.sh"
+bindsym $mod+Shift+Print --release exec --no-startup-id "/home/mia/.config/.system/selectionScreenshot.sh"
 
-bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 focus_follows_mouse no
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -110,10 +112,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -127,9 +129,9 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+h split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+Shift+d split h;exec notify-send 'tile horizontally'
+bindsym $mod+g split v;exec notify-send 'tile vertically'
+bindsym $mod+Shift+v split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -210,8 +212,10 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Open applications on specific workspaces
 assign [class="discord"] $ws2
 assign [class="zoom"] $ws2
-assign [class="spotify"] $ws3
+assign [class="Microsoft Teams - Preview"] $ws2
+assign [class="Spotify"] $ws3
 assign [class="Steam"] $ws4
+assign [class="Substance Painter"] $w4
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -243,8 +247,11 @@ for_window [class="(?i)virtualbox"] floating enable border pixel 1
 for_window [class="Xfburn"] floating enable
 for_window [title="Network Connections"] floating enable border pixel 1
 for_window [title="Picture-in-Picture"] floating enable border pixel 1
-for_window [class="ranger"] floating enable border pixel 1
+for_window [title="ranger"] floating enable border pixel 1
 for_window [title="Bluetooth Devices"] floating enable border pixel 1
+for_window [class="Substance Painter"] floating enable
+for_window [class="Substance Designer"] floating enable
+for_window [class="Substance Architect"] floating enable
 
 
 # switch to workspace with urgent window automatically
@@ -303,14 +310,17 @@ mode "resize" {
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
 # Autostart applications
+# Set Key repeat rate
+exec_always --no-startup-id xset r rate 200 95
 exec_always --no-startup-id /home/mia/.config/polybar/launch.sh
+exec --no-startup-id greenclip daemon
+exec --no-startup-id unclutter
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id manjaro-hello
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id clipit
-exec --no-startup-id blueman-applet
+# exec --no-startup-id nm-applet
+# exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
@@ -397,8 +407,8 @@ set_from_resource $term_color15    color15
 #############################
 
 # Set inner/outer gaps
-gaps inner 0 
-gaps outer 0 
+gaps inner 10 
+gaps outer 5 
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -448,4 +458,3 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-exec_always --no-startup-id xset r rate 150

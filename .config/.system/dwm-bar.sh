@@ -4,9 +4,9 @@
 #############################################
 killall "/bin/sh $HOME/.config/.system/dwm-bar.sh"
 while true; do 
-    vpnStatus="$(ip a | grep 'tun0' | grep 'inet' | wc -l)"
+    vpnStatus="$(ip a | grep 'tun0' | grep 'inet')"
     vpnIcon=""
-    if [[ "$vpnStatus" == '1' ]]; then
+    if [[ ! -z "$vpnStatus" ]]; then
         vpnIcon="    Connected  |"
     fi
     xsetroot -name "$vpnIcon$(date +"  %a ◆  %b %d  ◆ %l:%M %p ")"

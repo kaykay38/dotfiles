@@ -6,8 +6,10 @@ GITSTATUS_LOG_LEVEL=DEBUG
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
+export PATH=$PATH:$HOME/dotnet:/home/mia/.dotnet/tools:$HOME/OneDrive/CodeWorkspace/Scripts:/home/mia/node_modules/.bin
+# Add .NET Core SDK tools
+#export PATH="$PATH:/home/mia/.dotnet/tools"
 export DOTNET_ROOT=/usr/share/dotnet
-export PATH=$PATH:$HOME/dotnet:$HOME/OneDrive/CodeWorkspace/Scripts
 # NNN CONFIG
 export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
 export NNN_FCOLORS='00001e318f00000000000000'
@@ -128,10 +130,10 @@ source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 # ALIASES
 #-------------------------------------------
 alias s="sudo"
-alias l="exa -a --icons"
+alias l="exa --icons"
+alias la="exa -a --icons"
 alias ll="exa -al --icons"
 alias ls="ls --color"
-alias la="ls -a --color"
 alias lsl="ls -al --color"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -225,5 +227,3 @@ function ex ()
     echo "'$1' is not a valid file"
   fi
 }
-# Add .NET Core SDK tools
-export PATH="$PATH:/home/mia/.dotnet/tools"
