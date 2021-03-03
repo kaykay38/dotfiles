@@ -9,8 +9,6 @@ nnoremap <space>c "+y
 nnoremap <space>C "+Y
 nnoremap <space>v "+p
 nnoremap <space>V "+P
-nnoremap c c
-nnoremap C c
 "These create newlines like o and O but stay in normal mode
 nnoremap zj o<Esc>k
 nnoremap zk O<Esc>j
