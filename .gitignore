@@ -19,6 +19,7 @@ Suckless/
 env/
 rgResults/
 perl5/
+.adobe/
 .android/
 .cache/
 .cargo/
@@ -42,6 +43,7 @@ perl5/
 .gsutil/
 .icons/
 .java/
+.lemminx/
 .local/
 .m2/
 .moc/
@@ -56,6 +58,7 @@ perl5/
 .omnisharp/
 .password-store/
 .pki/
+.redhat/
 .ssh/
 .steam/
 .swt/
@@ -64,8 +67,11 @@ perl5/
 .tooling/
 .urxvt/
 .vim/
+.vpython_cipd_cache/
 .vpython-root/
 .vscode/
+.vscode-oss/
+.vsts/
 .w3m/
 .webclipse/
 .wine/
@@ -108,6 +114,7 @@ gitstatus.txt
 .zcompdump
 .zhistory
 .zsh_history
+.config/@joplin/
 .config/.autostart/ewuVPN.sh
 .config/.mono/
 .config/Allegorithmic/
@@ -120,11 +127,13 @@ gitstatus.txt
 .config/Microsoft/
 .config/Microsoft\ Teams\ -\ Preview/
 .config/Open\ Sorcery/
+.config/Office\ 365\ on\ Electron/
 .config/JetBrains/
 .config/Kvantum/
 .config/Mousepad/
 .config/Unknown\ Organization/
 .config/autostart/
+.config/balena-etcher-electron/
 .config/blender/
 .config/calcurse/
 .config/cef_user-data/
@@ -160,6 +169,7 @@ gitstatus.txt
 .config/icloud-nativefier-4f0919/
 .config/icloud-nativefier-7468b5/
 .config/jgit/
+.config/joplin-desktop/
 .config/khal/
 .config/libfm/
 .config/libreoffice/
@@ -177,6 +187,7 @@ gitstatus.txt
 .config/nvim/autoload/
 .config/nvim/plugged/
 .config/nvim/undodir/
+.config/obsidian/
 .config/onedrive/
 .config/openrazer/
 .config/pamac/refresh_timestamp
@@ -196,6 +207,7 @@ gitstatus.txt
 .config/sublime-text-3/
 .config/systemd/
 .config/teams/
+.config/unity3d/
 .config/vdirsyncer/
 .config/vivaldi/
 .config/vlc/

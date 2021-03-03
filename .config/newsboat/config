@@ -27,7 +27,6 @@ text-width 80
 
 goto-next-feed no
 
-browser "$BROWSER"
 
 bind-key j down feedlist
 bind-key k up feedlist
@@ -42,6 +41,8 @@ bind-key k up article
 bind-key n next-unread
 bind-key N prev-unread
 
+macro m set browser "mpv --player-operation-mode=pseudo-gui -- %u &"; one; set browser brave
+
 # -- bookmarks -----------------------------------------------------------------
 
 #bookmark-cmd ~/.newsbeuter/bookmark.sh
@@ -53,4 +54,3 @@ bind-key N prev-unread
 
 unbind-key C feedlist
 confirm-exit no
-cleanup-on-quit no

@@ -2,8 +2,8 @@
 if exists('g:vscode')
     source $HOME/.vim/vscode.vim
 else
-" }}}
-" Options: {{{
+    " }}}
+    " Options: {{{
     set nocompatible
     syntax on
     filetype plugin indent on
@@ -50,14 +50,19 @@ else
     autocmd BufWrite * mkview
     " Load folds
     autocmd BufRead * silent! loadview
-" }}}
-" Plugins: {{{
+    " }}}
+    " Lua: {{{
+    augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+    augroup END
+    " }}}
+    " Plugins: {{{
     call plug#begin('~/.config/nvim/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'itchyny/lightline.vim'
     Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'maximbaz/lightline-ale'
-    Plug 'mhinz/vim-startify'
     Plug 'mbbill/undotree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -77,8 +82,8 @@ else
     Plug 'lervag/vimtex'
     " Plug 'nvim-treesitter/nvim-treesitter', {'commit': '3c07232'}
     call plug#end()
-" }}}
-" Colors: {{{
+    " }}}
+    " Colors: {{{
     " Use truecolor in the terminal, when it is supported
     if has('termguicolors')
         set termguicolors
@@ -96,8 +101,8 @@ else
     hi! Todo       ctermbg=NONE guibg=NONE
     " Syntax Highlighting: {{{
     " }}}
-" }}}
-" Lightline: {{{
+    " }}}
+    " Lightline: {{{
     let g:lightline = {
                 \ 'colorscheme':'gruvbox',
                 \ 'active': {
@@ -158,13 +163,13 @@ else
     let g:lightline#ale#indicator_warnings = "\uf071 "
     let g:lightline#ale#indicator_errors = "\uf05e "
     let g:lightline#ale#indicator_ok = "\uf00c "
-" }}}
-" AutoCompletion: {{{
+    " }}}
+    " AutoCompletion: {{{
     "let g:ycm_global_ycm_extra_conf = '$HOME/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" }}}
-" ALE: {{{
+    " }}}
+    " ALE: {{{
     let g:ale_sign_error = '•'
     let g:ale_sign_warning = '•'
     let g:ale_sign_info = '·'
@@ -172,23 +177,23 @@ else
     let g:ale_sign_style_warning = '·'
     let g:ale_linters = { 'cs': ['syntax','semantic', 'issues'], 'python': ['pylint'],'java':['javac']}
     let g:ale_fixers={'*':[],'python':['black','isort']}
-" }}}
-" COC: {{{
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+    " }}}
+    " COC: {{{
+    " Use K to show documentation in preview window.
+    nnoremap <silent> aa :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        elseif (coc#rpc#ready())
+            call CocActionAsync('doHover')
+        else
+            execute '!' . &keywordprg . " " . expand('<cword>')
+        endif
+    endfunction
 
-" }}}
-" Snippets: {{{
+    " }}}
+    " Snippets: {{{
     " Set this to 1 to use ultisnips for snippet handling
     let s:using_snippets = 1
     let g:UltiSnipsExpandTrigger="<c-j>"
@@ -196,8 +201,8 @@ endfunction
     let g:UltiSnipsJumpBackwardTrigger="<c-b>"
     let g:UltiSnipsSnippetDirectories = ['$HOME/.config/nvim/plugged/ultisnips', 'UltiSnips']
     let g:UltiSnipsSnippetsDir="$HOME/.config/nvim/plugged/ultisnips"
-" }}}
-"Netrw: {{{
+    " }}}
+    "Netrw: {{{
     let g:netrw_browse_split = 2
     let g:netrw_banner = 0
     let g:netrw_liststyle = 3
@@ -225,8 +230,8 @@ endfunction
             silent Lexplore
         endif
     endfunction
-" }}}
-" FZF: {{{
+    " }}}
+    " FZF: {{{
     let g:fzf_action = {
                 \ 'ctrl-t': 'tab split',
                 \ 'ctrl-x': 'split',
@@ -282,8 +287,8 @@ endfunction
                 \ call fzf#vim#grep(
                 \   'git grep --line-number '.shellescape(<q-args>), 0,
                 \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-" }}}
-" Markdown Preview: {{{
+    " }}}
+    " Markdown Preview: {{{
     " set to 1, nvim will open the preview window after entering the markdown buffer
     " default: 0
     let g:mkdp_auto_start = 0
@@ -334,18 +339,18 @@ endfunction
     " content_editable: if enable content editable for preview page, default: v:false
     " disable_filename: if disable filename header for preview page, default: 0
     let g:mkdp_preview_options = {
-        \ 'mkit': {},
-        \ 'katex': {},
-        \ 'uml': {},
-        \ 'maid': {},
-        \ 'disable_sync_scroll': 0,
-        \ 'sync_scroll_type': 'middle',
-        \ 'hide_yaml_meta': 1,
-        \ 'sequence_diagrams': {},
-        \ 'flowchart_diagrams': {},
-        \ 'content_editable': v:false,
-        \ 'disable_filename': 0
-        \ }
+                \ 'mkit': {},
+                \ 'katex': {},
+                \ 'uml': {},
+                \ 'maid': {},
+                \ 'disable_sync_scroll': 0,
+                \ 'sync_scroll_type': 'middle',
+                \ 'hide_yaml_meta': 1,
+                \ 'sequence_diagrams': {},
+                \ 'flowchart_diagrams': {},
+                \ 'content_editable': v:false,
+                \ 'disable_filename': 0
+                \ }
     " use a custom markdown style must be absolute path
     " like '/Users/username/markdown.css' or expand('~/markdown.css')
     let g:mkdp_markdown_css = ''
@@ -360,25 +365,26 @@ endfunction
     " recognized filetypes
     " these filetypes will have MarkdownPreview... commands
     let g:mkdp_filetypes = ['markdown']
-" }}}
-" Key Mapping: {{{
+    " }}}
+    " Key Mapping: {{{
     let mapleader = " "
+    " In the quickfix window, <CR> is used to jump to the error under the
+    " cursor, so undefine the mapping there.
     noremap <silent><leader>n :call ToggleNetrw()<CR>
     nnoremap <leader>r :%s/
     "nnoremap <leader>; :%s/\s*;\s*/;\r/g<CR>
     "nnoremap <leader>: :%s/\s*;\s*\n*/; /g<CR>
     noremap <F12> :vsp $MYVIMRC<CR>
     nnoremap T :set splitbelow<CR>:sp<CR>:term<CR>
-    inoremap <C-j> <Down>
-    inoremap <C-k> <Up>
-    inoremap <C-n> <Left>
-    inoremap <C-l> <Right>
-    noremap <leader>c "+y
-    noremap <leader>y "+Y
-    vnoremap <leader>C "+y
-    vnoremap <leader>Y "+Y
-    noremap <leader>v "+p
-    noremap <leader>V "+P
+    vnoremap y ygv
+    nnoremap <leader>c "+y
+    nnoremap <leader>C "+Y
+    vnoremap <leader>c "+ygv
+    vnoremap <leader>C "+ygv
+    nnoremap <leader>v "+p
+    nnoremap <leader>V "+P
+    vnoremap <leader>v "+pgv
+    vnoremap <leader>V "+Pgv
     nnoremap <silent><leader>h :wincmd h<CR>
     nnoremap <silent><leader>j :wincmd j<CR>
     nnoremap <silent><leader>k :wincmd k<CR>
@@ -404,17 +410,42 @@ endfunction
     nnoremap dM d^
     nnoremap m $
     nnoremap M ^
-    nnoremap <S-Tab> :<<CR>
-    nnoremap <Tab> :><CR>
-    vnoremap <S-Tab> :'<,'><<CR>
-    vnoremap <Tab> :'<,'>><CR>
+    nnoremap <S-Tab> <<
+    nnoremap <Tab> >>
+    vnoremap <S-Tab> <gv
+    vnoremap <Tab> >gv
+
+    inoremap <A-j> <Esc>:m .+1<CR>==gi
+    inoremap <A-k> <Esc>:m .-2<CR>==gi
+    nnoremap <A-k> :m .-2<CR>==
+    nnoremap <A-j> :m .+1<cr>==
+    vnoremap <A-j> :m '>+1<CR>gv=gv
+    vnoremap <A-k> :m '<-2<CR>gv=gv
+   
     nnoremap <S><CR> O<Esc>
     nnoremap <CR> o<Esc>
+    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
     nnoremap zk O<Esc>j
     nnoremap zj o<Esc>k
-    nnoremap <leader>fi gg=G<C-o><C-o>
+    nnoremap <leader>fi gg=G<C-o>
     nnoremap <leader>a ggVG
     nnoremap <leader>u :UndotreeShow<CR>
+    " coc-snippets
+    "Use <C-l> for trigger snippet expand.
+    imap <C-l> <Plug>(coc-snippets-expand)
+
+    " Use <C-j> for select text for visual placeholder of snippet.
+    vmap <C-j> <Plug>(coc-snippets-select)
+
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<c-j>'
+
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    let g:coc_snippet_prev = '<c-k>'
+
+    " Use <C-j> for both expand and jump (make expand higher priority.)
+    imap <C-j> <Plug>(coc-snippets-expand-jump)
     " coc-explorer
     nnoremap <leader>e :CocCommand explorer<CR>
     nnoremap <leader>f :Files<CR>
@@ -428,5 +459,5 @@ endfunction
     nmap <silent> gd <Plug>(coc-definition)    
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)    
-" }}}
+    " }}}
 endif

@@ -10,4 +10,4 @@ function openNomacs() {
 }
 
 sleep .2
-scrot -s "$file" && echo "$file" | xclip -i && notify-send 'Selection screenshot' "Saved to Pictures/Screenshots\nFile path copied to primary"
+scrot -s "$file" && echo "$file" | xclip -i && notify-send -i "$file" 'Selection screenshot' "Saved to Pictures/Screenshots\nFile path copied to primary"

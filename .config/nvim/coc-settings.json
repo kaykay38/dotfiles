@@ -1,4 +1,5 @@
 {
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-1.8",
@@ -10,7 +11,7 @@
         },
         {
             "name": "JavaSE-14",
-            "path": "/usr/lib/jvm/java-15-openjdk/bin/java",
+            "path": "/usr/lib/jvm/jdk-14.0.2/bin/java",
             "default": true
         }
     ],

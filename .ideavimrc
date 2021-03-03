@@ -6,14 +6,11 @@ set scrolloff=5 " 5 lines above/below cursor when scrolling
 " Use Idea to join lines smartly
 set ideajoin
 nnoremap <space>c "+y
-nnoremap <space>C "+y
+nnoremap <space>C "+Y
 nnoremap <space>v "+p
 nnoremap <space>V "+P
 nnoremap c c
 nnoremap C c
-nnoremap <space>c "*y
-nnoremap <space>C "+y
-nnoremap <A-v> "*p
 "These create newlines like o and O but stay in normal mode
 nnoremap zj o<Esc>k
 nnoremap zk O<Esc>j
@@ -40,4 +37,3 @@ nnoremap M ^
 nnoremap dm d$
 nnoremap dM d^
 nnoremap <space>sa ggVG
-nnoremap <space>s :w<cr>

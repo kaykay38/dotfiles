@@ -124,7 +124,7 @@ zstyle ':completion:*:processes' sort false
 source $HOME/.config/zsh/find.zsh
 source $HOME/.config/zsh/alacritty-win-title.zsh
 source $HOME/.config/zsh/websearch.zsh
-source $HOME/.config/zsh/zsh-autosuggestions
+source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 #-------------------------------------------
 # ALIASES
@@ -139,11 +139,12 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
-alias ip='ip --color=auto'
 alias open="xdg-open"
 alias pac="sudo pacman -S"
+alias ip='ip --color=auto'
 alias pacr="sudo pacman -Rs"
 alias pacs=pacSearch
+alias pwsh="pwsh -nologo"
 alias v="nvim"
 alias sv="sudoedit"
 alias za=zathuraOpen
@@ -161,6 +162,7 @@ alias pic="cd $HOME/Pictures"
 alias scrshots="cd $HOME/Pictures/Screenshots"
 alias vd="cd $HOME/.config/nvim"
 alias svd="cd /opt/nvim/share/nvim/runtime"
+alias wsl="cd /Windows/Users/Mia/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs"
 alias conf="cd $HOME/.config"
 alias sys="cd $HOME/.config/.system"
 alias suckless="cd $HOME/Suckless"
