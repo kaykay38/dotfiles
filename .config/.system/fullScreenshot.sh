@@ -9,4 +9,4 @@ function openNomacs() {
     nomacs -m default $file
 }
 
-scrot "$file" && echo "$file" | xclip -i && notify-send -i "$file" 'Screenshot' "Saved to Pictures/Screenshots\nFile path copied to primary"
+scrot "$file" && echo "$file" | xclip -i && notify-send -i "$file" -a 'Scrot' 'Screenshot' "Saved to Pictures/Screenshots\nFile path copied to primary"

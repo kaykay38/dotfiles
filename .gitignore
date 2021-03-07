@@ -133,6 +133,8 @@ gitstatus.txt
 .config/Mousepad/
 .config/Unknown\ Organization/
 .config/autostart/
+.config/awesome/surreal/
+.config/awesome/pastel-mirage/
 .config/balena-etcher-electron/
 .config/blender/
 .config/calcurse/
@@ -145,6 +147,7 @@ gitstatus.txt
 .config/coc/list-commands-history.json
 .config/coc/list-explorerFiles-history.json
 .config/coc/list-location-history.json
+.config/coc/snippets-mru
 .config/clipboard-history/
 .config/dconf/
 .config/discord/

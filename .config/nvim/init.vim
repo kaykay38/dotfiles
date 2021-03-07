@@ -74,6 +74,8 @@ else
     " Plug 'sirver/ultisnips'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'neovim/nvim-lspconfig'
+    "Plug 'xolox/vim-lua-ftplugin'
+    "Plug 'xolox/vim-misc'
     Plug 'PProvost/vim-ps1'
     Plug 'uiiaoo/java-syntax.vim'
     Plug 'OmniSharp/omnisharp-vim'
@@ -434,16 +436,12 @@ else
     " coc-snippets
     "Use <C-l> for trigger snippet expand.
     imap <C-l> <Plug>(coc-snippets-expand)
-
     " Use <C-j> for select text for visual placeholder of snippet.
     vmap <C-j> <Plug>(coc-snippets-select)
-
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
     let g:coc_snippet_next = '<c-j>'
-
     " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
     let g:coc_snippet_prev = '<c-k>'
-
     " Use <C-j> for both expand and jump (make expand higher priority.)
     imap <C-j> <Plug>(coc-snippets-expand-jump)
     " coc-explorer
@@ -458,6 +456,8 @@ else
     " CoC
     nmap <silent> gd <Plug>(coc-definition)    
     nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)    
+    nnoremap <silent> gr <Plug>(coc-references)    
+    nmap <silent> gs :exe 'CocList -I --normal --input='.expand('<cword>').' symbols'<CR>
+    nmap <silent> <leader>rn <Plug>(coc-rename)
     " }}}
 endif

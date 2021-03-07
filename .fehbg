@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/home/mia/Pictures/Wallpapers/dusk-mountain-bluegreen-blurred.jpg' 
