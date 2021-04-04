@@ -1,0 +1,65 @@
+configuration {
+	font: "Noto Sans Nerd Font 14";
+	width: 30;
+	lines: 5;
+    //bw: 20;
+	ssh-command: "{terminal} -e {ssh-client} {host}";
+	//sidebar-mode: true;
+	auto-select: false;
+    display-run: "RUN";
+    display-drun: "APPS";
+    display-ssh: "SSH";
+    display-window: "WINDOW";
+}
+
+* {
+  background-color: #21212199;
+  text-color: #bbbbbb;
+  border-color: #2d2d2d;
+  spacing: 0;
+  width: 512px;
+}
+
+window {
+    transparency: "real";
+    border: 0px;
+    border-color: #2d2d2d;
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+}
+
+prompt {
+  padding: 16px;
+  border: 0 1px 0 0;
+}
+
+textbox {
+  background-color: #212121;
+  border: 0 0 1px 0;
+  border-color: #2d2d2d;
+  text-color: #eeeeee;
+  padding: 8px 16px;
+}
+
+entry {
+  padding: 16px;
+}
+
+listview {
+  cycle: true;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: 16px;
+}
+
+element selected {
+  background-color: #303030e6;
+  text-color: #eeeeee;
+}

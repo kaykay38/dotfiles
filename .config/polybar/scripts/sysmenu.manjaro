@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Custom Rofi Script
+BORDER="#222D33"
+SEPARATOR="#263238"
+FOREGROUND="#d8d8d8"
+BACKGROUND="#263238"
+BACKGROUND_ALT="#18242B"
+HIGHLIGHT_BACKGROUND="#2F3D44"
+HIGHLIGHT_FOREGROUND="#d8d8d8"
+
+# Launch Rofi
+MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System' \
+-hide-scrollbar true \
+-bw 1 \
+-lines 5 \
+-line-padding 10 \
+-padding 20 \
+-width 12 \
+-location 1 \
+-yoffset 20 \
+-columns 1 \
+-font "NotoSans Nerd Font 10" \
+-color-enabled true \
+-color-window "$BACKGROUND,$BORDER,$SEPARATOR" \
+-color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
+<<< "  Lock|鈴  Sleep|  Logout|  Reboot|  Shutdown")"
+case "$MENU" in
+  *Lock) blurlock;;
+  *Sleep) i3exit suspend;;
+  *Logout) i3-msg exit;;
+  *Reboot) systemctl reboot ;;
+  *Shutdown) systemctl -i poweroff
+esac
+
+# More Options
+# -fullscreen \
+
+# Theming help
+# color window = background, border, separator
+# color normal = background, foreground, background-alt, highlight-background, highlight-foreground
+# color active = background, foreground, background-alt, highlight-background, highlight-foreground
+# color urgent = background, foreground, background-alt, highlight-background, highlight-foreground
