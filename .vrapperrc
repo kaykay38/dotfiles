@@ -1,0 +1,19 @@
+set ignorecase
+set autoindent
+set novisualmouse
+set scrolloff=5
+nmap <space>v <C-v>
+nmap m $
+nmap <space>m ^
+nmap <space><CR> O<Esc>j
+nmap <CR> o<Esc>k
+nmap fi gg=G<C-o><C-o>
+noremap c "*y
+noremap C "+y
+noremap <space>v "*p
+noremap <space>V "+p
+nmap <space>sa ggVG
+imap <A-j> <Down>
+imap <A-k> <Up>
+imap <A-h> <Left>
+imap <A-l> <Right>

@@ -1,0 +1,262 @@
+# ~/.zshrc file for zsh interactive shells.
+# see /usr/share/doc/zsh/examples/zshrc for examples
+source ~/.p10k.zsh
+setopt autocd              # change directory just by typing its name
+#setopt correct            # auto correct mistakes
+setopt interactivecomments # allow comments in interactive mode
+setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
+setopt nonomatch           # hide error message if there is no match for the pattern
+setopt notify              # report the status of background jobs immediately
+setopt numericglobsort     # sort filenames numerically when it makes sense
+setopt promptsubst         # enable command substitution in prompt
+
+WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
+
+# hide EOL sign ('%')
+PROMPT_EOL_MARK=""
+
+# configure key keybindings
+bindkey -e                                        # emacs key bindings
+bindkey ' ' magic-space                           # do history expansion on space
+bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '^[[3~' delete-char                       # delete
+bindkey '^[[1;5C' forward-word                    # ctrl + ->
+bindkey '^[[1;5D' backward-word                   # ctrl + <-
+bindkey '^[[5~' beginning-of-buffer-or-history    # page up
+bindkey '^[[6~' end-of-buffer-or-history          # page down
+bindkey '^[[H' beginning-of-line                  # home
+bindkey '^[[F' end-of-line                        # end
+bindkey '^[[Z' undo                               # shift + tab undo last action
+
+# enable completion features
+autoload -Uz compinit
+compinit -d ~/.cache/zcompdump
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
+
+# History configurations
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=2000
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+#setopt share_history         # share command history data
+
+# force zsh to show the complete history
+alias history="history 0"
+
+# make less more friendly for non-text input files, see lesspipe(1)
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+# Load version control
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info  }
+precmd_functions+=( precmd_vcs_info  )
+# Format the vcs_inf_msg
+zstyle ':vcs_info:git:*' formats ' %b'
+# Set up the prompt with git branch name on right side
+setopt prompt_subst
+#PROMPT='%(?.%F{green}✓.%F{red}?%?)%f %F{209}%1~%f %F{36}$%f '
+#RPROMPT='%F{30}${vcs_info_msg_0_}%f'
+
+if [ "$color_prompt" = yes ]; then
+    #PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.blue)}%n%(#.💀.㉿)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.) %B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+    #RPROMPT=$' %F{30}${vcs_info_msg_0_}%f'
+
+    # enable syntax-highlighting
+    if [ -f $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
+	. /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+	ZSH_HIGHLIGHT_STYLES[default]=none
+	ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
+	ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=cyan,bold
+	ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
+	ZSH_HIGHLIGHT_STYLES[global-alias]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
+	ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
+	ZSH_HIGHLIGHT_STYLES[path]=underline
+	ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
+	ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
+	ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[command-substitution]=none
+	ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[process-substitution]=none
+	ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
+	ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
+	ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
+	ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
+	ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[assign]=none
+	ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
+	ZSH_HIGHLIGHT_STYLES[named-fd]=none
+	ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
+	ZSH_HIGHLIGHT_STYLES[arg0]=fg=green
+	ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red,bold
+	ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=green,bold
+	ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=magenta,bold
+	ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
+	ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
+	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
+    fi
+else
+    #PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    TERM_TITLE=$'\e]0;${debian_chroot:+($debian_chroot)}%n@%m: %~\a'
+    ;;
+*)
+    ;;
+esac
+
+new_line_before_prompt=yes
+precmd() {
+    # Print the previously configured title
+    print -Pnr -- "$TERM_TITLE"
+
+    # Print a new line before the prompt, but only if it is not the first line
+    if [ "$new_line_before_prompt" = yes ]; then
+	if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
+	    _NEW_LINE_BEFORE_PROMPT=1
+	else
+	    print ""
+	fi
+    fi
+}
+
+# enable auto-suggestions based on the history
+if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # change suggestion color
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
+fi
+
+# enable color support of ls, less and man, and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias diff='diff --color=auto'
+    alias ip='ip --color=auto'
+
+    export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
+    export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
+    export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+    export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
+    export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+    export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+    export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+    # Take advantage of $LS_COLORS for completion as well
+    zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+fi
+
+#-------------------------------------------
+# ENV VARIABLES 
+#-------------------------------------------
+export EDITOR=/usr/bin/nvim
+export DOTNET_ROOT=/opt/dotnet
+export PATH=$PATH:/opt/dotnet
+# NNN CONFIG
+export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
+#export NNN_FCOLORS='00001e318f00000000000000'
+export NNN_BMS='c:/mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace;j:/mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace/Java'
+export NNN_FIFO="/tmp/nnn.fifo"
+
+#------------------------------------------
+# PLUGINS & SCRIPTS
+#-------------------------------------------
+source ~/.config/zsh/find.zsh
+source ~/.config/zsh/alacritty-win-title.zsh
+source ~/.config/zsh/websearch.zsh
+
+#-------------------------------------------
+# ALIASES
+#-------------------------------------------
+alias s="sudo"
+alias l="exa -a --icons"
+alias ll="exa -al --icons"
+alias ls="ls -a --color"
+alias lsl="ls -al --color"
+alias v="nvim"
+alias g="git"
+alias open="wsl-open"
+alias nn="nnn -eU"
+alias zrc="nvim $HOME/.zshrc"
+alias vrc="nvim $HOME/.config/nvim/init.vim"
+alias rr="ranger"
+alias srr="sudo ranger"
+alias dwn="cd $HOME/Downloads"
+alias wdwn="cd /mnt/c/Users/miaxy/Downloads"
+alias vd="cd $HOME/.config/nvim"
+alias svd="cd /opt/nvim/share/nvim/runtime"
+alias prog="cd /mnt/c/Program\ Files"
+alias prog86="cd /mnt/c/Program\ Files(x86)"
+alias ctext="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CurrTextbooks"
+alias ewu="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/2020-21Q2Winter"
+alias codes="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace"
+alias gitd="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace/Github"
+alias netd="cd /mnt/c/Users/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace/NET"
+alias cs240="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/2020-21Q2Winter/CSCD240-CandUnix"
+alias cs327="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/2020-21Q2Winter/CSCD327-RelationalDatabases"
+alias cs371="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace/NET/CSCD371-NETProgramming"
+alias ma301="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/2020-21Q2Winter/MATH301-DiscreteMathematics"
+alias 350proj="cd /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CodeWorkspace/CS350Project"
+alias dotfiles="wsl-open https://github.com/kaykay38/dotfiles"
+alias canvas="wsl-open https://canvas.ewu.edu/"
+alias ccal="wsl-open https://canvas.ewu.edu/calendar#view_name=month&view_start="
+alias c371g="wsl-open https://github.com/IntelliTect-Samples/EWU-CSCD371-2021-Winter"
+alias c240="wsl-open https://canvas.ewu.edu/courses/1427733"
+alias c327="wsl-open https://canvas.ewu.edu/courses/1427835"
+alias c371="wsl-open https://canvas.ewu.edu/courses/1451913"
+alias m301="wsl-open https://canvas.ewu.edu/courses/1427319"
+alias m301book="wsl-open /mnt/c/Users/miaxy/OneDrive\ -\ Eastern\ Washington\ University/CurrTextbooks/Discrete\ mathematics\ and\ its\ applications\ by\ Rosen,\ Kenneth.pdf"
+export BROWSER=/mnt/c/Browser/BraveSoftware/Brave-Browser/Application/brave.exe
+source ~/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme

@@ -1,0 +1,15 @@
+set font "notosans 9"
+set selection-clipboard clipboard
+set default-bg "#393939"
+set default-fg "#bbbbbb"
+set completion-group-bg "#242424"
+set completion-group-fg "#eeeeee"
+set completion-bg "#303030"
+set completion-fg "#777777"
+set completion-highlight-bg "#303030"
+set completion-highlight-fg "#ffffff"
+set inputbar-bg "#323232"
+set inputbar-fg "#ffffff"
+set statusbar-bg "#212121"
+set statusbar-fg "#bbbbbb"
+set window-title-basename true

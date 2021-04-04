@@ -1,0 +1,115 @@
+#!/bin/sh
+
+function web_search() {
+  emulate -L zsh
+
+  # define search engine URLS
+  typeset -A urls
+  urls=(
+    $ZSH_WEB_SEARCH_ENGINES
+    google      "https://www.google.com/search?q="
+    amazon      "https://www.amazon.com/s?k="
+    ebay        "https://www.ebay.com/sch/i.html?_nkw=%s&LH_TitleDesc=1&_sop=12" 
+    vimwiki     "https://vim.fandom.com/wiki/Special:Search?search="
+    duckduckgo  "https://www.duckduckgo.com/?q="
+    github      "https://github.com/search?q="
+    baidu       "https://www.baidu.com/s?wd="
+    ecosia      "https://www.ecosia.org/search?q="
+    goodreads   "https://www.goodreads.com/search?q="
+    qwant       "https://www.qwant.com/?q="
+    givero      "https://www.givero.com/search?q="
+    stackoverflow  "https://stackoverflow.com/search?q="
+    wikipedia   "https://en.wikipedia.org/wiki/Special:Search?search="
+    wolframalpha   "https://www.wolframalpha.com/input/?i="
+    archive     "https://web.archive.org/web/*/"
+    scholar        "https://scholar.google.com/scholar?q="
+    yahoo       "https://search.yahoo.com/search?p="
+    youtube     "https://www.youtube.com/results?search_query="
+    googleImages "https://www.google.com/search?tbm=isch&q=" 
+  )
+
+  # check whether the search engine is supported
+  if [[ -z "$urls[$1]" ]]; then
+    echo "Search engine '$1' not supported."
+    return 1
+  fi
+
+  # search or go to main page depending on number of arguments passed
+  if [[ $# -gt 1 ]]; then
+    # build search url:
+    # join arguments passed with '+', then append to search engine URL
+    url="${urls[$1]}${(j:+:)@[2,-1]}"
+  else
+    # build main page url:
+    # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
+    url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
+  fi
+
+  xdg-open "$url" &
+}
+
+
+# other search engine aliases
+if [[ ${#ZSH_WEB_SEARCH_ENGINES} -gt 0 ]]; then
+  typeset -A engines
+  engines=($ZSH_WEB_SEARCH_ENGINES)
+  for key in ${(k)engines}; do
+    alias "$key"="web_search $key"
+  done
+  unset engines key
+fi
+
+# Custom Rofi Script
+BORDER="#2d2d2d"
+SEPARATOR="#e6212121"
+FOREGROUND="#bbbbbb"
+BACKGROUND="#e6212121"
+BACKGROUND_ALT="#e62d2d2d"
+HIGHLIGHT_BACKGROUND="#e6444444"
+HIGHLIGHT_FOREGROUND="#eeeeee"
+
+# Launch Rofi
+#-location 0 \ # top left corner
+#-font "NotoSans Nerd Font 10" \
+#-width 12
+ENGINE="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'Search' \
+-hide-scrollbar true \
+-bw 1 \
+-lines 5 \
+-line-padding 10 \
+-padding 20 \
+-width 20 \
+-location 0 \
+-yoffset 22 \
+-columns 1 \
+-font "NotoSans Nerd Font 10" \
+-color-enabled true \
+-color-window "$BACKGROUND,$BORDER,$SEPARATOR" \
+-color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
+<<< "Google|Google Images|DuckDuckGo|Youtube|Github|Amazon|Wikipedia|Stack Overflow|Scholar")"
+case "$ENGINE" in
+    *ggl) 'web_search google';;
+    *ddg) 'web_search duckduckgo';;
+    *img) 'web_search googleImages';;
+    *amzn) 'web_search amazon';;
+    *git) 'web_search github';;
+    *sof) 'web_search stackoverflow';;
+    *wolfalph) 'web_search wolframalpha';;
+    *archive) 'web_search archive';;
+    *scholar) 'web_search scholar';;
+    *wiki) 'web_search wikipedia';;
+    *yt) 'web_search youtube';;
+    *news) 'web_search duckduckgo \!n';;
+    *map) 'web_search duckduckgo \!m'
+esac
+
+# More Options
+# -fullscreen \
+
+# Theming help
+# color window = background, border, separator
+# color normal = background, foreground, background-alt, highlight-background, highlight-foreground
+# color active = background, foreground, background-alt, highlight-background, highlight-foreground
+# color urgent = background, foreground, background-alt, highlight-background, highlight-foreground
+# web_search from terminal
+
