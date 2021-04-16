@@ -59,3 +59,4 @@ application/octet-stream=visual-studio-code.desktop;nvim.desktop;sublime_text.de
 application/x-compressed-tar=xarchiver.desktop;org.manjaro.pamac.manager.desktop;
 application/x-sharedlib=Alacritty.desktop;
 application/x-desktop=visual-studio-code.desktop;nvim.desktop;net.lutris.Lutris.desktop;
+application/x-font-pcf=org.gnome.FontManager.desktop;
