@@ -51,10 +51,10 @@ get_session(){
 }
 
 session="$(get_session "$1")"
-if [ "$session" == 'dwm' ]; then
-    $HOME/.config/.system/dwm-bar.sh  
-    # Autostart settings
-    $HOME/.config/.system/settings.sh
-fi
+#if [ "$session" == 'dwm' ]; then
+#    $/home/mia/.config/.system/dwm-bar.sh  
+#    # Autostart settings
+#    /home/mia/.config/.system/settings.sh
+#fi
 
 exec "$session"
