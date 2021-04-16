@@ -55,7 +55,7 @@ return require("packer").startup(
         use {"rafamadriz/friendly-snippets", opt = true}
 
         -- Treesitter
-        --use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
         use {"windwp/nvim-ts-autotag", opt = true}
 
         -- Explorer
@@ -65,7 +65,7 @@ return require("packer").startup(
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
         use {"lewis6991/gitsigns.nvim", opt = true}
-        use {"liuchengxu/vim-which-key", opt = true}
+        -- use {"liuchengxu/vim-which-key", opt = true}
         use {"ChristianChiarulli/dashboard-nvim", opt = true}
         use {"windwp/nvim-autopairs", opt = true}
         use {"terrortylor/nvim-comment", opt = true}
@@ -97,7 +97,7 @@ return require("packer").startup(
         require_plugin("nvim-colorizer.lua")
         require_plugin("nvim-tree.lua")
         --require_plugin("gitsigns.nvim")
-        require_plugin("vim-which-key")
+        -- require_plugin("vim-which-key")
         --require_plugin("dashboard-nvim")
         require_plugin("nvim-autopairs")
         require_plugin("nvim-comment")

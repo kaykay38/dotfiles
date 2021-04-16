@@ -27,6 +27,7 @@ export BAT_THEME="gruvbox"
 # Add .NET Core SDK tools
 #export PATH="$PATH:/home/mia/.dotnet/tools"
 export DOTNET_ROOT=/usr/share/dotnet
+export DOOMDIR=$HOME/.config/doom
 # NNN CONFIG
 export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
 export NNN_FCOLORS='00001e318f00000000000000'
