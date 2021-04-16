@@ -145,11 +145,6 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     path = "/home/mia/.local/share/nvim/site/pack/packer/opt/vim-vsnip"
-  },
-  ["vim-which-key"] = {
-    loaded = false,
-    needs_bufread = true,
-    path = "/home/mia/.local/share/nvim/site/pack/packer/opt/vim-which-key"
   }
 }
 

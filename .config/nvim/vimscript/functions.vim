@@ -55,11 +55,11 @@ command! DebugGetSession lua require'dap'.session()
 " nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
 " nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
 
-autocmd! User GoyoEnter lua require('gitsigns').toggle_signs()
-autocmd! User GoyoLeave lua require('gitsigns').toggle_signs()
-
-autocmd User GoyoEnter set laststatus=0 
-autocmd User GoyoLeave set laststatus=2
+" autocmd! User GoyoEnter lua require('gitsigns').toggle_signs()
+" autocmd! User GoyoLeave lua require('gitsigns').toggle_signs()
+" 
+" autocmd User GoyoEnter set laststatus=0 
+" autocmd User GoyoLeave set laststatus=2
 
 " autocmd! User GoyoEnter lua require('galaxyline').disable_galaxyline()
 " autocmd! User GoyoLeave lua require('galaxyline').galaxyline_augroup()
