@@ -1,7 +1,7 @@
 -- TODO figure out why this don't work
 vim.fn.sign_define(
     "LspDiagnosticsSignError",
-    {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError", guifg = "#cc241d"}
+    {texthl = "LspDiagnosticsSignError", text = "❌", numhl = "LspDiagnosticsSignError"}
 )
 vim.fn.sign_define(
     "LspDiagnosticsSignWarning",
@@ -9,7 +9,7 @@ vim.fn.sign_define(
 )
 vim.fn.sign_define(
     "LspDiagnosticsSignHint",
-    {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"}
+    {texthl = "LspDiagnosticsSignHint", text = "💡", numhl = "LspDiagnosticsSignHint"}
 )
 vim.fn.sign_define(
     "LspDiagnosticsSignInformation",
@@ -24,6 +24,8 @@ vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")
 vim.cmd("nnoremap <silent> gs <cmd>lua vim.lsp.buf.symbols()<CR>")
 vim.cmd("nnoremap <silent> <leader><CR> :Lspsaga code_action<CR>")
 vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
+vim.cmd("nnoremap <silent> <C-k> :LspShowLineDiagnostics<CR>")
 -- vim.cmd('nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>')
 vim.cmd("nnoremap <silent> <C-p> :Lspsaga diagnostic_jump_prev<CR>")
 vim.cmd("nnoremap <silent> <C-n> :Lspsaga diagnostic_jump_next<CR>")
