@@ -1,0 +1,10 @@
+--vim.cmd('let g:nvcode_termcolors=256')
+
+vim.cmd('let g:gruvbox_italics=1')
+vim.cmd('let g:gruvbox_transp_bg=1')
+vim.cmd('let g:gruvbox_transp_bg=1')
+vim.cmd('colorscheme ' .. O.colorscheme)
+vim.cmd('hi! Normal     ctermbg=NONE guibg=NONE')
+vim.cmd('hi! SignColumn ctermbg=NONE guibg=NONE')
+vim.cmd('hi! VertSplit   ctermbg=241 guibg=#665c54')
+vim.cmd('hi! Todo       ctermbg=NONE guibg=NONE')

@@ -1,4 +1,5 @@
-#/bin/sh
+#!/bin/sh
+#2021-04-07_23h30m25.png
 file=$(date +"/home/mia/Pictures/Screenshots/%Y-%m-%d_%Hh%Mm%S.png")
 
 function openNomacs() {

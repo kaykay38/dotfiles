@@ -1,0 +1,2 @@
+#!/bin/sh
+journalctl --user-unit onedrive -n 50 | sed 's/ArchLinuxAMDpc .*\[.*\]: /| /'| bat --paging=always --wrap=never --file-name "OneDrive Log"

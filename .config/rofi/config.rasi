@@ -1,24 +1,68 @@
 configuration {
+	font: "Noto Sans Nerd Font 14";
 	width: 30;
 	lines: 5;
-	columns: 1;
-	font: "Noto Sans Nerd Font 14";
-	bw: 1;
-	padding: 20;
-	fixed-num-lines: true;
+    //bw: 20;
 	ssh-command: "{terminal} -e {ssh-client} {host}";
-	sidebar-mode: true;
-	eh: 1;
+	//sidebar-mode: true;
 	auto-select: false;
-	line-margin: 5;
-	separator-style: "none";
-	hide-scrollbar: true;
     display-run: "RUN";
     display-drun: "APPS";
     display-ssh: "SSH";
     display-window: "WINDOW";
-	color-normal: "argb:00202A2e, #b3797979, argb:00202A2e, argb:00202A2e, #eeeeee";
-	color-urgent: "argb:00202A2e, #b3c9695f, argb:00202A2e, argb:00202A2e, #d14434";
-	color-active: "argb:00202A2e, #b39f9557, argb:00202A2e, argb:00202A2e, #fced6a";
-	color-window: "argb:f2212121, #b32d2d2d, argb:f2212121";
+}
+
+* {
+  background-color: #21212199;
+  text-color: #bbbbbb;
+  border-color: #2d2d2d;
+  spacing: 0;
+  width: 512px;
+}
+
+window {
+    transparency: "real";
+    border: 1px;
+    border-color: #353535;
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+}
+
+prompt {
+  padding: 16px;
+  border: 0 1px 0 0;
+}
+
+textbox {
+  background-color: #212121;
+  border: 0 0 1px 0;
+  border-color: #2d2d2d;
+  text-color: #eeeeee;
+  padding: 8px 16px;
+}
+
+entry {
+  padding: 16px;
+}
+
+listview {
+  cycle: true;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+}
+
+element-icon {
+  size: 2.8ch;
+}
+element {
+  border: 0 0 1px 0;
+  padding: 16px;
+}
+
+element selected {
+  background-color: #303030e6;
+  text-color: #eeeeee;
 }

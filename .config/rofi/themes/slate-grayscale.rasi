@@ -54,6 +54,9 @@ listview {
   scrollbar: false;
 }
 
+element-icon {
+  size: 3ch;
+}
 element {
   border: 0 0 1px 0;
   padding: 16px;
