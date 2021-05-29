@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [[ ! -z "$(pgrep -f /usr/bin/flameshot)" ]]; then
+    echo " flameshot  "
+fi

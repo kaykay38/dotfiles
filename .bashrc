@@ -13,7 +13,7 @@
 # Set up the prompt with git branch name on right side
 #setopt prompt_subst
 #RPROMPT='%F{30}${vcs_info_msg_0_}%f'
-PROMPT='%(?.%F{green}✓.%F{red}?%?)%f %F{209}%1~%f %F{36}$%f '
+# PROMPT='%(?.%F{green}✓.%F{red}?%?)%f %F{209}%1~%f %F{36}$%f '
 
 #-------------------------------------------
 # COLORS
@@ -216,3 +216,5 @@ alias m371b="zathura $HOME/OneDrive/CurrTextbooks/Essential\ C\ Sharp\ 8.0\ by\ 
 alias m301="xdg-open https://canvas.ewu.edu/courses/1427319 &"
 alias m301b="zathura $HOME/OneDrive/CurrTextbooks/Discrete\ mathematics\ and\ its\ applications\ by\ Rosen,\ Kenneth.pdf &"
 alias vpn="sudo $HOME/.config/.startup/ewuVPN.sh &"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

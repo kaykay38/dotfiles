@@ -23,12 +23,12 @@ O = {
 
     database = {save_location = '~/.config/nvcode_db', auto_execute = 1},
     python = {
-        linter = 'pyright',
+        linter = 'flake8',
         -- @usage can be 'yapf', 'black'
         formatter = '',
         autoformat = false,
         isort = false,
-        diagnostics = {virtual_text = false, signs = true, underline = true}
+        diagnostics = {virtual_text = false, underline = true}
     },
     java = {sdk_path = '/usr/lib/jvm/java-15-openjdk/bin/java',
         -- @usage can be 'eslint'
@@ -67,7 +67,7 @@ O = {
         autoformat = false,
         diagnostics = {virtual_text = false, signs = true, underline = true}
     },
-    tailwindls = {filetypes = {'html', 'cshtml', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}},
+    tailwindls = {filetypes = {'razor','html', 'cshtml', 'css', 'scss', 'svelt', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}},
     clang = {diagnostics = {virtual_text = false, signs = true, underline = true}}
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}

@@ -1,6 +1,6 @@
 [Hotkey]
 # Trigger Input Method
-TriggerKey=CTRL_SPACE CTRL_SPACE
+TriggerKey=CTRL_SUPER_LSUPER CTRL_SPACE
 # Use extra trigger key only after using it to inactivate
 # Available Value:
 # True False
@@ -27,7 +27,7 @@ TriggerKey=CTRL_SPACE CTRL_SPACE
 # Super+Right Ctrl
 # Disabled
 # Custom
-#SwitchKey=L_SHIFT
+SwitchKey=Custom
 # Custom switch key
 #CustomSwitchKey=
 # Activate input method
@@ -62,9 +62,9 @@ TriggerKey=CTRL_SPACE CTRL_SPACE
 # Switch Full Width Punc Mode
 #PuncSwitchKey=CTRL_.
 # Prev Page
-#PrevPageKey=- UP
+PrevPageKey=K UP
 # Next Page
-#NextPageKey== DOWN
+NextPageKey=J DOWN
 # Choose Second and Third Candidate Word
 #SecondThirdCandWordKey=
 # Saving All Config and Input History
@@ -84,7 +84,7 @@ TriggerKey=CTRL_SPACE CTRL_SPACE
 # No
 # All
 # PerProgram
-#ShareStateAmongWindow=No
+ShareStateAmongWindow=PerProgram
 # Default Input Method State
 # Available Value:
 # Inactive

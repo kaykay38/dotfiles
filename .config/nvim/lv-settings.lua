@@ -10,31 +10,31 @@ an executable
 -- general
 O.auto_complete = true
 O.colorscheme = 'gruvbox8'
-O.auto_close_tree = 0
 O.wrap_lines = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
 O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
+O.treesitter.highlight.disable = {"c_sharp", "latex"}
 
 
 O.clang.diagnostics.virtual_text = false
-O.clang.diagnostics.signs = false
-O.clang.diagnostics.underline = false
+O.clang.diagnostics.signs = true
+O.clang.diagnostics.underline = true
 
 -- python
 -- add things like O.python.formatter.yapf.exec_path
 -- add things like O.python.linter.flake8.exec_path
 -- add things like O.python.formatter.isort.exec_path
-O.python.formatter = 'yapf'
--- O.python.linter = 'flake8'
-O.python.isort = true
-O.python.autoformat = true
-O.python.diagnostics.virtual_text = true
-O.python.diagnostics.signs = true
-O.python.diagnostics.underline = true
-
+-- O.python.formatter = 'efm'
+-- O.python.linter = 'pyright'
+-- O.python.isort = true
+-- O.python.autoformat = true
+-- O.python.diagnostics.virtual_text = false
+-- O.python.diagnostics.signs = true
+-- O.python.diagnostics.underline = true
+-- 
 -- lua
 -- TODO look into stylua
 O.lua.formatter = 'lua-format'

@@ -30,6 +30,7 @@ nnoremap <space>za :action UnsplitAll<cr>
 nnoremap <space>wd :action OpenEditorInOppositeTabGroup<cr>
 nnoremap <space><space> :action VimFilePrevious<cr>
 nmap <space>ww :action JumpToLastWindow<cr>
+nmap <space>s :w<cr>
 nnoremap m $
 nnoremap M ^
 nnoremap dm d$

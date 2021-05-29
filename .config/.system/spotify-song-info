@@ -1,0 +1,16 @@
+#!/bin/bash
+status="$(sp status)"
+coverUrl="$(sp art)"
+cover="/tmp/$(echo $coverUrl | sed -E 's/https:\/\/i.scdn.co\/image\//spotify-/')"
+if [[ "$status" = 'Playing' || "$status" = 'Paused' ]]; then
+    if [[ ! -f "$cover" ]]; then
+        rm /tmp/spotify-*
+        curl "$coverUrl" -o "$cover"
+    fi
+    info="$(playerctl --player=spotify metadata --format "{{title}}\nArtist: {{artist}}\nAlbum: {{ album }}")"
+    title="$(echo -e "$info" | rg -m1 "")"
+    info="$(echo -e "$info" | sed 1d)"
+    notify-send --hint=string:x-dunst-stack-tag:test -i "$cover" "$title" "$info"
+else
+    exit 1
+fi

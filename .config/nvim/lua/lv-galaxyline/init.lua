@@ -87,7 +87,7 @@ gls.left[2] = {
         condition = condition.check_git_workspace,
         separator = ' ',
         separator_highlight = {'NONE', colors.bg},
-        highlight = {colors.orange, colors.bg}
+        highlight = {colors.grey, colors.bg}
     }
 }
 
@@ -95,30 +95,47 @@ gls.left[3] = {
     GitBranch = {
         provider = 'GitBranch',
         condition = condition.check_git_workspace,
+        separator = ' | ',
+        separator_highlight = {colors.grey, colors.bg},
+        highlight = {colors.grey, colors.bg}
+    }
+}
+-- 
+-- gls.left[4] = {
+--     DiffAdd = {
+--         provider = 'DiffAdd',
+--         condition = condition.hide_in_width,
+--         icon = '  ',
+--         highlight = {colors.grey, colors.bg}
+--     }
+-- }
+-- gls.left[5] = {
+--     DiffRemove = {
+--         provider = 'DiffRemove',
+--         condition = condition.hide_in_width,
+--         icon = '   ',
+--         highlight = {colors.grey, colors.bg}
+--     }
+-- }
+
+gls.left[4] ={
+  FileIcon = {
+    provider = 'FileIcon',
+    condition = condition.buffer_not_empty,
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg},
+  },
+}
+
+gls.left[5] = {
+    FileName = {
+        provider = 'FileName',
         separator = ' ',
         separator_highlight = {'NONE', colors.bg},
         highlight = {colors.white, colors.bg}
     }
 }
 
-gls.left[4] = {
-    DiffAdd = {
-        provider = 'DiffAdd',
-        condition = condition.hide_in_width,
-        icon = '  ',
-        highlight = {colors.grey, colors.bg}
-    }
-}
-gls.left[5] = {
-    DiffRemove = {
-        provider = 'DiffRemove',
-        condition = condition.hide_in_width,
-        icon = '   ',
-        highlight = {colors.grey, colors.bg}
-    }
-}
-
-gls.left[6] = {
+gls.left[7] = {
     DiffModified = {
         provider = 'DiffModified',
         condition = condition.hide_in_width,
@@ -154,7 +171,7 @@ gls.right[5] = {
 gls.right[6] = {
     LineInfo = {
         provider = 'LineColumn',
-        separator = '  ',
+        separator = '   ',
         separator_highlight = {'NONE', colors.bg},
         highlight = {colors.grey, colors.bg}
     }
@@ -163,7 +180,7 @@ gls.right[6] = {
 gls.right[7] = {
     PerCent = {
         provider = 'LinePercent',
-        separator = ' ',
+        separator = '  ',
         separator_highlight = {'NONE', colors.bg},
         highlight = {colors.grey, colors.bg}
     }
@@ -208,20 +225,31 @@ gls.right[9] = {
         end,
         separator = ' ',
         separator_highlight = {'NONE', colors.bg},
-        highlight = {colors.orange, colors.bg}
+        highlight = {colors.bg, colors.bg}
+    }
+}
+
+-- gls.short_line_left[1] = {
+--     BufferType = {
+--         provider = 'FileTypeName',
+--         separator = ' ',
+--         separator_highlight = {'NONE', colors.bg},
+--         highlight = {colors.grey, colors.bg}
+--     }
+-- }
+-- 
+gls.short_line_left[0] = {
+    Space = {
+        provider = function()
+            return ' '
+        end,
+        separator = ' ',
+        separator_highlight = {'NONE', colors.bg},
+        highlight = {colors.bg, colors.bg}
     }
 }
 
 gls.short_line_left[1] = {
-    BufferType = {
-        provider = 'FileTypeName',
-        separator = ' ',
-        separator_highlight = {'NONE', colors.bg},
-        highlight = {colors.grey, colors.bg}
-    }
-}
-
-gls.short_line_left[2] = {
     SFileName = {provider = 'SFileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
 }
 

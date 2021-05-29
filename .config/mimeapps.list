@@ -30,6 +30,7 @@ x-scheme-handler/gitkraken=GitKraken.desktop
 x-scheme-handler/obsidian=obsidian.desktop
 application/x-trash=pcmanfm.desktop
 inode/directory=pcmanfm.desktop
+application/octet-stream=spotify.desktop
 
 [Added Associations]
 x-scheme-handler/http=userapp-Pale Moon.desktop;brave-browser.desktop;firefox.desktop;brave-browser.desktop;
@@ -55,8 +56,9 @@ application/zip=xarchiver.desktop;
 application/x-trash=pcmanfm.desktop;
 application/x-java-archive=jshell-java-openjdk.desktop;jconsole-java-openjdk.desktop;
 text/x-java=eclipse.desktop;
-application/octet-stream=visual-studio-code.desktop;nvim.desktop;sublime_text.desktop;
+application/octet-stream=spotify.desktop;visual-studio-code.desktop;nvim.desktop;sublime_text.desktop;
 application/x-compressed-tar=xarchiver.desktop;org.manjaro.pamac.manager.desktop;
 application/x-sharedlib=Alacritty.desktop;
 application/x-desktop=visual-studio-code.desktop;nvim.desktop;net.lutris.Lutris.desktop;
 application/x-font-pcf=org.gnome.FontManager.desktop;
+audio/ogg=spotify.desktop;
