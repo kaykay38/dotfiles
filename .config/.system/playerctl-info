@@ -2,7 +2,7 @@
 status="$(playerctl --player=spotify,mpv,%any status)"
 coverUrl="$(playerctl --player=spotify,mpv,%any metadata --format "{{mpris:artUrl}}")"
 coverUrl="$(echo "${coverUrl/open.spotify.com/i.scdn.co}")"
-cover="/tmp/$(echo "${coverUrl//\//}" | sed 's/https://')"
+cover="/tmp/artUrl-$(echo "${coverUrl//\//}" | sed 's/https://')"
 if [[ "$status" = 'Playing' || "$status" = 'Paused' ]]; then
     if [[ ! -f "$cover" ]]; then
         rm /tmp/artUrl-*

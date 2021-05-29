@@ -1,0 +1,7 @@
+#!/bin/bash -x
+playlistIndex="$HOME/Music/.playlists/playlists.index"
+playlistName="$(cut -d '"' -f 2 "$playlistIndex"| rofi -dmenu -i --match fuzzy -p "Playlists")"
+playlist="$(grep "\"$playlistName\"" "$playlistIndex" | cut -d ' ' -f 1)"
+
+[[ -f $playlist ]] && pkill -f "mpv --no-video .*" ; mpv --no-video --playlist=$playlist --shuffle
+[[ $playlist =~ ^https://youtube.com/.* ]] && pkill -f "mpv --no-video .*" ; mpv --no-video $playlist --shuffle

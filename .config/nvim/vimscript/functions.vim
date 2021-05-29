@@ -54,9 +54,9 @@ function! Exec_on_term(cmd, pos)
   let @b=backup_b
   let @a=backup_a
 endfunction
-nnoremap <leader>dr :call Exec_on_term("normal", "curr")<CR>
+nnoremap <leader>r :call Exec_on_term("normal", "curr")<CR>
 vnoremap <F6> :<c-u>call Exec_on_term("visual", "curr")<CR>
-nnoremap <leader>dn :call Exec_on_term("normal", "next")<CR>
+nnoremap <leader>rn :call Exec_on_term("normal", "next")<CR>
 " Available Debug Adapters:
 "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
 " 

@@ -3,17 +3,17 @@ spotifyStatus="$(playerctl --player=spotify,spotifyd status)"
 mpvStatus="$(playerctl --player=mpv status)"
 status="$(playerctl status)"
 if [[ "$spotifyStatus" = 'Playing' ]]; then
-	playerctl --player=spotify metadata --format "     {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+	playerctl --player=spotify metadata --format "     {{ trunc(artist,25) }} - {{ trunc(title,40) }} "
 elif [[ "$mpvStatus" = 'Playing' ]]; then
-    playerctl --player=mpv metadata --format "   mpv - {{ trunc(title,40) }} "
+    playerctl --player=mpv metadata --format "  mpv  {{ trunc(title,40) }} "
 elif [[ "$status" = 'Playing' ]]; then
-	playerctl metadata --format "   {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+	playerctl metadata --format "   {{ trunc(artist,25) }} - {{ trunc(title,40) }} "
 elif [[ "$spotifyStatus" = 'Paused' ]]; then
-    playerctl --player=spotify metadata --format "     {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+    playerctl --player=spotify metadata --format "     {{ trunc(artist,25) }} - {{ trunc(title,40) }} "
 elif [[ "$mpvStatus" = 'Paused' ]]; then
-    playerctl --player=mpv metadata --format "   mpv - {{ trunc(title,40) }} "
+    playerctl --player=mpv metadata --format "  mpv  {{ trunc(title,40) }} "
 elif [[ "$status" = 'Paused' ]]; then
-    playerctl metadata --format "   {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+    playerctl metadata --format "   {{ trunc(artist,25) }} - {{ trunc(title,40) }} "
 else
     exit 1
 fi
