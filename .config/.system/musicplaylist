@@ -1,7 +1,12 @@
 #!/bin/bash -x
+urlRegex="^https://.*"
 playlistIndex="$HOME/Music/.playlists/playlists.index"
-playlistName="$(cut -d '"' -f 2 "$playlistIndex"| rofi -dmenu -i --match fuzzy -p "Playlists")"
+playlistName="$(cut -d '"' -f 2 "$playlistIndex" | sort | rofi -dmenu -i --matching fuzzy -p "Playlists")"
 playlist="$(grep "\"$playlistName\"" "$playlistIndex" | cut -d ' ' -f 1)"
-
-[[ -f $playlist ]] && pkill -f "mpv --no-video .*" ; mpv --no-video --playlist=$playlist --shuffle
-[[ $playlist =~ ^https://youtube.com/.* ]] && pkill -f "mpv --no-video .*" ; mpv --no-video $playlist --shuffle
+if [[ $playlist =~ $urlRegex ]]; then 
+    pgrep -f 'mpv --no-video' | xargs kill
+    mpv --no-video $playlist --shuffle
+else
+    pgrep -f 'mpv --no-video' | xargs kill
+    mpv --no-video --playlist=$playlist --shuffle
+fi
