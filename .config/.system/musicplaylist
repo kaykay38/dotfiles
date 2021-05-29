@@ -2,11 +2,12 @@
 urlRegex="^https://.*"
 playlistIndex="$HOME/Music/.playlists/playlists.index"
 playlistName="$(cut -d '"' -f 2 "$playlistIndex" | sort | rofi -dmenu -i --matching fuzzy -p "Playlists")"
+if [[ $playlistName =~ ^@[q|quit] ]]; then pgrep -f 'mpv --no-video' | xargs kill;  exit 0; fi
 playlist="$(grep "\"$playlistName\"" "$playlistIndex" | cut -d ' ' -f 1)"
 if [[ $playlist =~ $urlRegex ]]; then 
     pgrep -f 'mpv --no-video' | xargs kill
     mpv --no-video $playlist --shuffle
-else
+elif [[ -f $playlist ]]; then
     pgrep -f 'mpv --no-video' | xargs kill
     mpv --no-video --playlist=$playlist --shuffle
 fi
