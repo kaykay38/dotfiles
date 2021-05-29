@@ -1,0 +1,19 @@
+#!/bin/sh
+spotifyStatus="$(playerctl --player=spotify,spotifyd status)"
+mpvStatus="$(playerctl --player=mpv status)"
+status="$(playerctl status)"
+if [[ "$spotifyStatus" = 'Playing' ]]; then
+	playerctl --player=spotify metadata --format "     {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+elif [[ "$mpvStatus" = 'Playing' ]]; then
+    playerctl --player=mpv metadata --format "   mpv - {{ trunc(title,40) }} "
+elif [[ "$status" = 'Playing' ]]; then
+	playerctl metadata --format "   {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+elif [[ "$spotifyStatus" = 'Paused' ]]; then
+    playerctl --player=spotify metadata --format "     {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+elif [[ "$mpvStatus" = 'Paused' ]]; then
+    playerctl --player=mpv metadata --format "   mpv - {{ trunc(title,40) }} "
+elif [[ "$status" = 'Paused' ]]; then
+    playerctl metadata --format "   {{ trunc(title,40) }} - {{ trunc(artist,25) }} "
+else
+    exit 1
+fi

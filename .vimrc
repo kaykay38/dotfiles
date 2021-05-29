@@ -20,6 +20,7 @@ set ttymouse=sgr
 set mouse=a
 set smartindent
 set relativenumber
+set nu
 set smartcase
 set noswapfile
 set nobackup

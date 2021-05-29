@@ -8,14 +8,14 @@
 # to point to the `config_mac' or `config_win` folders depending on your system.
 
 JAR="/opt/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"
-GRADLE_HOME=/opt/gradle-7.0 /usr/lib/jvm/java-15-openjdk/bin/java \
+GRADLE_HOME=/opt/gradle-7.0/bin/gradle /usr/lib/jvm/java-15-openjdk/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
   -Dlog.protocol=true \
   -Dlog.level=ALL \
-  -javaagent:/usr/local/share/lombok/lombok.jar \
-  -Xms1g \
+  -javaagent:$HOME/.local/share/lombok/lombok.jar \
+  -Xms1g 
   -Xmx2G \
   -jar $(echo "$JAR") \
   -configuration "/opt/jdtls/config_linux" \

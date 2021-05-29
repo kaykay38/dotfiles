@@ -7,7 +7,7 @@ configuration {
 	//sidebar-mode: true;
 	auto-select: false;
     display-run: "RUN";
-    display-drun: "APPS";
+    display-drun: "";
     display-ssh: "SSH";
     display-window: "WINDOW";
 }

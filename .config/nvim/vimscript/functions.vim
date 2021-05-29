@@ -24,17 +24,39 @@ command! ResetBuffer lua require 'lv-utils'.reset_buffer()
 command! PreviewHunk lua require 'lv-utils'.preview_hunk()
 command! BlameLine lua require 'lv-utils'.blame_line()
 command! W noa w
-
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " Debugging
-command! DebugToggleBreakpoint lua require'dap'.toggle_breakpoint()
-command! DebugStart lua require'dap'.continue()
-command! DebugContinue lua require'dap'.continue()
-command! DebugStepOver lua require'dap'.step_over()
-command! DebugStepOut lua require'dap'.step_out()
-command! DebugStepInto lua require'dap'.step_into()
-command! DebugToggleRepl lua require'dap'.repl.toggle()
-command! DebugGetSession lua require'dap'.session()
+" command! DebugToggleBreakpoint lua require'dap'.toggle_breakpoint()
+" command! DebugStart lua require'dap'.continue()
+" command! DebugContinue lua require'dap'.continue()
+" command! DebugStepOver lua require'dap'.step_over()
+" command! DebugStepOut lua require'dap'.step_out()
+" command! DebugStepInto lua require'dap'.step_into()
+" command! DebugToggleRepl lua require'dap'.repl.toggle()
+" command! DebugGetSession lua require'dap'.session()
 
+function! Exec_on_term(cmd, pos)
+  exec "normal! ma"
+  let backup_a=@a
+  let backup_b=@b
+  let sep = "------"
+  exec "normal! ?".sep."\<CR>jV/".sep."\<CR>k\"ay"
+  exec "normal! /".sep."\<CR>jO"
+  if a:pos == "next"
+	  exec "normal! O".sep
+	  exec "normal! jddkko"
+  endif
+  exec "normal! V/".sep."\<CR>kdO"
+  let @b=system(@a)
+  execute "put b"
+  execute "normal! ?".sep."\<CR>jdd"
+  exec "normal 'a"
+  let @b=backup_b
+  let @a=backup_a
+endfunction
+nnoremap <leader>dr :call Exec_on_term("normal", "curr")<CR>
+vnoremap <F6> :<c-u>call Exec_on_term("visual", "curr")<CR>
+nnoremap <leader>dn :call Exec_on_term("normal", "next")<CR>
 " Available Debug Adapters:
 "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
 " 

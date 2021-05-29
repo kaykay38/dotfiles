@@ -1,11 +1,11 @@
 #-------------------------------------------
 # PROMPT
 #-------------------------------------------
-#source $HOME/.p10k.zsh
-#source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
-source $HOME/.config/zsh/pr-exec-time.zsh
-autoload -U zmv
-autoload -Uz pretty-time
+source $HOME/.p10k.zsh
+source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
+# source $HOME/.config/zsh/pr-exec-time.zsh
+# autoload -U zmv
+# autoload -Uz pretty-time
 setopt extended_glob
 # Load version control
 autoload -Uz vcs_info
@@ -15,29 +15,38 @@ zstyle ':vcs_info:git*' formats "  %b"
 setopt prompt_subst
 #   
 # Current time & time elapsed between last command
-RPROMPT='%F{blue} %t$pr_exec_time%f'
-PROMPT='%F{blue}%f  %F{209}%3~%f %F{106}${vcs_info_msg_0_}%f %(?.%F{71}❯.%F{red}❯)%f '
+# RPROMPT='%F{blue} %t$pr_exec_time%f'
+# PROMPT='%F{blue}%f  %F{209}%3~%f %F{106}${vcs_info_msg_0_}%f %(?.%F{71}❯.%F{red}❯)%f '
 
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
 GITSTATUS_LOG_LEVEL=DEBUG
-export PATH=$PATH:$HOME/dotnet:/home/mia/.dotnet/tools:$HOME/OneDrive/CodeWorkspace/Scripts:/home/mia/node_modules/.bin:/home/mia/.local/bin
-export BAT_THEME="gruvbox"
+export PATH=$PATH:$HOME/OneDrive/CodeWorkspace/Scripts:$HOME/node_modules/.bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.config/nvim/utils/bin
+
 # Add .NET Core SDK tools
-#export PATH="$PATH:/home/mia/.dotnet/tools"
+export PATH="$PATH:$HOME/.dotnet/tools"
+DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT=/usr/share/dotnet
+
+export JAR=/opt/jdtls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
+export GRADLE_HOME=/opt/gradle-7.0/
+export JAVA_HOME=/usr/lib/jvm/java-15-openjdk/
+export JDTLS_CONFIG=/opt/jdtls/config_linux
+# export WORKSPACE=/home/mia/OneDrive/CodeWorkspace/Java/
+
 export DOOMDIR=$HOME/.config/doom
+
+export BAT_THEME="gruvbox-dark"
+
+# export FZF_DEFAULT_OPTS='--bind=alt-k:up,alt-j:down'
+
 # NNN CONFIG
 export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
 export NNN_FCOLORS='00001e318f00000000000000'
 export NNN_BMS='c:$HOME/OneDrive/CodeWorkspace;j:$HOME/CodeWorkspace/Java'
 export NNN_FIFO="/tmp/nnn.fifo"
-export JAR=/opt/jdtls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
-export GRADLE_HOME=/opt/gradle-7.0
-export JAVA_HOME=/usr/lib/jvm/java-15-openjdk/
-export JDTLS_CONFIG=/opt/jdtls/config_linux
-export WORKSPACE=$HOME/OneDrive/CodeWorkspace/Java
+
 #-------------------------------------------
 # KEY BINDINGS
 #-------------------------------------------
@@ -45,8 +54,10 @@ export WORKSPACE=$HOME/OneDrive/CodeWorkspace/Java
 bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '\^U' backward-kill-line
 bindkey '^[[3~' delete-char                       # delete
 bindkey '^[[1;5C' forward-word                    # ctrl + ->
+bindkey '^[[1;5D' backward-word                   # ctrl + <-
 bindkey '^[[1;5D' backward-word                   # ctrl + <-
 bindkey '^[[5~' beginning-of-buffer-or-history    # page up
 bindkey '^[[6~' end-of-buffer-or-history          # page down
@@ -148,6 +159,7 @@ source $HOME/.config/zsh/find.zsh
 source $HOME/.config/zsh/alacritty-win-title.zsh
 source $HOME/.config/zsh/websearch.zsh
 source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 #-------------------------------------------
 # ALIASES
 #-------------------------------------------
@@ -177,11 +189,12 @@ alias nn="nnn -eU"
 alias zrc="nvim $HOME/.zshrc"
 alias src="source $HOME/.zshrc"
 alias vrc="nvim $HOME/.config/nvim/init.lua"
-alias svrc="nvim /sys/nvim/init.lua"
+alias svrc="nvim /etc/xdg/nvim/sysinit.vim"
 alias rr="ranger"
 alias srr="sudo ranger"
 alias pc="pcmanfm . &"
 alias smake="sudo make clean install"
+alias doomd="cd $DOOMDIR"
 alias dwn="cd $HOME/Downloads"
 alias awm="cd $HOME/.config/awesome && nvim ."
 alias awmc="cd $HOME/.config/awesome && nvim rc.lua"
@@ -208,17 +221,19 @@ alias cs330="cd $HOME/OneDrive/2020-21Q3Spring/CSCD330-ComputerNetworks"
 alias cs320="cd $HOME/OneDrive/2020-21Q3Spring/CSCD320-Algorithms"
 alias cs350="cd $HOME/OneDrive/2020-21Q3Spring/CSCD350-SoftwareDevPrinciples"
 alias cs379="cd $HOME/OneDrive/CodeWorkspace/CSCD379-NETWebDev"
-alias cs379t="cd $HOME/OneDrive/CodeWorkspace/cscd379-tyler"
+alias cs379t="cd $HOME/LocalCodeWorkspace/cscd379-tyler"
+alias cs379m="cd $HOME/LocalCodeWorkspace/cscd379-mia"
 alias 350proj="cd $HOME/OneDrive/CodeWorkspace/CS350Project"
 alias dotfiles="xdg-open https://github.com/kaykay38/dotfiles &"
 alias canvas="xdg-open https://canvas.ewu.edu/ &"
-alias sling="xdg-open https://app.getsling.com/ 2>/dev/null& disown %1"
+alias sling="xdg-open https://app.getsling.com/ 2>/dev/null&"
 alias ccal="xdg-open https://canvas.ewu.edu/calendar 2>/dev/null& disown %1"
-alias c379="xdg-open https://github.com/IntelliTect-Samples/EWU-CSCD379-2021-Spring &"
+alias c379="xdg-open https://github.com/IntelliTect-Samples/EWU-CSCD379-2021-Spring 2/dev/null&"
 alias c320="xdg-open https://canvas.ewu.edu/courses/1460184/pages/cscd320-course-schedule 2>/dev/null&"
 alias c330="xdg-open https://canvas.ewu.edu/courses/1460164/modules 2>/dev/null&"
 alias c350="xdg-open http://shelby.ewu.edu/redirect?target=034Z4H4H3L3T6H35430R6Z5D170Z3723 2>/dev/null&"
 alias c379b="zathura $HOME/OneDrive/CurrTextbooks/Essential\ C\ Sharp\ 8.0\ by\ Mark\ Michaelis.pdf 2>/dev/null&"
+alias aws="ssh -i $HOME/OneDrive/2020-21Q3Spring/CSCD330-ComputerNetworks/cscd330.pem ubuntu@10.219.1.87"
 alias vpn="$HOME/Security/autovpn"
 alias bfg="java -jar /opt/bfg.jar"
 alias susp="systemctl suspend"
@@ -255,3 +270,5 @@ function ex()
     echo "'$1' is not a valid file"
   fi
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

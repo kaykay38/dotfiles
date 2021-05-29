@@ -1,0 +1,17 @@
+#!/bin/sh
+status="$(playerctl status)"
+spotifyStatus="$(playerctl --player=spotify status)"
+mpvStatus="$(playerctl --player=mpv status)"
+if [[ "$spotifyStatus" = 'Playing' ]]; then
+    playerctl --player=spotify pause
+elif [[ "$mpvStatus" = 'Playing' ]]; then
+    playerctl --player=mpv pause
+elif [[ "$spotifyStatus" = 'Paused' ]]; then
+    playerctl --player=spotify play
+elif [[ "$mpvStatus" = 'Paused' ]]; then
+    playerctl --player=mpv play
+elif [[ "$status" = 'Playing' ]]; then
+    playerctl pause
+else
+    playerctl play
+fi
