@@ -1,12 +1,20 @@
-#!/bin/bash
+#!/bin/bash -x
 status="$(playerctl --player=spotify,mpv,%any status)"
 coverUrl="$(playerctl --player=spotify,mpv,%any metadata --format "{{mpris:artUrl}}")"
 coverUrl="$(echo "${coverUrl/open.spotify.com/i.scdn.co}")"
 cover="/tmp/artUrl-$(echo "${coverUrl//\//}" | sed 's/https://')"
 if [[ "$status" = 'Playing' || "$status" = 'Paused' ]]; then
+    if [[ -z "$coverUrl" ]]; then
+        url=$(playerctl --player=spotify,mpv,%any metadata --format "{{xesam:url}}")
+        if [[ $url =~ ^file://.* ]]; then 
+            file="$(urldecode $url)"
+            file="$(echo ${file:7})"
+            cover="/tmp/artUrl-$(echo "${file//\//-}" | sed 's# ##; s#-home-mia-Music-##; s#.mp3##').jpg"
+        fi
+    fi
     if [[ ! -f "$cover" ]]; then
         rm /tmp/artUrl-*
-        curl "$coverUrl" -o "$cover"
+        curl "$coverUrl" -o "$cover" || ffmpeg -i "$file" "$cover"
     fi
     info="$(playerctl --player=spotify,mpv,%any metadata --format "{{title}}\n{{artist}}\n{{ album }}")"
     title="$(echo -e "$info" | rg -m1 "")"
