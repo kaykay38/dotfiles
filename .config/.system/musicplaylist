@@ -2,6 +2,7 @@
 urlRegex="^https://.*"
 playlistIndex="$HOME/Music/.playlists/playlists.index"
 playlistName="$(cut -d '"' -f 2 "$playlistIndex" | sort | rofi -dmenu -i --matching fuzzy -p "Playlists")"
+currentPlaylistFile="$HOME/Music/.playlists/.current.playlist"
 if [[ $playlistName =~ ^@q$|quit$ ]]; then pgrep -f 'mpv --no-video' | xargs kill;  exit 0;
 elif [[ $playlistName =~ ^@a$|add$ ]]; then
     newPlaylistInfo="$(rofi -dmenu -lines 1 -p 'Add new playlist')"
@@ -18,12 +19,17 @@ elif [[ $playlistName =~ ^@d$|delete$|remove$ ]]; then
     deletePlaylist="$(cut -d '"' -f 2 "$playlistIndex" | sort | rofi -dmenu -i --matching fuzzy -p 'Delete playlist')"
     if [[ ! -z $deletePlaylist ]]; then sed -i "/\"$deletePlaylist\"/d" "$playlistIndex" && notify-send 'Music Playlist' "$deletePlaylist successfully deleted"; else exit 1; fi
     exit 0;
+elif [[ $playlistName =~ ^@c$|current$ ]]; then
+    cat "$currentPlaylistFile" | rofi -lines 1 -dmenu -p "Current playlist"
+    exit 0;
 fi
 playlist="$(grep "\"$playlistName\"" "$playlistIndex" | cut -d ' ' -f 1)"
-if [[ $playlist =~ $urlRegex ]]; then 
+if [[ $playlist =~ $urlRegex ]]; then
     pgrep -f 'mpv --no-video' | xargs kill
-    mpv --no-video $playlist --shuffle
+    mpv --no-video $playlist --shuffle & echo "$playlistName" > "$currentPlaylistFile"
+
 elif [[ -f $playlist ]]; then
     pgrep -f 'mpv --no-video' | xargs kill
-    mpv --no-video --playlist=$playlist --shuffle
+    mpv --no-video --playlist=$playlist --shuffle & echo "$playlistName" > "$currentPlaylistFile"
+
 fi
