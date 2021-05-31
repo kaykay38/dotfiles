@@ -9,14 +9,14 @@ if [[ "$status" = 'Playing' || "$status" = 'Paused' ]]; then
         if [[ $url =~ ^file://.* ]]; then 
             file="$(urldecode $url)"
             file="$(echo ${file:7})"
-            cover="/tmp/artUrl-$(echo "${file//\//-}" | sed 's# ##; s#-home-mia-Music-##; s#.mp3##').jpg"
+            cover="/tmp/artUrl-$(echo "${file//\//-}" | sed 's# ##g; s#.mp3##; s#.wav##').jpg"
         fi
     fi
     if [[ ! -f "$cover" ]]; then
         rm /tmp/artUrl-*
         curl "$coverUrl" -o "$cover" || ffmpeg -i "$file" "$cover"
     fi
-    info="$(playerctl --player=spotify,mpv,%any metadata --format "{{title}}\n{{artist}}\n{{ album }}")"
+    info="$(playerctl --player=spotify,mpv,%any metadata --format "{{title}}\n{{artist}}\n{{album}}")"
     title="$(echo -e "$info" | rg -m1 "")"
     info="$(echo -e "$info" | sed 1d)"
     notify-send --hint=string:x-dunst-stack-tag:test -i "$cover" "$title" "$info"

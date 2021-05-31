@@ -1,0 +1,19 @@
+#!/bin/bash -x
+coverUrl="$(playerctl --player=mpv metadata --format "{{mpris:artUrl}}")"
+cover="/tmp/artUrl-$(echo "${coverUrl//\//}" | sed 's/https://')"
+if [[ -z "$coverUrl" ]]; then
+    url=$(playerctl --player=mpv metadata --format "{{xesam:url}}")
+    if [[ $url =~ ^file://.* ]]; then 
+        file="$(urldecode $url)"
+        file="$(echo ${file:7})"
+        cover="/tmp/artUrl-$(echo "${file//\//-}" | sed 's# ##g; s#.mp3##; s#.wav##').jpg"
+    fi
+fi
+if [[ ! -f "$cover" ]]; then
+    rm /tmp/artUrl-*
+    curl "$coverUrl" -o "$cover" || ffmpeg -i "$file" "$cover"
+fi
+info="$(playerctl --player=mpv metadata --format "{{title}}\n{{artist}}\n{{album}}")"
+title="$(echo -e "$info" | rg -m1 "")"
+info="$(echo -e "$info" | sed 1d)"
+notify-send --hint=string:x-dunst-stack-tag:test -i "$cover" "$title" "$info" || exit 1

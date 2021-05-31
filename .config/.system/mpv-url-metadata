@@ -1,0 +1,10 @@
+#!/bin/bash
+coverUrl="$(playerctl --player=mpv metadata --format "{{mpris:artUrl}}")"
+coverUrl="$(echo "${coverUrl/open.spotify.com/i.scdn.co}")"
+cover="/tmp/artUrl-$(echo "${coverUrl//\//}" | sed 's/https://')"
+if [[ ! -f "$cover" ]]; then
+    rm /tmp/artUrl-*
+    curl "$coverUrl" -o "$cover"
+fi
+echo "$cover"
+echo -e "$(playerctl --player=mpv metadata --format "{{title}}\n{{artist}}\n{{album}}")"

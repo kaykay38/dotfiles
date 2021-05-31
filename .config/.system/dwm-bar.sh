@@ -2,7 +2,6 @@
 #############################################
 #               DWM Statusbar               #
 #############################################
-killall "/bin/sh /home/mia/.config/.system/dwm-bar.sh"
 while true; do 
     network="$(/usr/local/bin/sb-network-simple)"
     onedrivestatus="$(/usr/local/bin/sb-onedrive)"
