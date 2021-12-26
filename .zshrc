@@ -1,69 +1,48 @@
-#-------------------------------------------
-# PROMPT
-#-------------------------------------------
-source $HOME/.p10k.zsh
-source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
-# source $HOME/.config/zsh/pr-exec-time.zsh
-# autoload -U zmv
-# autoload -Uz pretty-time
-setopt extended_glob
-# Load version control
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-zstyle ':vcs_info:git*' formats "  %b"
-setopt prompt_subst
-#   
-# Current time & time elapsed between last command
-# RPROMPT='%F{blue} %t$pr_exec_time%f'
-# PROMPT='%F{blue}%f  %F{209}%3~%f %F{106}${vcs_info_msg_0_}%f %(?.%F{71}❯.%F{red}❯)%f '
+#-----------------------------------------------------
+# .zshrc
+# Author: kaykay38
+# Last Modified: Dec 25, 2021
+#-----------------------------------------------------
 
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
-GITSTATUS_LOG_LEVEL=DEBUG
-export PATH=$PATH:$HOME/OneDrive/CodeWorkspace/Scripts:$HOME/node_modules/.bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.config/nvim/utils/bin
-
-# Add .NET Core SDK tools
-export PATH="$PATH:$HOME/.dotnet/tools"
-DOTNET_CLI_TELEMETRY_OPTOUT=1
-export DOTNET_ROOT=/usr/share/dotnet
-
-export JAR=/opt/jdtls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
-export GRADLE_HOME=/opt/gradle-7.0/
-export JAVA_HOME=/usr/lib/jvm/java-15-openjdk/
-export JDTLS_CONFIG=/opt/jdtls/config_linux
-# export WORKSPACE=/home/mia/OneDrive/CodeWorkspace/Java/
-
-export DOOMDIR=$HOME/.config/doom
-
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:/usr/local/opt/texinfo/bin" # or follow the instructions given by brew info
+export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:/usr/local/share/python"
+export PATH="$PATH:/usr/local/opt/ruby/bin"
+export PATH="$PATH:$HOME/Scripts:$HOME/node_modules/.bin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.config/nvim/utils/bin"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+# Preferred editor for local and remote sessions
+export EDITOR='lvim'
+export VISUAL='code'
+# export BROWSER="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser"
+export ONEDRIVE="$HOME/OneDrive"
+export TODODIR="$ONEDRIVE/TODO"
 export BAT_THEME="gruvbox-dark"
 
-# export FZF_DEFAULT_OPTS='--bind=alt-k:up,alt-j:down'
-
-# NNN CONFIG
-export NNN_PLUG='f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview' 
-export NNN_FCOLORS='00001e318f00000000000000'
-export NNN_BMS='c:$HOME/OneDrive/CodeWorkspace;j:$HOME/CodeWorkspace/Java'
+export JAR=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
+export GRADLE_HOME=/usr/local/Cellar/gradle/7.0
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
+export JDTLS_CONFIG=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/config_mac
+export WORKSPACE="$ONEDRIVE/CodeWorkspace/Java"
+#
+DOTNET_CLI_TELEMETRY_OPTOUT=1
+#export PATH="$PATH:/home/mia/.dotnet/tools"
+export DOTNET_ROOT=/usr/share/dotnet
+export DOOMDIR=$HOME/.config/doom
+export CHROME_EXECUTABLE='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
+export HOMEBREW_NO_AUTO_UPDATE=1
+#-----------------------------------------------------
+# NNN CONFIG 
+#-----------------------------------------------------
 export NNN_FIFO="/tmp/nnn.fifo"
+export NNN_PLUG="f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview" 
+export NNN_FCOLORS="00001e318f00000000000000"
+export NNN_BMS="g:$ONEDRIVE/CodeWorkspace/Github;j:$ONEDRIVE/CodeWorkspace/Java;c:$ONEDRIVE/CodeWorkspace/C;n:$ONEDRIVE/CodeWorkspace/NET;C:$HOME/.config;v:$HOME/.config/nvim;p:$HOME/Pictures;d:$HOME/Downloads"
 
-#-------------------------------------------
-# KEY BINDINGS
-#-------------------------------------------
-# configure key keybindings
-bindkey -e                                        # emacs key bindings
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '\^U' backward-kill-line
-bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
-bindkey '^[[H' beginning-of-line                  # home
-bindkey '^[[F' end-of-line                        # end
-bindkey '^[[Z' undo                               # shift + tab undo last action
 #-------------------------------------------
 # HISTORY
 #-------------------------------------------
@@ -79,6 +58,7 @@ setopt hist_verify            # show command with history expansion to user befo
 
 # force zsh to show the complete history
 alias history="history 0"
+
 #-------------------------------------------
 # COLORS
 #-------------------------------------------
@@ -127,6 +107,7 @@ if [ -f $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ];
     ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
     ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 fi
+
 #-------------------------------------------
 # COMPLETION & MISC.
 #-------------------------------------------
@@ -140,7 +121,7 @@ setopt numericglobsort     # sort filenames numerically when it makes sense
 setopt promptsubst         # enable command substitution in prompt
 WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # TAB COMPLETION 
-autoload -Uz compinit
+autoload -Uz compinit && compinit
 compinit -d $HOME/.cache/zcompdump
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
@@ -152,99 +133,90 @@ zstyle ':completion:*:processes' command 'ps -U $(whoami)|sed "/ps/d"'
 zstyle ':completion:*:processes' insert-ids menu yes select
 zstyle ':completion:*:processes-names' command 'ps xho command|sed "s/://g"'
 zstyle ':completion:*:processes' sort false 
-#------------------------------------------
-# PLUGINS & SCRIPTS
-#-------------------------------------------
-source $HOME/.config/zsh/find.zsh
-source $HOME/.config/zsh/alacritty-win-title.zsh
+
+#-----------------------------------------------------
+# PLUGINS
+#-----------------------------------------------------
+#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.config/zsh/websearch.zsh
-source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-#-------------------------------------------
-# ALIASES
-#-------------------------------------------
+source $HOME/.config/zsh/find.zsh
+source $HOME/.config/lf/icons.sh
+source $HOME/.config/zsh/lfcd.sh
+
+#-----------------------------------------------------
+# ALIASES 
+#-----------------------------------------------------
+alias ..="cd .."
 alias s="sudo"
-alias l="exa --icons"
-alias la="exa -a --icons"
-alias ll="exa -al --icons"
-alias ls="ls --color"
-alias lsl="ls -al --color"
-alias grep='grep --color=auto'
+alias grep="grep --color"
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias ip='ip --color=auto'
-alias open="xdg-open"
-alias pac="sudo pacman -S"
-alias pacr="sudo pacman -Rs"
-alias pacs=pacSearch
-alias pwsh="pwsh -nologo"
-alias v="nvim"
-alias vv="vim"
-alias sv="sudoedit"
-alias za=zathuraOpen
+alias rm="trash"
+alias dwn="cd ~/Downloads"
+alias l="exa --icons"
+alias la="exa -a --icons"
+alias ll="exa -al --icons"
+alias ls="ls -Ga"
+alias lsl="ls -Gal"
 alias g="git"
 alias gcl=gitclone
-alias nn="nnn -eU"
-alias zrc="nvim $HOME/.zshrc"
-alias src="source $HOME/.zshrc"
-alias vrc="nvim $HOME/.config/nvim/init.lua"
-alias svrc="nvim /etc/xdg/nvim/sysinit.vim"
-alias rr="ranger"
+alias lf=lfcd
 alias srr="sudo ranger"
-alias pc="pcmanfm . &"
-alias smake="sudo make clean install"
-alias doomd="cd $DOOMDIR"
-alias dwn="cd $HOME/Downloads"
-alias awm="cd $HOME/.config/awesome && nvim ."
-alias awmc="cd $HOME/.config/awesome && nvim rc.lua"
-alias pic="cd $HOME/Pictures"
-alias scrshots="cd $HOME/Pictures/Screenshots"
-alias vd="cd $HOME/.config/nvim"
-alias svd="cd /opt/nvim/share/nvim/runtime"
-alias wsl="cd /Windows/Users/Mia/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs"
+alias nn="nnn -eUH"
+alias v="lvim"
+alias vs="open -a Visual\ Studio.app"
+alias zrc="lvim $HOME/.zshrc"
+alias src="source $HOME/.zshrc"
+alias vd="cd $HOME/.config/lvim"
+alias vrc="lvim $HOME/.config/lvim/config.lua"
 alias conf="cd $HOME/.config"
-alias sys="cd $HOME/.config/.system"
-alias suckless="cd $HOME/Suckless"
-alias dwmd="cd $HOME/Suckless/dwm"
-alias dwmc="cd $HOME/Suckless/dwm && nvim $HOME/Suckless/dwm/config.def.h"
-alias oned="cd $HOME/OneDrive"
-alias ewu="cd $HOME/OneDrive/2020-21Q3Spring"
-alias codes="cd $HOME/OneDrive/CodeWorkspace"
-alias dnet="cd $HOME/OneDrive/CodeWorkspace/NET"
-alias djava="cd $HOME/OneDrive/CodeWorkspace/Java"
-alias dclang="cd $HOME/OneDrive/CodeWorkspace/C"
-alias dpy="cd $HOME/OneDrive/CodeWorkspace/Python"
-alias ctext="cd $HOME/OneDrive/CurrTextbooks"
-alias scripts="cd $HOME/OneDrive/CodeWorkspace/Scripts"
-alias cs330="cd $HOME/OneDrive/2020-21Q3Spring/CSCD330-ComputerNetworks"
-alias cs320="cd $HOME/OneDrive/2020-21Q3Spring/CSCD320-Algorithms"
-alias cs350="cd $HOME/OneDrive/2020-21Q3Spring/CSCD350-SoftwareDevPrinciples"
-alias cs379="cd $HOME/OneDrive/CodeWorkspace/CSCD379-NETWebDev"
-alias cs379t="cd $HOME/LocalCodeWorkspace/cscd379-tyler"
-alias cs379m="cd $HOME/LocalCodeWorkspace/cscd379-mia"
-alias 350proj="cd $HOME/OneDrive/CodeWorkspace/CS350Project"
-alias dotfiles="xdg-open https://github.com/kaykay38/dotfiles &"
-alias canvas="xdg-open https://canvas.ewu.edu/ &"
-alias sling="xdg-open https://app.getsling.com/ 2>/dev/null&"
-alias ccal="xdg-open https://canvas.ewu.edu/calendar 2>/dev/null& disown %1"
-alias c379="xdg-open https://github.com/IntelliTect-Samples/EWU-CSCD379-2021-Spring 2/dev/null&"
-alias c320="xdg-open https://canvas.ewu.edu/courses/1460184/pages/cscd320-course-schedule 2>/dev/null&"
-alias c330="xdg-open https://canvas.ewu.edu/courses/1460164/modules 2>/dev/null&"
-alias c350="xdg-open http://shelby.ewu.edu/redirect?target=034Z4H4H3L3T6H35430R6Z5D170Z3723 2>/dev/null&"
-alias c379b="zathura $HOME/OneDrive/CurrTextbooks/Essential\ C\ Sharp\ 8.0\ by\ Mark\ Michaelis.pdf 2>/dev/null&"
-alias aws="ssh -i $HOME/OneDrive/2020-21Q3Spring/CSCD330-ComputerNetworks/cscd330.pem ubuntu@10.219.1.87"
-alias vpn="$HOME/Security/autovpn"
-alias bfg="java -jar /opt/bfg.jar"
-alias susp="systemctl suspend"
-alias off="poweroff"
-function zathuraOpen() {
-    zathura $1 &
+alias codes="cd $ONEDRIVE/CodeWorkspace"
+alias scripts="cd $HOME/Scripts"
+alias dgit="cd $ONEDRIVE/CodeWorkspace/Github"
+alias dpy="cd $ONEDRIVE/CodeWorkspace/Python"
+alias djava="cd $ONEDRIVE/CodeWorkspace/Java"
+alias dc="cd $ONEDRIVE/CodeWorkspace/C"
+alias dnet="cd $ONEDRIVE/CodeWorkspace/NET"
+alias oned="cd $ONEDRIVE"
+alias ctext="cd $ONEDRIVE/CurrTextbooks"
+alias dotfiles="open https://github.com/kaykay38/dotfiles"
+alias gmail="open https://mail.google.com/mail/u/1/#inbox"
+alias canvas="open https://canvas.ewu.edu/"
+alias ccal="open https://canvas.ewu.edu/calendar"
+alias eagnet="open https://eaglenet.ewu.edu/"
+alias sling="open https://app.getsling.com/ 2>/dev/null"
+alias chegg="open https://www.chegg.com/"
+
+function za() { zathura "$1" & disown %zathura }
+
+function git_update {
+    GIT_DISCOVERY_ACROSS_FILESYSTEM=true
+    git_status="$(git status "$1" 2>/dev/null)"; if [ $? -eq 0 ]; then 
+    st="$(rg 'Your branch is up to date' <<< "$git_status")"
+        if [[ "$st" ]]; then
+            echo $st
+        else
+            echo "git: pulling from remote"
+            git fetch && git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
+        fi
+    fi
 }
-function pacSearch() {
-    pacman -Ss "^$1"
+
+function fzd {
+    dir="$(fd -t d -c never -d 3 | fzf)"
+    [[ "$dir" ]] && cd "$dir"
+    git_update "$dir"
 }
-gitclone() {
+function fzh() {
+    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/.ignore" --search-path ~ 2>/dev/null | fzf)"
+    [[ "$dir" ]] && cd "$dir"
+    git_update "$dir"
+}
+
+function gitclone() {
     git clone git@github.com:$1.git
 }
 # # ex - archive extractor
@@ -271,4 +243,39 @@ function ex()
   fi
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#-------------------------------------------
+# KEY BINDINGS
+#-------------------------------------------
+# configure key keybindings
+bindkey -e                                        # emacs key bindings
+bindkey ' ' magic-space                           # do history expansion on space
+bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '^[[3~' delete-char                       # delete
+bindkey '^[[1;5C' forward-word                    # ctrl + ->
+bindkey '^[[1;5D' backward-word                   # ctrl + <-
+bindkey '^[[5~' beginning-of-buffer-or-history    # page up
+bindkey '^[[6~' end-of-buffer-or-history          # page down
+bindkey '^[[H' beginning-of-line                  # home
+bindkey '^[[F' end-of-line                        # end
+bindkey '^[[Z' undo                               # shift + tab undo last action
+bindkey -s '^f' 'fzh\n'
+bindkey -s '^o' 'fzd\n'
+
+#-------------------------------------------
+# PROMPT
+#-------------------------------------------
+#source $HOME/.p10k.zsh
+#source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
+# autoload -U zmv
+# setopt extended_glob
+# Load version control
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# zstyle ':vcs_info:git*' formats "   %b"
+# setopt prompt_subst
+#   
+# Current time & time elapsed between last command
+# PROMPT=' %F{blue}%f %F{209}%3~%f%F{106}${vcs_info_msg_0_}%f %(?.%F{71}❯.%F{red}❯)%f '
+eval "$(starship init zsh)"
+RPROMPT='%F{blue} %D{%L:%M:%S %p}%f'
