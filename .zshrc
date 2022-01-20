@@ -14,7 +14,7 @@ export PATH="$PATH:/usr/local/share/python"
 export PATH="$PATH:/usr/local/opt/ruby/bin"
 export PATH="$PATH:$HOME/Scripts:$HOME/node_modules/.bin:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.config/nvim/utils/bin"
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+[[ $(uname) = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
 export VISUAL='code'
@@ -194,11 +194,11 @@ function git_update {
     GIT_DISCOVERY_ACROSS_FILESYSTEM=true
     git_status="$(git status "$1" 2>/dev/null)"; if [ $? -eq 0 ]; then 
     st="$(rg 'Your branch is up to date' <<< "$git_status")"
-        if [[ "$st" ]]; then
+        if [[ -n "$st" ]]; then
             echo $st
         else
-            echo "git: pulling from remote"
-            git fetch && git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
+            echo "git: fetching from remote"
+            git fetch 1>/dev/null && git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
         fi
     fi
 }
@@ -208,6 +208,7 @@ function fzd {
     [[ "$dir" ]] && cd "$dir"
     git_update "$dir"
 }
+
 function fzh() {
     dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/.ignore" --search-path ~ 2>/dev/null | fzf)"
     [[ "$dir" ]] && cd "$dir"
