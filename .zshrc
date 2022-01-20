@@ -18,7 +18,6 @@ eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
 export VISUAL='code'
-# export BROWSER="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser"
 export ONEDRIVE="$HOME/OneDrive"
 export TODODIR="$ONEDRIVE/TODO"
 export BAT_THEME="gruvbox-dark"
