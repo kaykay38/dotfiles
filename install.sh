@@ -19,7 +19,7 @@ if [[ -n "$@" ]]; then
 else
     for file in $(pwd)/.*
     do 
-        ln -s "$file" "$HOME/" && echo "Linked $file -> $HOME/$file"
+        [[ $file = .git* ]] && ln -s "$file" "$HOME/" && echo "Linked $file -> $HOME/$file"
     done
     for file in $(pwd)/.config/*
     do 
