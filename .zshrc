@@ -137,7 +137,6 @@ zstyle ':completion:*:processes' sort false
 # PLUGINS
 #-----------------------------------------------------
 #source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.config/zsh/websearch.zsh
 source $HOME/.config/zsh/find.zsh
 source $HOME/.config/lf/icons.sh
@@ -205,7 +204,7 @@ function git_update {
 }
 
 function fzd {
-    dir="$(fd -t d -c never -d 3 | fzf)"
+    dir="$(fd -H -t d -c never -d 3 | fzf)"
     [[ "$dir" ]] && cd "$dir"
     git_update "$dir"
 }
