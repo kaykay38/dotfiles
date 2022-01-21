@@ -34,6 +34,8 @@ export DOTNET_ROOT=/usr/share/dotnet
 export DOOMDIR=$HOME/.config/doom
 export CHROME_EXECUTABLE='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
 export HOMEBREW_NO_AUTO_UPDATE=1
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+
 #-----------------------------------------------------
 # NNN CONFIG 
 #-----------------------------------------------------
