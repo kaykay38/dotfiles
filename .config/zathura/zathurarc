@@ -59,3 +59,4 @@ set recolor                     true
 set recolor-keephue             true      # keep original color
 
 map ; set recolor
+set guioptions none
