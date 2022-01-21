@@ -1,0 +1,27 @@
+**/.*/
+!**/.git/
+!**/.config/
+!**/.config/.dotfiles/
+**/node_modules
+**/Visual Studio 2019/
+**/Lightroom Library.lrlibrary
+**/Photos Library.photoslibrary
+**/plugged/
+**/sites/
+**/_*/
+**/__*/
+**/Music/
+**/Movies/
+**/workspace/
+**/Downloads/
+**/Library/
+**/VM Library/
+**/Locker/
+**/My Games/
+**/perl5/
+**/Sites/
+**/Recovered/
+**/Applications/
+**/Pictures/
+**/Movies/
+**/OneDrive/Documents/

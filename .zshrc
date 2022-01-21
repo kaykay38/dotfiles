@@ -192,12 +192,13 @@ function za() { zathura "$1" & disown %zathura }
 
 function git_update {
     GIT_DISCOVERY_ACROSS_FILESYSTEM=true
-    git_status="$(git status "$1" 2>/dev/null)"; if [ $? -eq 0 ]; then 
-    st="$(rg 'Your branch is up to date' <<< "$git_status")"
-        if [[ -n "$st" ]]; then
+    git_status="$(git -C "$1" rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
+        echo "$1"
+        echo "git: fetching from remote"
+        st="$(rg 'Your branch is up to date' <<< $(git status $1 2>/dev/null))"
+        if [[ "$st" ]]; then
             echo $st
         else
-            echo "git: fetching from remote"
             git fetch 1>/dev/null && git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
         fi
     fi
@@ -205,19 +206,19 @@ function git_update {
 
 function fzd {
     dir="$(fd -H -t d -c never -d 3 | fzf)"
-    [[ "$dir" ]] && cd "$dir"
-    git_update "$dir"
+    [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
 function fzh() {
-    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/.ignore" --search-path ~ 2>/dev/null | fzf)"
-    [[ "$dir" ]] && cd "$dir"
-    git_update "$dir"
+    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/.ignore" --search-path $HOME 2>/dev/null | fzf)"
+    [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
-function gitclone() {
-    git clone git@github.com:$1.git
+function fzg() {
+    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/.ignore2" '^\.git$' --search-path $HOME 2>/dev/null | sed s#.git## | fzf --prompt='Jump to git repo > ')"
+    [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
+
 # # ex - archive extractor
 # # usage: ex <file>
 function ex()
@@ -259,6 +260,7 @@ bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
 bindkey -s '^f' 'fzh\n'
 bindkey -s '^o' 'fzd\n'
+bindkey -s '^g' 'fzg\n'
 
 #-------------------------------------------
 # PROMPT
