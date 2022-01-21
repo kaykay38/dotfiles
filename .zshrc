@@ -195,6 +195,7 @@ function git_update {
     git_status="$(git -C "$1" rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
         echo "$1"
         echo "git: fetching from remote"
+        git fetch && echo "git: fetched from remote"
         st="$(rg 'Your branch is up to date' <<< $(git status $1 2>/dev/null))"
         if [[ "$st" ]]; then
             echo $st
@@ -210,7 +211,7 @@ function fzd {
 }
 
 function fzh() {
-    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/.ignore" --search-path $HOME 2>/dev/null | fzf)"
+    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME 2>/dev/null | fzf)"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
