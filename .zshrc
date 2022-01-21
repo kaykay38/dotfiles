@@ -194,14 +194,10 @@ function za() { zathura "$1" & disown %zathura }
 function git_update {
     GIT_DISCOVERY_ACROSS_FILESYSTEM=true
     git_status="$(git -C . rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
-        echo "$1"
+        echo "cd -> $1"
         git fetch 1>/dev/null
         st="$(rg 'Your branch is up to date' <<< $(git status 2>/dev/null))"
-        if [[ "$st" ]]; then
-            echo $st
-        else
-            git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
-        fi
+        [[ "$st" ]] || echo "git: pulling from remote" && git pull || echo "\033[0;31mgit: failed to pull from remote\033[0m"
     fi
 }
 
