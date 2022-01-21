@@ -1,3 +1,4 @@
+fonts.dir
 **/*.git/
 **/*.git.*/
 **/*.github
@@ -6,24 +7,6 @@
 .fzf*/
 **/fzf*
 **/pavucontrol*
-Desktop/
-Documents/
-Downloads/
-Music/
-Pictures/
-Templates/
-Videos/
-Public/
-Github/
-OneDrive/
-Scripts/
-AppSrc/
-dotnet/
-Security/
-Suckless/
-env/
-rgResults/
-perl5/
 .aspnet/
 .adobe/
 .android/
@@ -86,8 +69,6 @@ perl5/
 .wine/
 .yarn/
 .zoom/
-fonts.dir
-gitstatus.txt
 *.log
 *.txt
 .DS_Store
@@ -275,4 +256,3 @@ gitstatus.txt
 .config/user-dirs.locale
 .config/zoom.conf
 .config/zoomus.conf
-node_modules
