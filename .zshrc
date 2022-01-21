@@ -1,7 +1,7 @@
 #-----------------------------------------------------
 # .zshrc
 # Author: kaykay38
-# Last Modified: Dec 25, 2021
+# Last Modified: Jan 20, 2021
 #-----------------------------------------------------
 
 #-------------------------------------------
@@ -47,7 +47,6 @@ export NNN_BMS="g:$ONEDRIVE/CodeWorkspace/Github;j:$ONEDRIVE/CodeWorkspace/Java;
 #-------------------------------------------
 # HISTORY
 #-------------------------------------------
-# History configurations
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000
 SAVEHIST=2000
@@ -194,26 +193,26 @@ function za() { zathura "$1" & disown %zathura }
 
 function git_update {
     GIT_DISCOVERY_ACROSS_FILESYSTEM=true
-    git_status="$(git -C "$1" rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
+    git_status="$(git -C . rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
         echo "$1"
         echo "git: fetching from remote"
-        git fetch && echo "git: fetched from remote"
-        st="$(rg 'Your branch is up to date' <<< $(git status $1 2>/dev/null))"
+        git fetch 1>/dev/null && echo "git: fetched from remote"
+        st="$(rg 'Your branch is up to date' <<< $(git status 2>/dev/null))"
         if [[ "$st" ]]; then
             echo $st
         else
-            git fetch 1>/dev/null && git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
+            git pull || echo -c "\033[0;31mgit: failed to pull from remote\033[0m"
         fi
     fi
 }
 
-function fzd {
-    dir="$(fd -H -t d -c never -d 3 | fzf)"
+function fzh() {
+    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME 2>/dev/null | fzf)"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
-function fzh() {
-    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME 2>/dev/null | fzf)"
+function fzd {
+    dir="$(fd -H -t d -c never -d 3 | fzf | sed -e "1 s#.#$(pwd)#")"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
