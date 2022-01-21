@@ -215,7 +215,7 @@ function fzh() {
 }
 
 function fzg() {
-    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/.ignore2" '^\.git$' --search-path $HOME 2>/dev/null | sed s#.git## | fzf --prompt='Jump to git repo > ')"
+    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '^\.git$' --search-path $HOME 2>/dev/null | sed s#.git## | fzf --prompt='Jump to git repo > ')"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
