@@ -2,7 +2,7 @@
 #    name =
 #    email =
 [core]
-    editor = nvim
+    editor = lvim
 [push]
     default = simple
 [color]
@@ -37,7 +37,6 @@
     edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
     # add conflicted file on merge
     add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-
 [hub]
     protocol = https
 [github]
@@ -53,7 +52,5 @@
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-	required = true
 	process = git-lfs filter-process
-[ghq]
-    root = ~/.ghq
+	required = true
