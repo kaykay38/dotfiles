@@ -24,4 +24,7 @@
 **/Applications/
 **/Pictures/
 **/Movies/
-**/OneDrive/Documents/
+**/Videos/
+**/OneDrive*/Documents/
+**/OneDrive*/Pictures/*/
+**/OneDrive*/Desktop/
