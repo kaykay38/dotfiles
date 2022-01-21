@@ -28,3 +28,21 @@
 **/OneDrive*/Documents/
 **/OneDrive*/Pictures/*/
 **/OneDrive*/Desktop/
+**/obj/
+**/out/
+**/bin/
+**/lib/
+**/src/
+**/latex/images
+**/*javadoc*/
+**/test/*/
+**/NET/*/*/
+**/NET/**/test/*/
+**/NET/**/bin/
+**/NET/**/obj/
+**/NET/*/packages/
+**/VirtualBox VMs/*/
+**/Files-copy/
+**/qemu/
+**/Documents/Adobe/
+**/Documents/Allegorithmic/
