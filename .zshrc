@@ -195,8 +195,7 @@ function git_update {
     GIT_DISCOVERY_ACROSS_FILESYSTEM=true
     git_status="$(git -C . rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
         echo "$1"
-        echo "git: fetching from remote"
-        git fetch 1>/dev/null && echo "git: fetched from remote"
+        git fetch 1>/dev/null
         st="$(rg 'Your branch is up to date' <<< $(git status 2>/dev/null))"
         if [[ "$st" ]]; then
             echo $st
