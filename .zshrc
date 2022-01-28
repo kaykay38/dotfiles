@@ -201,14 +201,29 @@ function git_update {
     fi
 }
 
+function fzq() {
+    dir="$(fd -t d -c never --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME/OneDrive/2021-22Q2Winter 2>/dev/null | fzf --prompt='Jump to > ')"
+    [[ "$dir" ]] && cd "$dir" && git_update "$dir"
+}
+
 function fzh() {
-    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME 2>/dev/null | fzf)"
+    dir="$(fd -t d -c never --base-directory $HOME --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME 2>/dev/null | fzf --prompt='Jump to > ' )"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
 function fzd {
-    dir="$(fd -H -t d -c never -d 3 | fzf | sed -e "1 s#.#$(pwd)#")"
+    dir="$(fd -H -t d -c never -d 3 | fzf --prompt='Jump to > ' | sed -e "1 s#.#$(pwd)#")"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
+}
+
+function fzo {
+    file="$(fd -H -c never -d 3 | fzf --prompt='Open > ')"
+    if [[ "$file" ]]; then
+        case $(file --mime-type "$file" -bL) in
+            text/*|application/json) $EDITOR "$file";;
+            *) open "$file" ;;
+        esac
+    fi
 }
 
 function fzg() {
@@ -255,25 +270,36 @@ bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo                               # shift + tab undo last action
-bindkey -s '^f' 'fzh\n'
-bindkey -s '^o' 'fzd\n'
+bindkey -s '^h' 'fzh\n'
+bindkey -s '^o' 'fzo\n'
+bindkey -s '^l' 'fzd\n'
 bindkey -s '^g' 'fzg\n'
+bindkey -s '^v' 'fzq\n'
 
 #-------------------------------------------
 # PROMPT
 #-------------------------------------------
-#source $HOME/.p10k.zsh
-#source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
-# autoload -U zmv
-# setopt extended_glob
-# Load version control
-# autoload -Uz vcs_info
-# precmd_vcs_info() { vcs_info }
-# precmd_functions+=( precmd_vcs_info )
-# zstyle ':vcs_info:git*' formats "   %b"
-# setopt prompt_subst
+
+#-------------------------------------------
+# PERSONAL PROMPT
+#-------------------------------------------
+autoload -U zmv
+setopt extended_glob
+# START Load version control
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+zstyle ':vcs_info:git*' formats "   %b"
+setopt prompt_subst
+# END Load version control
 #   
-# Current time & time elapsed between last command
-# PROMPT=' %F{blue}%f %F{209}%3~%f%F{106}${vcs_info_msg_0_}%f %(?.%F{71}❯.%F{red}❯)%f '
-eval "$(starship init zsh)"
+NEWLINE=$'\n'
+# PROMPT='${NEWLINE}%F{blue}%f %F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
+PROMPT='${NEWLINE}%F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
+
 RPROMPT='%F{blue} %D{%L:%M:%S %p}%f'
+#-------------------------------------------
+# PERSONAL PROMPT END
+#-------------------------------------------
+
+# eval "$(starship init zsh)"
