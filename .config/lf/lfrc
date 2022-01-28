@@ -40,19 +40,30 @@ cmd copy-path ${{
 }}
 
 cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        text/*|application/json) $EDITOR "$f";;
-        *) open "$f" ;;
-    esac
+    for file in "$fx"
+    do
+        if [[ $file = *.pynb ]] || [[ $file = *.ipynb ]]; then
+            url="http://localhost:8888/notebooks/$(basename "$file")"
+            echo "$url"
+            [[ -z "$(pgrep -f 'jupyter-notebook')" ]] && jupyter notebook 2>/dev/null 1>/dev/null&
+            open "$url" || xdg-open "$url"
+        else
+            case $(file --mime-type "$file" -bL) in
+                text/*|application/json) $EDITOR "$file";;
+                *) open "$file" ;;
+            esac
+        fi
+    done
 }}
 
 # cmd open-with %printf "Open with: " && read ans && printf "Opening with $ans" && $ans "$f" 2>/dev/null & disown "%$ans"
 cmd open-with %printf "Open with: " && read ans && printf "Opening with $ans\n" && exec-disown $ans "$f" 2>/dev/null
 
 cmd mkfile %printf "File Name: " && read ans && $EDITOR $ans
-cmd sudomkfile %printf "File Name: "; read ans && sudo $EDITOR $ans
+cmd sudo-mkfile ${{printf "File Name: "; read ans && sudo touch $ans}}
 
-cmd mkdir %printf "Directory Name: " && read ans && mkdir $ans
+cmd mkdir %printf "Directory Name: " && read ans && mkdir -p $ans
+cmd sudo-mkfile ${{printf "Directory Name: "; read ans && sudo mkdir -p $ans}}
 
 cmd chmod ${{
   printf "Mode Bits: "
@@ -66,7 +77,7 @@ cmd chmod ${{
   lf -remote 'send reload'
 }}
 
-cmd fzf_jump ${{
+cmd fzf-jump ${{
   res="$(find . -maxdepth 3 2>/dev/null | fzf --preview='bat --color always --style plain {}' --reverse --header='Jump to location')"
   if [ -f "$res" ]; then
     cmd="select"
@@ -85,6 +96,7 @@ cmd unarchive ${{
       *.tar) tar -xvf "$f" ;;
       *) echo "Unsupported format" ;;
   esac
+    lf -remote 'send reload'
 }}
 
 cmd zip %zip -r "$f" "$f"
@@ -110,10 +122,19 @@ cmd trash ${{
       files="${files#*;}"
     fi
   done
+    lf -remote 'send reload'
 }}
 
 cmd clear-trash %printf "Empty trash? (yes/no): " && read ans && [ $ans = "yes" ] && rm -rf ~/.Trash/* && printf "Trash emptied" && lf -remote 'send reload'
 
+cmd symlink %printf 'Symlink selected to: ' && read ans && ln -s $fs $ans && for file in $fs; do printf "Symlinked $file -> $ans\n"; done && lf -remote 'send unselect'
+cmd sudo-symlink ${{
+    printf 'Symlink selected to: ' && read ans && sudo ln -s $fs $ans
+    for file in $fs; do
+        printf "Symlinked $file -> $ans\n"
+    done
+    lf -remote 'send unselect'
+}}
 
 # Bindings
 # Remove some defaults
@@ -160,7 +181,7 @@ map Tc clear-trash
 map T. cd ~/.Trash
 
 # fzf Mapping
-map f fzf_jump
+map f fzf-jump
 
 # Basic Functions
 map . set hidden!
