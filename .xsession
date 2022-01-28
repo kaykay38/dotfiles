@@ -46,6 +46,7 @@ get_session(){
 		bspwm) echo "bspwm-session" ;;
 		xfce) echo xfce4-session ;;
 		openbox) echo openbox-session ;;
+		lxqt) echo lxqt-session ;;
 		*) echo "$DEFAULT_SESSION" ;;
 	esac
 }
