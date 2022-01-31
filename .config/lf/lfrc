@@ -1,7 +1,5 @@
-
 set previewer ~/.config/lf/preview
 set preview true
-set hidden true
 set drawbox true
 set icons true
 set ignorecase true
@@ -40,20 +38,14 @@ cmd copy-path ${{
 }}
 
 cmd open ${{
-    for file in "$fx"
-    do
-        if [[ $file = *.pynb ]] || [[ $file = *.ipynb ]]; then
-            url="http://localhost:8888/notebooks/$(basename "$file")"
-            echo "$url"
-            [[ -z "$(pgrep -f 'jupyter-notebook')" ]] && jupyter notebook 2>/dev/null 1>/dev/null&
-            open "$url" || xdg-open "$url"
-        else
-            case $(file --mime-type "$file" -bL) in
-                text/*|application/json) $EDITOR "$file";;
-                *) open "$file" ;;
-            esac
-        fi
-    done
+    if [[ $f = *.pynb ]] || [[ $f = *.ipynb ]]; then
+        jupyter-notebook "$(basename $f)" 2>/dev/null &
+    else
+        case $(file --mime-type "$f" -bL) in
+            text/*|application/json) $EDITOR "$f";;
+            *) open "$f" ;;
+        esac
+    fi
 }}
 
 # cmd open-with %printf "Open with: " && read ans && printf "Opening with $ans" && $ans "$f" 2>/dev/null & disown "%$ans"

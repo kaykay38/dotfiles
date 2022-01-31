@@ -1,20 +1,22 @@
 #-----------------------------------------------------
 # .zshrc
 # Author: kaykay38
-# Last Modified: Jan 20, 2021
+# Last Modified: Jan 30, 2021
 #-----------------------------------------------------
 
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
+export OS=$(uname)
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:/usr/local/opt/texinfo/bin" # or follow the instructions given by brew info
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/share/python"
 export PATH="$PATH:/usr/local/opt/ruby/bin"
-export PATH="$PATH:$HOME/Scripts:$HOME/node_modules/.bin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.config/nvim/utils/bin"
-[[ $(uname) = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+export PATH="$PATH:$HOME/.dotnet/tools"
+[[ $OS = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
 export VISUAL='code'
@@ -26,13 +28,12 @@ export JAR=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/plugins/o
 export GRADLE_HOME=/usr/local/Cellar/gradle/7.0
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
 export JDTLS_CONFIG=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/config_mac
-export WORKSPACE="$ONEDRIVE/CodeWorkspace/Java"
+# export WORKSPACE="$ONEDRIVE/CodeWorkspace/Java"
 #
 DOTNET_CLI_TELEMETRY_OPTOUT=1
-#export PATH="$PATH:/home/mia/.dotnet/tools"
 export DOTNET_ROOT=/usr/share/dotnet
-export DOOMDIR=$HOME/.config/doom
-export CHROME_EXECUTABLE='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
+# export DOOMDIR=$HOME/.config/doom
+[[ $OS = Darwin ]] && export CHROME_EXECUTABLE='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
 export HOMEBREW_NO_AUTO_UPDATE=1
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
@@ -188,8 +189,14 @@ alias ccal="open https://canvas.ewu.edu/calendar"
 alias eagnet="open https://eaglenet.ewu.edu/"
 alias sling="open https://app.getsling.com/ 2>/dev/null"
 alias chegg="open https://www.chegg.com/"
+[[ $OS = Linux ]] && alias open="xdg-open"
 
-function za() { zathura "$1" & disown %zathura }
+function za() {
+    case $OS in
+        Darwin) /Applications/Zathura.app/Contents/MacOS/zathura "$1" & disown %/Applications/Zathura.app/Contents/MacOS/zathura ;;
+        *) zathura "$1" & disown %zathura ;; 
+    esac
+}
 
 function git_update {
     GIT_DISCOVERY_ACROSS_FILESYSTEM=true
@@ -280,26 +287,21 @@ bindkey -s '^v' 'fzq\n'
 # PROMPT
 #-------------------------------------------
 
-#-------------------------------------------
-# PERSONAL PROMPT
-#-------------------------------------------
-autoload -U zmv
-setopt extended_glob
-# START Load version control
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-zstyle ':vcs_info:git*' formats "   %b"
-setopt prompt_subst
-# END Load version control
-#   
-NEWLINE=$'\n'
-# PROMPT='${NEWLINE}%F{blue}%f %F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
-PROMPT='${NEWLINE}%F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
-
+if [[ $OS = Darwin ]]; then
+    NEWLINE=$'\n'
+    # PROMPT='${NEWLINE}%F{blue}%f %F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
+    PROMPT='${NEWLINE}%F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
+    autoload -U zmv
+    setopt extended_glob
+    # START Load version control
+    autoload -Uz vcs_info
+    precmd_vcs_info() { vcs_info }
+    precmd_functions+=( precmd_vcs_info )
+    zstyle ':vcs_info:git*' formats "   %b"
+    setopt prompt_subst
+    # END Load version control
+    #   
+else
+    eval "$(starship init zsh)"
+fi
 RPROMPT='%F{blue} %D{%L:%M:%S %p}%f'
-#-------------------------------------------
-# PERSONAL PROMPT END
-#-------------------------------------------
-
-# eval "$(starship init zsh)"
