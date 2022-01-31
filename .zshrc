@@ -199,7 +199,6 @@ function za() {
 }
 
 function git_update {
-    GIT_DISCOVERY_ACROSS_FILESYSTEM=true
     git_status="$(git -C . rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
         echo "cd -> $1"
         git fetch 1>/dev/null
