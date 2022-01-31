@@ -34,7 +34,7 @@ cmd bulk-rename ${{
 }}
 
 cmd copy-path ${{
-    echo "$fx" | pbcopy
+    [[ $(uname) = Darwin ]] && echo "$fx" | pbcopy || echo "$fx" | xclip -i -selection clipboard
 }}
 
 cmd open ${{
@@ -43,7 +43,7 @@ cmd open ${{
     else
         case $(file --mime-type "$f" -bL) in
             text/*|application/json) $EDITOR "$f";;
-            *) open "$f" || xdg-open "$f" ;;
+            *) [[ $(uname) = Darwin ]] && open "$f" || xdg-open "$f"&;;
         esac
     fi
 }}
