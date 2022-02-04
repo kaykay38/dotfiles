@@ -12,7 +12,6 @@
 **/__*/
 **/Music/
 **/Movies/
-**/workspace/
 **/Downloads/
 **/Library/
 **/VM Library/
@@ -26,7 +25,7 @@
 **/Movies/
 **/Videos/
 **/OneDrive*/Documents/
-**/OneDrive*/Pictures/*/
+**/OneDrive*/Pictures/
 **/OneDrive*/Desktop/
 **/obj/
 **/out/

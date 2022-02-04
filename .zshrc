@@ -33,7 +33,7 @@ export JDTLS_CONFIG=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/
 DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT=/usr/share/dotnet
 # export DOOMDIR=$HOME/.config/doom
-[[ $OS = Darwin ]] && export CHROME_EXECUTABLE='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
+[[ $OS = Darwin ]] && export CHROME_EXECUTABLE='/Applications/Firefox.app/Contents/MacOS/firefox'
 export HOMEBREW_NO_AUTO_UPDATE=1
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
@@ -304,3 +304,4 @@ else
     eval "$(starship init zsh)"
 fi
 RPROMPT='%F{blue} %D{%L:%M:%S %p}%f'
+todo
