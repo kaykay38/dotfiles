@@ -15,7 +15,7 @@
 # full_circle     full_square     full_rounded     full_alt
 # row_circle      row_square      row_rounded      row_alt
 
-theme="full_circle"
+theme="full_circle_custom"
 dir="$HOME/.config/rofi/powermenu"
 
 # random colors
@@ -23,11 +23,11 @@ styles=($(ls -p --hide="colors.rasi" $dir/styles))
 color="${styles[$(( $RANDOM % 8 ))]}"
 
 # comment this line to disable random colors
-sed -i -e "s/@import .*/@import \"$color\"/g" $dir/styles/colors.rasi
+# sed -i -e "s/@import .*/@import \"$color\"/g" $dir/styles/colors.rasi
 
 # comment these lines to disable random style
-themes=($(ls -p --hide="powermenu.sh" --hide="styles" --hide="confirm.rasi" --hide="message.rasi" $dir))
-theme="${themes[$(( $RANDOM % 24 ))]}"
+# themes=($(ls -p --hide="powermenu.sh" --hide="styles" --hide="confirm.rasi" --hide="message.rasi" $dir))
+# theme="${themes[$(( $RANDOM % 24 ))]}"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
@@ -41,18 +41,15 @@ suspend=""
 logout=""
 
 # Confirmation
-confirm_exit() {
-	rofi -dmenu\
-		-i\
-		-no-fixed-num-lines\
-		-p "Are You Sure? : "\
-		-theme $dir/confirm.rasi
-}
+# confirm_exit() {
+# 	printf "Yes\nNo" | rofi -dmenu\
+#         -matching fuzzy \
+#         -l 2 \
+# 		-i\
+# 		-p "Are You Sure? : "\
+# 		-theme $dir/confirm.rasi
 
-# Message
-msg() {
-	rofi -theme "$dir/message.rasi" -e "Available Options  -  yes / y / no / n"
-}
+# }
 
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
@@ -60,58 +57,49 @@ options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
 case $chosen in
     $shutdown)
-		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+		# ans=$(confirm_exit &)
+		# if [[ $ans == "Yes" || $ans == "yes" ||  $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+		# 	systemctl poweroff
+  #       else
+  #           exit 0
+  #       fi
 			systemctl poweroff
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-			exit 0
-        else
-			msg
-        fi
         ;;
     $reboot)
-		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+		# ans=$(confirm_exit &)
+		# if [[ $ans == "Yes" || $ans == "yes" ||  $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+		# 	systemctl reboot
+  #       else
+  #           exit 0
+  #       fi
 			systemctl reboot
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-			exit 0
-        else
-			msg
-        fi
         ;;
     $lock)
-		if [[ -f /usr/bin/i3lock ]]; then
+		if [[ -f /usr/local/bin/i3lock-script ]]; then
+			i3lock-script
+		elif [[ -f /usr/local/bin/i3lock ]]; then
 			i3lock
 		elif [[ -f /usr/bin/betterlockscreen ]]; then
 			betterlockscreen -l
 		fi
         ;;
     $suspend)
-		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			mpc -q pause
-			amixer set Master mute
-			systemctl suspend
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-			exit 0
-        else
-			msg
-        fi
+        playerctl pause
+        systemctl suspend
         ;;
     $logout)
-		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
-				openbox --exit
-			elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-				bspc quit
-			elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
-				i3-msg exit
-			fi
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-			exit 0
-        else
-			msg
-        fi
+        kill -9 -1
+		# ans=$(confirm_exit &)
+		# if [[ $ans == "Yes" || $ans == "yes" ||  $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+		# 	if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
+		# 		openbox --exit
+		# 	elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
+		# 		bspc quit
+		# 	elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
+		# 		i3-msg exit
+		# 	fi
+  #       else
+  #           exit 0
+  #       fi
         ;;
 esac

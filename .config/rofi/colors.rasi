@@ -1,0 +1,25 @@
+/* colors */
+
+//  al (transparent):  #000000;
+//  bg (background):  #212121;
+//  se (selected):  #444444;
+//  fg (foreground):  #eeeeee;
+//  ac ():  #cccccc;
+//  pf (prompt fg):  #eeeeee;
+//  pb (prompt bg):  #eeeeee;
+//  tf (title fg):  #eeeeee;
+//  tb (title bg):  #eeeeee;
+//  in (input):  #eeeeeeff;
+
+* {
+  al:  #00000000;
+  bg:  #212121f2;
+  se:  #444444f2;
+  fg:  #eeeeeef2;
+  ac:  #ccccccad;
+  pf:  #bbbbbbff;
+  pb:  #44444499;
+  tf:  #eeeeeeff;
+  tb:  #212121f2;
+  in:  #eeeeeeff;
+}
