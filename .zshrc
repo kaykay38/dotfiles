@@ -1,7 +1,7 @@
 #-----------------------------------------------------
 # .zshrc
 # Author: kaykay38
-# Last Modified: Jan 30, 2021
+# Last Modified: Feb 7, 2021
 #-----------------------------------------------------
 
 #-------------------------------------------
@@ -243,7 +243,7 @@ function fzo {
 }
 
 function fzg() {
-    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '^\.git$' --search-path $HOME 2>/dev/null | sed -e 's#/\.git##'  | fzf --prompt='Jump to git repo > ')"
+    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '^\.git$' $1 2>/dev/null | sed -e 's#/\.git##'  | fzf --prompt='Jump to git repo > ')"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
