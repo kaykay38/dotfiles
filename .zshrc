@@ -189,7 +189,17 @@ alias ccal="open https://canvas.ewu.edu/calendar"
 alias eagnet="open https://eaglenet.ewu.edu/"
 alias sling="open https://app.getsling.com/ 2>/dev/null"
 alias chegg="open https://www.chegg.com/"
-[[ $OS = Linux ]] && alias open="xdg-open"
+if [[ $OS = Linux ]]; then
+    alias open=open-disown "$1"
+    alias awmd="cd $HOME/.config/awesome"
+    alias awmc="cd $HOME/.config/awesome && $EDITOR $HOME/.config/awesome/rc.lua"
+    alias dwmd="cd $HOME/Suckless/dwm"
+    alias dwmc="cd $HOME/Suckless/dwm && $EDITOR $HOME/Suckless/dwm/config.def.h"
+fi
+
+function open-disown {
+    xdg-open "$1" & disown '%xdg-open' 
+}
 
 function za() {
     case $OS in
