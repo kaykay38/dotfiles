@@ -1,68 +1,120 @@
+/*
+ *
+ * Author  : Aditya Shakya
+ * Mail    : adi1090x@gmail.com
+ * Github  : @adi1090x
+ * Twitter : @adi1090x
+ *
+ */
+
 configuration {
-	font: "Noto Sans Nerd Font 14";
-	width: 30;
-	lines: 5;
-    //bw: 20;
-	ssh-command: "{terminal} -e {ssh-client} {host}";
-	//sidebar-mode: true;
-	auto-select: false;
-    display-run: "RUN";
-    display-drun: "";
-    display-ssh: "SSH";
-    display-window: "WINDOW";
+	font:							"NotoSans Nerd Font 14";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    display-drun: 					"";
+    display-window: 				"WINDOW";
+    display-run: 					"RUN";
+    display-ssh: 					"SSH";
+    disable-history:                false;
+	sidebar-mode: 					false;
 }
 
-* {
-  background-color: #21212199;
-  text-color: #bbbbbb;
-  border-color: #2d2d2d;
-  spacing: 0;
-  width: 512px;
-}
+@import "colors.rasi"
 
 window {
-    transparency: "real";
-    border: 1px;
-    border-color: #353535;
-}
-
-inputbar {
-  border: 0 0 1px 0;
-  children: [prompt,entry];
+    transparency:                   "real";
+    background-color:               @bg;
+    text-color:                     @fg;
+	border:							0px;
+	border-color:					@ac;
+    border-radius:                  0px;
+	width:							18%;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       0;
 }
 
 prompt {
-  padding: 16px;
-  border: 0 1px 0 0;
-}
-
-textbox {
-  background-color: #212121;
-  border: 0 0 1px 0;
-  border-color: #2d2d2d;
-  text-color: #eeeeee;
-  padding: 8px 16px;
+    enabled: 						true;
+	padding: 						0% 1% 0% -0.5%;
+	background-color: 				@al;
+	text-color: 					@pf;
 }
 
 entry {
-  padding: 16px;
+    background-color:               @al;
+    text-color:                     @fg;
+    placeholder-color:              @pf;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Search";
+    padding:                        0.10% 0% 0% 0%;
+    blink:                          true;
+}
+
+inputbar {
+	children: 						[ prompt, entry ];
+    background-color:               @pb;
+    text-color:                     @pf;
+    expand:                         false;
+	border:							0% 0% 0% 0%;
+    border-radius:                  0px;
+	border-color:					@ac;
+    margin:                         0% 0% 0% 0%;
+    padding:                        1.5%;
 }
 
 listview {
-  cycle: true;
-  margin: 0 0 -1px 0;
-  scrollbar: false;
+    background-color:               @al;
+    padding:                        0px;
+    columns:                        1;
+    lines:                          5;
+    spacing:                        0%;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @al;
+	border:							0% 0% 0% 0%;
+    border-radius:                  0% 0% 0% 0%;
+	border-color:					@ac;
+    children:                       [ inputbar, listview ];
+    spacing:                       	0%;
+    padding:                        0%;
+}
+
+element {
+    background-color:               @al;
+    text-color:                     @fg;
+    orientation:                    horizontal;
+    border-radius:                  0%;
+    padding:                        1% 0.5% 1% 0.5%;
 }
 
 element-icon {
-  size: 2.8ch;
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           32px;
+    border:                         0px;
 }
-element {
-  border: 0 0 1px 0;
-  padding: 16px;
+
+element-text {
+    background-color: 				@al;
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         0% 0.25% 0% 0.25%;
 }
 
 element selected {
-  background-color: #303030e6;
-  text-color: #eeeeee;
+    background-color:               @se;
+    text-color:                     @fg;
+	border:							0% 0% 0% 0%;
+    border-radius:                  0px;
+    border-color:                  	@bg;
 }

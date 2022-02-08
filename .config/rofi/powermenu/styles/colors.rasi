@@ -3,8 +3,9 @@
  *
  * Available Color Schemes
  *
- * bluish    berry    nordic    nightly    gotham    mask    faded    cocoa
+ * bluish    berry    nordic    nightly    gotham    mask    faded    cocoa    gray
  *
  */
 
-@import "gotham.rasi"
+/* @import "nordic.rasi" */
+@import "gray.rasi"
