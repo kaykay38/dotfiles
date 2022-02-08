@@ -218,7 +218,7 @@ function git_update {
 }
 
 function fzq() {
-    dir="$(fd -t d -c never --ignore-file "$HOME/.config/fd/ignore-home" --search-path $HOME/OneDrive/2021-22Q2Winter 2>/dev/null | fzf --prompt='Jump to > ')"
+    dir="$(fd -t d -c never --ignore-file "$HOME/.config/fd/ignore-home" --search-path $SYNCDRIVE/2021-22Q2Winter 2>/dev/null | fzf --prompt='Jump to > ')"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
