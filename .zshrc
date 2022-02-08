@@ -20,15 +20,15 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
 export VISUAL='code'
-export ONEDRIVE="$HOME/OneDrive"
-export TODODIR="$ONEDRIVE/TODO"
+export SYNCDRIVE="$HOME/Sync"
+export TODODIR="$SYNCDRIVE/TODO"
 export BAT_THEME="gruvbox-dark"
 
 export JAR=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
 export GRADLE_HOME=/usr/local/Cellar/gradle/7.0
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
 export JDTLS_CONFIG=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/config_mac
-# export WORKSPACE="$ONEDRIVE/CodeWorkspace/Java"
+# export WORKSPACE="$SYNCDRIVE/CodeWorkspace/Java"
 #
 DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT=/usr/share/dotnet
@@ -43,7 +43,7 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export NNN_FIFO="/tmp/nnn.fifo"
 export NNN_PLUG="f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview" 
 export NNN_FCOLORS="00001e318f00000000000000"
-export NNN_BMS="g:$ONEDRIVE/CodeWorkspace/Github;j:$ONEDRIVE/CodeWorkspace/Java;c:$ONEDRIVE/CodeWorkspace/C;n:$ONEDRIVE/CodeWorkspace/NET;C:$HOME/.config;v:$HOME/.config/nvim;p:$HOME/Pictures;d:$HOME/Downloads"
+export NNN_BMS="g:$SYNCDRIVE/CodeWorkspace/Github;j:$SYNCDRIVE/CodeWorkspace/Java;c:$SYNCDRIVE/CodeWorkspace/C;n:$SYNCDRIVE/CodeWorkspace/NET;C:$HOME/.config;v:$HOME/.config/nvim;p:$HOME/Pictures;d:$HOME/Downloads"
 
 #-------------------------------------------
 # HISTORY
@@ -173,15 +173,15 @@ alias src="source $HOME/.zshrc"
 alias vd="cd $HOME/.config/lvim"
 alias vrc="lvim $HOME/.config/lvim/config.lua"
 alias conf="cd $HOME/.config"
-alias codes="cd $ONEDRIVE/CodeWorkspace"
+alias codes="cd $SYNCDRIVE/CodeWorkspace"
 alias scripts="cd $HOME/Scripts"
-alias dgit="cd $ONEDRIVE/CodeWorkspace/Github"
-alias dpy="cd $ONEDRIVE/CodeWorkspace/Python"
-alias djava="cd $ONEDRIVE/CodeWorkspace/Java"
-alias dc="cd $ONEDRIVE/CodeWorkspace/C"
-alias dnet="cd $ONEDRIVE/CodeWorkspace/NET"
-alias oned="cd $ONEDRIVE"
-alias ctext="cd $ONEDRIVE/CurrTextbooks"
+alias dgit="cd $SYNCDRIVE/CodeWorkspace/Github"
+alias dpy="cd $SYNCDRIVE/CodeWorkspace/Python"
+alias djava="cd $SYNCDRIVE/CodeWorkspace/Java"
+alias dc="cd $SYNCDRIVE/CodeWorkspace/C"
+alias dnet="cd $SYNCDRIVE/CodeWorkspace/NET"
+alias oned="cd $SYNCDRIVE"
+alias ctext="cd $SYNCDRIVE/CurrTextbooks"
 alias dotfiles="cd $HOME/.config/.dotfiles"
 alias gmail="open https://mail.google.com/mail/u/1/#inbox"
 alias canvas="open https://canvas.ewu.edu/"
