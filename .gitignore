@@ -1,4 +1,5 @@
 fonts.dir
+**/.git/
 **/*.git/
 **/*.git.*/
 **/*.github
@@ -241,7 +242,6 @@ fonts.dir
 .config/xarchiver/
 .config/xfce4/
 .config/zoom/
-.config/zsh/
 .config/Allegorithmic.conf
 .config/QtProject.conf
 .config/droidcam
