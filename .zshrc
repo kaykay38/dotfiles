@@ -1,7 +1,7 @@
 #-----------------------------------------------------
 # .zshrc
 # Author: kaykay38
-# Last Modified: Feb 7, 2021
+# Last Modified: Feb 15, 2021
 #-----------------------------------------------------
 
 #-------------------------------------------
@@ -236,8 +236,9 @@ function fzo {
     file="$(fd -H -c never -d 3 | fzf --prompt='Open > ')"
     if [[ "$file" ]]; then
         case $(file --mime-type "$file" -bL) in
+            text/html) open "$file" || xdg-open "$file"& ;;
             text/*|application/json) $EDITOR "$file";;
-            *) open "$file" ;;
+            *) open "$file" || xdg-open "$file"& ;;
         esac
     fi
 }
