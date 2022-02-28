@@ -23,6 +23,7 @@ export VISUAL='code'
 export SYNCDRIVE="$HOME/Sync"
 export TODODIR="$SYNCDRIVE/TODO"
 export BAT_THEME="gruvbox-dark"
+# export TERM=xterm-256color
 
 export JAR=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
 export GRADLE_HOME=/usr/local/Cellar/gradle/7.0
@@ -182,7 +183,6 @@ alias dc="cd $SYNCDRIVE/CodeWorkspace/C"
 alias dnet="cd $SYNCDRIVE/CodeWorkspace/NET"
 alias oned="cd $SYNCDRIVE"
 alias ctext="cd $SYNCDRIVE/CurrTextbooks"
-alias dotfiles="cd $HOME/.config/.dotfiles"
 alias gmail="open https://mail.google.com/mail/u/1/#inbox"
 alias canvas="open https://canvas.ewu.edu/"
 alias ccal="open https://canvas.ewu.edu/calendar"
@@ -197,7 +197,7 @@ if [[ $OS = Linux ]]; then
     alias dwmc="cd $HOME/Suckless/dwm && $EDITOR $HOME/Suckless/dwm/config.def.h"
 fi
 
-function open-disown {
+function open-disown() {
     xdg-open "$1" & disown '%xdg-open' 
 }
 
@@ -208,7 +208,7 @@ function za() {
     esac
 }
 
-function git_update {
+function git_update() {
     git_status="$(git -C . rev-parse 2>/dev/null)"; if [ $? -eq 0 ]; then 
         echo "cd -> $1"
         git fetch 1>/dev/null
@@ -227,31 +227,34 @@ function fzh() {
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
-function fzd {
+function fzd() {
     dir="$(fd -H -t d -c never -d 3 | fzf --prompt='Jump to > ' | sed -e "1 s#.#$(pwd)#")"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
-function fzo {
+function fzo() {
     file="$(fd -H -c never -d 3 | fzf --prompt='Open > ')"
     if [[ "$file" ]]; then
         case $(file --mime-type "$file" -bL) in
+            application/pdf) za "$file" ;;
             text/html) open "$file" || xdg-open "$file"& ;;
-            text/*|application/json) $EDITOR "$file";;
+            text/*|application/json) $EDITOR "$file" ;;
             *) open "$file" || xdg-open "$file"& ;;
         esac
     fi
 }
 
 function fzg() {
-    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '^\.git$' $1 2>/dev/null | sed -e 's#/\.git##'  | fzf --prompt='Jump to git repo > ')"
+    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '^\.git$' --search-path $HOME 2>/dev/null | sed -e 's#/\.git##'  | fzf --prompt='Jump to git repo > ')"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
+function dotfiles() {
+    cd $HOME/.config/.dotfiles && git_update $HOME/.config/.dotfiles
+}
 # # ex - archive extractor
 # # usage: ex <file>
-function ex()
-{
+function ex() {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xjf $1   ;;

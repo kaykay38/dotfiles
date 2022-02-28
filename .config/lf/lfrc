@@ -43,6 +43,7 @@ cmd open ${{
     else
         case $(file --mime-type "$f" -bL) in
             text/*|application/json) $EDITOR "$f";;
+            application/pdf) /Applications/Zathura.app/Contents/MacOS/zathura "$f" 2>/dev/null 1>/dev/null& disown %/Applications/Zathura.app/Contents/MacOS/zathura 2>/dev/null || zathura "f" & disown %zathura 2>/dev/null;;
             *) [[ $(uname) = Darwin ]] && open "$f" || xdg-open "$f"&;;
         esac
     fi

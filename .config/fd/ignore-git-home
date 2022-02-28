@@ -27,6 +27,9 @@
 **/OneDrive*/Documents/
 **/OneDrive*/Pictures/
 **/OneDrive*/Desktop/
+**/Sync/Documents/
+**/Sync/Pictures/
+**/Sync/Desktop/
 **/obj/
 **/out/
 **/bin/
