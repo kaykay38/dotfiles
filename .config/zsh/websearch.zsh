@@ -9,6 +9,7 @@ function web_search() {
     $ZSH_WEB_SEARCH_ENGINES
     google      "https://www.google.com/search?q="
     amazon      "https://www.amazon.com/s?k="
+    urbandictionary "https://www.urbandictionary.com/define.php?term="
     ebay        "https://www.ebay.com/sch/i.html?_nkw=%s&LH_TitleDesc=1&_sop=12" 
     vimwiki     "https://vim.fandom.com/wiki/Special:Search?search="
     duckduckgo  "https://www.duckduckgo.com/?q="
@@ -66,6 +67,7 @@ alias archive='web_search archive'
 alias scholar='web_search scholar'
 alias wiki='web_search wikipedia'
 alias yt='web_search youtube'
+alias udic='web_search urbandictionary'
 
 #add your own !bang searches here
 alias news='web_search duckduckgo \!n'
