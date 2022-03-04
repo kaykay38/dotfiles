@@ -76,9 +76,9 @@ bind-key V split-window
 set -g mouse on
 
 # t new window
-unbind C-t
-# unbind t
-bind-key -n C-t new-window
+# unbind C-t
+unbind t
+bind-key t new-window
 
 # w to kill panes
 unbind w
@@ -88,31 +88,29 @@ bind-key w kill-pane
 unbind q
 bind-key q kill-session
 
-# Switching panes with alt
+# Switching panes
 bind-key h select-pane -L
 bind-key l select-pane -R
 bind-key k select-pane -U
 bind-key j select-pane -D
 
+# Resizing panes
 unbind C-n
 unbind C-m
-unbind u
-unbind i
-bind-key C-n resize-pane -L 5
-bind-key C-m resize-pane -R 5
-bind-key u resize-pane -U 5
-bind-key i resize-pane -D 5
+unbind C-S-n
+unbind C-S-m
+bind-key -n C-n resize-pane -L 5
+bind-key -n C-n resize-pane -R 5
+bind-key -n C-S-n resize-pane -U 5
+bind-key -n C-S-m resize-pane -D 5
+# Alt+f + n : New session
 # unbind n
 # bind-key n new-session
 
-# unbind C-H
-# unbind C-L
-unbind C-j
-unbind C-k
-# bind-key -n C-H previous-window
-# bind-key -n C-L next-window
-bind-key C-k previous-window
-bind-key C-j next-window
+unbind Tab
+unbind S-Tab
+bind-key Tab next-window
+bind-key S-Tab previous-window
 # Move between windows
 # Move window to the left
 # bind-key K swap-window -t -1
