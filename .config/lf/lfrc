@@ -51,10 +51,10 @@ cmd open ${{
 
 cmd open-with %printf "Open with: " && read ans && printf "Opening with $ans\n" && exec-disown $ans "$f" </dev/null &>/dev/null
 
-cmd mkfile %printf "File Name: " && read ans && $EDITOR $ans
+cmd mkfile %printf "File Name: " && read ans && touch $ans
 cmd sudo-mkfile ${{printf "File Name: "; read ans && sudo touch $ans}}
-
 cmd mkdir %printf "Directory Name: " && read ans && mkdir -p $ans
+
 cmd sudo-mkfile ${{printf "Directory Name: "; read ans && sudo mkdir -p $ans}}
 
 cmd chmod ${{
