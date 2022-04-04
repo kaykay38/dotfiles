@@ -1,0 +1,1 @@
+WARN  2022-04-04T16:32:18.514 19262 log_path_init:96: Failed to create directory /Users/mia/.cache/nvim for writing logs: Unknown system error 1

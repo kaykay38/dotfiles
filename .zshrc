@@ -16,7 +16,8 @@ export PATH="$PATH:/usr/local/opt/ruby/bin"
 export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.config/nvim/utils/bin"
 export PATH="$PATH:$HOME/.dotnet/tools"
-[[ $OS = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+# [[ $OS = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
 export VISUAL='code'
@@ -25,12 +26,6 @@ export TODODIR="$SYNCDRIVE/TODO"
 export BAT_THEME="gruvbox-dark"
 # export TERM=xterm-256color
 
-export JAR=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
-export GRADLE_HOME=/usr/local/Cellar/gradle/7.0
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
-export JDTLS_CONFIG=$HOME/.config/jdtls/jdt-language-server-0.71.0-202104141151/config_mac
-# export WORKSPACE="$SYNCDRIVE/CodeWorkspace/Java"
-#
 DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT=/usr/share/dotnet
 # export DOOMDIR=$HOME/.config/doom
