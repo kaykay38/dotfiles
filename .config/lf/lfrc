@@ -204,11 +204,10 @@ map gs cd ~/Scripts
 
 map go cd ~/Sync
 map gt cd ~/Sync/CurrTextbooks
-map gq. cd ~/Sync/2021-22Q2Winter
-map gqw cd ~/Sync/2021-22Q2Winter/CSCD378-WebDev
-map gqm cd ~/Sync/2021-22Q2Winter/CSCD496-MachineLearning
-map gqs cd ~/Sync/2021-22Q2Winter/CSCD488-SeniorProject
-map gqa cd ~/Sync/2021-22Q2Winter/CSCD320-Algorithms
+map gq. cd ~/Sync/2021-22Q3Spring
+map gqp cd ~/Sync/2021-22Q3Spring/CSCD467-ParallelCloudComputing
+map gqs cd ~/Sync/2021-22Q3Spring/CSCD490-SeniorCapstone
+map gqc cd ~/Sync/2021-22Q3Spring/CSCD202-ComputingEthics
 map gc. cd ~/Sync/CodeWorkspace
 map gcj cd ~/Sync/CodeWorkspace/Java
 map gcp cd ~/Sync/CodeWorkspace/Python
@@ -216,7 +215,7 @@ map gcn cd ~/Sync/CodeWorkspace/NET
 
 map gC. cd ~/.config
 map gCl cd ~/.config/lf
-map gCv cd ~/.config/nvim
+map gCv cd ~/.config/lvim
 map gl cd ~/.local
 
 map ~ cd ~
