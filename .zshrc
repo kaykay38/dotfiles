@@ -33,14 +33,6 @@ export DOTNET_ROOT=/usr/share/dotnet
 export HOMEBREW_NO_AUTO_UPDATE=1
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-#-----------------------------------------------------
-# NNN CONFIG 
-#-----------------------------------------------------
-export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG="f:finder;o:fzopen;p:preview-tui;d:diffs;t:preview-tabbed;i:imgview" 
-export NNN_FCOLORS="00001e318f00000000000000"
-export NNN_BMS="g:$SYNCDRIVE/CodeWorkspace/Github;j:$SYNCDRIVE/CodeWorkspace/Java;c:$SYNCDRIVE/CodeWorkspace/C;n:$SYNCDRIVE/CodeWorkspace/NET;C:$HOME/.config;v:$HOME/.config/nvim;p:$HOME/Pictures;d:$HOME/Downloads"
-
 #-------------------------------------------
 # HISTORY
 #-------------------------------------------
@@ -161,7 +153,6 @@ alias g="git"
 alias gcl=gitclone
 alias lf=lfcd
 alias srr="sudo ranger"
-alias nn="nnn -eUH"
 alias v="lvim"
 alias vs="open -a Visual\ Studio.app"
 alias clear="clear && tmux clearhist"
@@ -183,8 +174,7 @@ alias gmail="open https://mail.google.com/mail/u/1/#inbox"
 alias canvas="open https://canvas.ewu.edu/"
 alias ccal="open https://canvas.ewu.edu/calendar"
 alias eagnet="open https://eaglenet.ewu.edu/"
-alias sling="open https://app.getsling.com/ 2>/dev/null"
-alias chegg="open https://www.chegg.com/"
+
 if [[ $OS = Linux ]]; then
     alias open=open-disown "$1"
     alias awmd="cd $HOME/.config/awesome"
