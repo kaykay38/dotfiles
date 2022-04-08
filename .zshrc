@@ -175,6 +175,9 @@ alias canvas="open https://canvas.ewu.edu/"
 alias ccal="open https://canvas.ewu.edu/calendar"
 alias eagnet="open https://eaglenet.ewu.edu/"
 
+#-----------------------------------------------------
+# FUNCTIONS 
+#-----------------------------------------------------
 if [[ $OS = Linux ]]; then
     alias open=open-disown "$1"
     alias awmd="cd $HOME/.config/awesome"
@@ -204,7 +207,7 @@ function git_update() {
 }
 
 function fzq() {
-    dir="$(fd -t d -c never -L --ignore-file "$HOME/.config/fd/ignore-home" --search-path $SYNCDRIVE/2021-22Q2Winter 2>/dev/null | fzf --prompt='Jump to > ')"
+    dir="$(fd -t d -c never -L --ignore-file "$HOME/.config/fd/ignore-home" --search-path $SYNCDRIVE/2021-22Q3Spring 2>/dev/null | fzf --prompt='Jump to > ')"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
