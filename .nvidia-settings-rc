@@ -1,8 +1,8 @@
 #
 # /home/mia/.nvidia-settings-rc
 #
-# Configuration file for nvidia-settings - the NVIDIA X Server Settings utility
-# Generated on Thu Mar 11 08:49:25 2021
+# Configuration file for nvidia-settings - the NVIDIA Settings utility
+# Generated on Tue Mar 29 11:07:50 2022
 #
 
 # ConfigProperties:
@@ -13,9 +13,9 @@ SliderTextEntries = Yes
 IncludeDisplayNameInConfigFile = No
 ShowQuitDialog = Yes
 UpdateRulesOnProfileNameChange = Yes
-Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
-Timer = Thermal_Monitor_(GPU_0),Yes,1000
 Timer = Memory_Used_(GPU_0),Yes,3000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 
 # Attributes:
 
@@ -30,19 +30,25 @@ Timer = Memory_Used_(GPU_0),Yes,3000
 0/OpenGLImageSettings=1
 0/FSAAAppEnhanced=0
 0/ShowGraphicsVisualIndicator=0
-[DPY:DP-0]/RedBrightness=0.000000
-[DPY:DP-0]/GreenBrightness=0.000000
-[DPY:DP-0]/BlueBrightness=0.000000
-[DPY:DP-0]/RedContrast=0.000000
-[DPY:DP-0]/GreenContrast=0.000000
-[DPY:DP-0]/BlueContrast=0.000000
-[DPY:DP-0]/RedGamma=1.000000
-[DPY:DP-0]/GreenGamma=1.000000
-[DPY:DP-0]/BlueGamma=1.000000
+[DPY:DP-2.8]/RedBrightness=0.000000
+[DPY:DP-2.8]/GreenBrightness=0.000000
+[DPY:DP-2.8]/BlueBrightness=0.000000
+[DPY:DP-2.8]/RedContrast=0.000000
+[DPY:DP-2.8]/GreenContrast=0.000000
+[DPY:DP-2.8]/BlueContrast=0.000000
+[DPY:DP-2.8]/RedGamma=1.000000
+[DPY:DP-2.8]/GreenGamma=1.000000
+[DPY:DP-2.8]/BlueGamma=1.000000
+[DPY:DP-2.8]/Dithering=0
+[DPY:DP-2.8]/DitheringMode=0
+[DPY:DP-2.8]/DitheringDepth=0
+[DPY:DP-2.8]/DigitalVibrance=0
+[DPY:DP-2.8]/ColorSpace=0
+[DPY:DP-2.8]/ColorRange=0
+[DPY:DP-2.8]/SynchronousPaletteUpdates=0
 [DPY:DP-0]/Dithering=0
 [DPY:DP-0]/DitheringMode=0
 [DPY:DP-0]/DitheringDepth=0
-[DPY:DP-0]/DigitalVibrance=0
 [DPY:DP-0]/ColorSpace=0
 [DPY:DP-0]/ColorRange=0
 [DPY:DP-0]/SynchronousPaletteUpdates=0
