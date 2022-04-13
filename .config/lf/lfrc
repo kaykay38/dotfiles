@@ -34,7 +34,6 @@ cmd bulk-rename-full-path ${{
 }}
 
 cmd bulk-rename-relative ${{
-    set -x
 	index=$(mktemp /tmp/lf-bulk-rename-index.XXXXXXXXXX)
 	if [ -n "${fs}" ]; then
 		echo "$fs" > $index
@@ -63,7 +62,6 @@ cmd bulk-rename-relative ${{
 		echo "Number of lines must stay the same"
 	fi
 	rm $index $index_edit
-    set -x
 }}
 
 cmd copy-path ${{
