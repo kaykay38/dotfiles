@@ -1,6 +1,8 @@
 [user]
     # name = 
     # email = 
+[init]
+	defaultBranch = main
 [core]
 	editor = lvim
 [push]
