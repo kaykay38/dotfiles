@@ -123,10 +123,12 @@ cmd unarchive ${{
     lf -remote 'send reload'
 }}
 
-cmd zip %zip -r "$f" "$f"
-cmd tar %tar cvf "$f.tar" "$f"
-cmd targz %tar cvzf "$f.tar.gz" "$f"
-cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+# cmd zip %zip -r "$f.zip" "$f" */
+
+cmd zip %zip -r "$(basename "$f").zip" "$(basename "$f")"
+cmd tar %tar cvf "$(basename "$f").tar" "$(basename "$f")"
+cmd targz %tar cvzf "$(basename "$f").tar.gz" "$(basename "$f")"
+cmd tarbz2 %tar cjvf "$(basename "$f").tar.bz2" "$(basename "$f")"
 
 # Trash cli bindings
 cmd trash ${{
@@ -242,6 +244,7 @@ map gqp cd ~/Sync/2021-22Q3Spring/CSCD467-ParallelCloudComputing
 map gqs cd ~/Sync/2021-22Q3Spring/CSCD490-SeniorCapstone
 map gqc cd ~/Sync/2021-22Q3Spring/CSCD202-ComputingEthics
 map gc. cd ~/Sync/CodeWorkspace
+map gcl cd ~/Sync/CodeWorkspace/LeetCode
 map gcj cd ~/Sync/CodeWorkspace/Java
 map gcp cd ~/Sync/CodeWorkspace/Python
 map gcn cd ~/Sync/CodeWorkspace/NET
