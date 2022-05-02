@@ -13,7 +13,7 @@ export PATH="$PATH:/usr/local/opt/texinfo/bin" # or follow the instructions give
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/share/python"
 export PATH="$PATH:/usr/local/opt/ruby/bin"
-export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.local/bin:$HOME/Library/Python/3.9/bin"
 export PATH="$PATH:$HOME/.config/nvim/utils/bin"
 export PATH="$PATH:$HOME/.dotnet/tools"
 # [[ $OS = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
@@ -174,6 +174,8 @@ alias gmail="open https://mail.google.com/mail/u/1/#inbox"
 alias canvas="open https://canvas.ewu.edu/"
 alias ccal="open https://canvas.ewu.edu/calendar"
 alias eagnet="open https://eaglenet.ewu.edu/"
+alias tf="terraform"
+[[ -f $HOME/.aliases.zsh ]] && source $HOME/.aliases.zsh
 
 #-----------------------------------------------------
 # FUNCTIONS 
@@ -308,3 +310,10 @@ else
 fi
 RPROMPT='%F{blue} %D{%L:%M:%S %p}%f'
 todo
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
