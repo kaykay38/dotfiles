@@ -1,15 +1,14 @@
 set ignorecase
 set autoindent
+set relativenumber
 set novisualmouse
 set unamedplus
 set scrolloff=5
 nnoremap <space>v <C-v>
-nnoremap m $
-nnoremap <space>m ^
 nnoremap <space><CR> O<Esc>j
 nnoremap <CR> o<Esc>k
 nnoremap fi gg=G<C-o><C-o>
-nnoremap <space>sa ggVG
+nnoremap <space>a ggVG
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-h> <Left>
