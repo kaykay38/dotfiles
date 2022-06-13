@@ -189,14 +189,6 @@ nnoremap <leader>r :%s/
 noremap <F12> :vsp $MYVIMRC<CR>
 nnoremap T :set splitbelow<CR>:sp<CR>:term<CR>
 vnoremap y ygv
-nnoremap <leader>c "+y
-nnoremap <leader>C "+Y
-vnoremap <leader>c "+ygv
-vnoremap <leader>C "+ygv
-nnoremap <leader>v "+p
-nnoremap <leader>V "+P
-vnoremap <leader>v "+pgv
-vnoremap <leader>V "+Pgv
 nnoremap <silent><leader>h :wincmd h<CR>
 nnoremap <silent><leader>j :wincmd j<CR>
 nnoremap <silent><leader>k :wincmd k<CR>

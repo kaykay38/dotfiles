@@ -176,10 +176,6 @@ alias ccal="open https://canvas.ewu.edu/calendar"
 alias eagnet="open https://eaglenet.ewu.edu/"
 alias tf="terraform"
 [[ -f $HOME/.aliases.zsh ]] && source $HOME/.aliases.zsh
-
-#-----------------------------------------------------
-# FUNCTIONS 
-#-----------------------------------------------------
 if [[ $OS = Linux ]]; then
     alias open=open-disown "$1"
     alias awmd="cd $HOME/.config/awesome"
@@ -188,6 +184,9 @@ if [[ $OS = Linux ]]; then
     alias dwmc="cd $HOME/Suckless/dwm && $EDITOR $HOME/Suckless/dwm/config.def.h"
 fi
 
+#-----------------------------------------------------
+# FUNCTIONS 
+#-----------------------------------------------------
 function open-disown() {
     xdg-open "$1" & disown '%xdg-open' 
 }
@@ -236,13 +235,14 @@ function fzo() {
 }
 
 function fzg() {
-    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '^\.git$' --search-path $HOME 2>/dev/null | sed -e 's#/\.git##'  | fzf --prompt='Jump to git repo > ')"
+    dir="$(fd -c never -t d -H --ignore-file "$HOME/.config/fd/ignore-git-home" '\.git' --search-path $HOME 2>/dev/null | sed -e 's#/\.git##'  | fzf --prompt='Jump to git repo > ')"
     [[ "$dir" ]] && cd "$dir" && git_update "$dir"
 }
 
 function dotfiles() {
     cd $HOME/.config/.dotfiles && git_update $HOME/.config/.dotfiles
 }
+
 # # ex - archive extractor
 # # usage: ex <file>
 function ex() {
@@ -290,7 +290,6 @@ bindkey -s '^v' 'fzq\n'
 #-------------------------------------------
 # PROMPT
 #-------------------------------------------
-
 if [[ $OS = Darwin ]]; then
     NEWLINE=$'\n'
     # PROMPT='${NEWLINE}%F{blue}%f %F{209}%3~%f%F{106}${vcs_info_msg_0_}%f${NEWLINE}%(?.%F{71}❯.%F{red}❯)%f '
