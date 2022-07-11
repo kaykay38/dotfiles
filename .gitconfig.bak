@@ -1,10 +1,11 @@
 [user]
-    # name = 
-    # email = 
+    name =
+    email =
 [init]
 	defaultBranch = main
 [core]
 	editor = lvim
+	autocrlf = input
 [push]
     default = simple
 [color]
@@ -31,7 +32,7 @@
     df = "!git hist | fzf | awk '{print $2}' | xargs -I {} git diff {}^ {}"
     hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
     llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
-    open = "!hub browse"
+    open = "!hub browse 2>/dev/null || open https://$(git remote -v | grep -o 'gitlab.com:.* (fetch)' | cut -d' ' -f1 | sed 's#:#/#') ||  xdg-open https://$(git remote -v | grep -o 'gitlab.com:.* (fetch)' | cut -d' ' -f1 | sed 's#:#/#')"
     type = cat-file -t
     dump = cat-file -p
     find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | fzf | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
@@ -42,7 +43,7 @@
 [hub]
     protocol = https
 [github]
-    user = kaykay38
+    user =
 [diff]
     tool = nvimdiff
 [difftool "nvimdiff"]
