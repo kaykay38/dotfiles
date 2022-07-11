@@ -239,10 +239,9 @@ map gs cd ~/Scripts
 
 map go cd ~/Sync
 map gt cd ~/Sync/CurrTextbooks
-map gq. cd ~/Sync/2021-22Q3Spring
-map gqp cd ~/Sync/2021-22Q3Spring/CSCD467-ParallelCloudComputing
-map gqs cd ~/Sync/2021-22Q3Spring/CSCD490-SeniorCapstone
-map gqc cd ~/Sync/2021-22Q3Spring/CSCD202-ComputingEthics
+map gq. cd ~/Sync/2021-22Q4Summer
+map gqc cd ~/Sync/2021-22Q4Summer/CSCD499-AutoCompletion
+map gqa cd ~/Sync/2021-22Q4Summer/AAST315-AfricanHistory
 map gc. cd ~/Sync/CodeWorkspace
 map gcl cd ~/Sync/CodeWorkspace/LeetCode
 map gcj cd ~/Sync/CodeWorkspace/Java
