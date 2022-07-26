@@ -61,7 +61,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  #decorations: full
+  decorations: buttonless
 
   # Background opacity
   #
@@ -180,7 +180,7 @@ font:
 
     # If `true`, bold text is drawn using the bright color variants.
     #draw_bold_text_with_bright_colors: false
-colors: &kanagawa_dark
+colors: &nordfox_dark
     # Cursor colors
     #
     # Colors which should be used to draw the terminal cursor.
@@ -330,7 +330,71 @@ schemes:
     # regardless of their background color.
     #transparent_background_colors: false
 
-  kanagawa_dark: &kanagawa_dark
+  # Nightfox Alacritty Colors
+  # Style: nightfox
+  # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nightfox/nightfox_alacritty.yml
+  nightfox: &nightfox_dark
+    # Default colors
+    primary:
+      background: '#192330'
+      foreground: '#cdcecf'
+    # Normal colors
+    normal:
+      black:   '#393b44'
+      red:     '#c94f6d'
+      green:   '#81b29a'
+      yellow:  '#dbc074'
+      blue:    '#719cd6'
+      magenta: '#9d79d6'
+      cyan:    '#63cdcf'
+      white:   '#dfdfe0'
+    # Bright colors
+    bright:
+      black:   '#575860'
+      red:     '#d16983'
+      green:   '#8ebaa4'
+      yellow:  '#e0c989'
+      blue:    '#86abdc'
+      magenta: '#baa1e2'
+      cyan:    '#7ad4d6'
+      white:   '#e4e4e5'
+    indexed_colors:
+      - { index: 16, color: '#f4a261' }
+      - { index: 17, color: '#d67ad2' }
+
+  # Nightfox Alacritty Colors
+  # Style: nordfox
+  # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nordfox/nightfox_alacritty.yml
+  nordfox: &nordfox_dark
+    # Default colors
+    primary:
+      background: '#2e3440'
+      foreground: '#cdcecf'
+    # Normal colors
+    normal:
+      black:   '#3b4252'
+      red:     '#bf616a'
+      green:   '#a3be8c'
+      yellow:  '#ebcb8b'
+      blue:    '#81a1c1'
+      magenta: '#b48ead'
+      cyan:    '#88c0d0'
+      white:   '#e5e9f0'
+    # Bright colors
+    bright:
+      black:   '#465780'
+      red:     '#d06f79'
+      green:   '#b1d196'
+      yellow:  '#f0d399'
+      blue:    '#8cafd2'
+      magenta: '#c895bf'
+      cyan:    '#93ccdc'
+      white:   '#e7ecf4'
+    indexed_colors:
+      - { index: 16, color: '#c9826b' }
+      - { index: 17, color: '#bf88bc' }
+
+  kanagawa: &kanagawa_dark
     # Bright and dim foreground colors
     #
     # The dimmed foreground color is calculated automatically if it is not
