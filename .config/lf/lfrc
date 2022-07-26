@@ -162,6 +162,12 @@ cmd sudo-symlink ${{
     lf -remote 'send unselect'
 }}
 
+# Drag and drop
+cmd drag-drop %dragon-drop "$f"
+cmd drag-drop-copy %dragoncp "$f"
+cmd drag-drop-download %dragondl "$f"
+cmd drag-drop-move %dragonmv "$f"
+
 # Bindings
 # Remove some defaults
 map m
@@ -224,6 +230,10 @@ map ch chmod
 map r rename
 map b. bulk-rename-relative
 map br bulk-rename-full-path
+map dr. drag-drop
+map dry drag-drop-copy
+map drd drag-drop-download
+map drm drag-drop-move
 map H top
 map L bottom
 map R reload
@@ -231,7 +241,6 @@ map C clear
 map U unselect
 
 # Movement
-
 map gp cd ~/Pictures
 map gd cd ~/Downloads
 
