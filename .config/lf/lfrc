@@ -248,9 +248,9 @@ map gs cd ~/Scripts
 
 map go cd ~/Sync
 map gt cd ~/Sync/CurrTextbooks
-map gq. cd ~/Sync/2021-22Q4Summer
-map gqc cd ~/Sync/2021-22Q4Summer/CSCD499-AutoCompletion
-map gqa cd ~/Sync/2021-22Q4Summer/AAST315-AfricanHistory
+map gq. cd ~/Sync/2022-23Q1Fall
+map gqb cd ~/Sync/2022-23Q1Fall/CSCD430-BigData
+map gqa cd ~/Sync/2022-23Q1Fall/AAST220-AfricanAmericanHistoryPostCivilWar
 map gc. cd ~/Sync/CodeWorkspace
 map gcl cd ~/Sync/CodeWorkspace/LeetCode
 map gcj cd ~/Sync/CodeWorkspace/Java
