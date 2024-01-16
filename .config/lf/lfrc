@@ -246,16 +246,13 @@ map gd cd ~/Downloads
 
 map gs cd ~/Scripts
 
-map go cd ~/Sync
-map gt cd ~/Sync/CurrTextbooks
-map gq. cd ~/Sync/2022-23Q1Fall
-map gqb cd ~/Sync/2022-23Q1Fall/CSCD430-BigData
-map gqa cd ~/Sync/2022-23Q1Fall/AAST220-AfricanAmericanHistoryPostCivilWar
-map gc. cd ~/Sync/CodeWorkspace
-map gcl cd ~/Sync/CodeWorkspace/LeetCode
-map gcj cd ~/Sync/CodeWorkspace/Java
-map gcp cd ~/Sync/CodeWorkspace/Python
-map gcn cd ~/Sync/CodeWorkspace/NET
+map go cd ~/Documents
+map gt cd ~/Documents/CurrTextbooks
+map gc. cd ~/Documents/CodeWorkspace
+map gcl cd ~/Documents/CodeWorkspace/LeetCode
+map gcj cd ~/Documents/CodeWorkspace/Java
+map gcp cd ~/Documents/CodeWorkspace/Python
+map gcn cd ~/Documents/CodeWorkspace/NET
 
 map gC. cd ~/.config
 map gCl cd ~/.config/lf
