@@ -1,7 +1,7 @@
 #-----------------------------------------------------
 # .zshrc
 # Author: kaykay38
-# Last Modified: Feb 15, 2021
+# Last Modified: Oct 10, 2023
 #-----------------------------------------------------
 
 #-------------------------------------------
@@ -20,8 +20,8 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
-export VISUAL='code'
-export SYNCDRIVE="$HOME/Sync"
+export VISUAL='codium'
+export SYNCDRIVE="$HOME/Documents"
 export TODODIR="$SYNCDRIVE/TODO"
 export BAT_THEME="gruvbox-dark"
 # export TERM=xterm-256color
@@ -193,7 +193,7 @@ function open-disown() {
 
 function za() {
     case $OS in
-        Darwin) /Applications/Zathura.app/Contents/MacOS/zathura "$1" & disown %/Applications/Zathura.app/Contents/MacOS/zathura ;;
+        Darwin) /Applications/sioyek.app/Contents/MacOS/sioyek "$1" & disown %/Applications/sioyek.app/Contents/MacOS/sioyek ;;
         *) zathura "$1" & disown %zathura ;; 
     esac
 }
