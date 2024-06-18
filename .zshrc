@@ -171,9 +171,12 @@ alias dnet="cd $SYNCDRIVE/CodeWorkspace/NET"
 alias oned="cd $SYNCDRIVE"
 alias ctext="cd $SYNCDRIVE/CurrTextbooks"
 alias gmail="open https://mail.google.com/mail/u/1/#inbox"
-alias canvas="open https://canvas.ewu.edu/"
-alias ccal="open https://canvas.ewu.edu/calendar"
-alias eagnet="open https://eaglenet.ewu.edu/"
+alias buff="open https://buffportal.colorado.edu/"
+alias canvas="open https://canvas.colorado.edu/"
+alias moodle="open https://moodle.cs.colorado.edu/course/view.php?id=1434"
+alias ccal="open https://moodle.cs.colorado.edu/calendar/view.php?view=month&course=1434"
+alias cs2400="cd $SYNCDRIVE/2024-Summer-CUBoulder/CSCD2400-ComputerSystems/Notes && lvim $SYNCDRIVE/2024-Summer-CUBoulder/CSCD2400-ComputerSystems/Notes"
+alias cs2400lab="open https://coding.csel.io/user/mihu5706"
 alias tf="terraform"
 [[ -f $HOME/.aliases.zsh ]] && source $HOME/.aliases.zsh
 if [[ $OS = Linux ]]; then
@@ -308,7 +311,6 @@ else
     eval "$(starship init zsh)"
 fi
 RPROMPT='%F{blue} %D{%L:%M:%S %p}%f'
-todo
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
