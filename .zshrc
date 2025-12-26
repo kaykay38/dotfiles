@@ -1,13 +1,12 @@
 #-----------------------------------------------------
 # .zshrc
 # Author: kaykay38
-# Last Modified: Oct 10, 2023
+# Last Modified: May 07, 2025
 #-----------------------------------------------------
 
 #-------------------------------------------
 # ENV VARIABLES 
 #-------------------------------------------
-export OS=$(uname)
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:/usr/local/opt/texinfo/bin" # or follow the instructions given by brew info
 export PATH="$PATH:/usr/local/sbin"
@@ -16,7 +15,9 @@ export PATH="$PATH:/usr/local/opt/ruby/bin"
 export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.local/bin:$HOME/Library/Python/3.9/bin"
 export PATH="$PATH:$HOME/.config/nvim/utils/bin"
 export PATH="$PATH:$HOME/.dotnet/tools"
-# [[ $OS = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+export PATH=
+export OS=$(uname)
+[[ $OS = Linux ]] || eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
@@ -129,8 +130,8 @@ zstyle ':completion:*:processes' sort false
 #source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/websearch.zsh
 source $HOME/.config/zsh/find.zsh
-source $HOME/.config/lf/icons.sh
-source $HOME/.config/zsh/lfcd.sh
+# source $HOME/.config/lf/icons.sh
+# source $HOME/.config/zsh/lfcd.sh
 
 #-----------------------------------------------------
 # ALIASES 
@@ -151,32 +152,26 @@ alias ls="ls -a --color"
 alias lsl="ls -al --color"
 alias g="git"
 alias gcl=gitclone
-alias lf=lfcd
+alias lf=yazi
 alias srr="sudo ranger"
 alias v="lvim"
 alias vs="open -a Visual\ Studio.app"
-alias clear="clear && tmux clearhist"
 alias zrc="lvim $HOME/.zshrc"
 alias src="source $HOME/.zshrc"
 alias vd="cd $HOME/.config/lvim"
 alias vrc="lvim $HOME/.config/lvim/config.lua"
 alias conf="cd $HOME/.config"
 alias codes="cd $SYNCDRIVE/CodeWorkspace"
+alias proj="cd $SYNCDRIVE/CodeWorkspace/Swift/AHDI\ Assistant"
+alias career="cd $SYNCDRIVE/Career/"
 alias scripts="cd $HOME/Scripts"
 alias dgit="cd $SYNCDRIVE/CodeWorkspace/Github"
 alias dpy="cd $SYNCDRIVE/CodeWorkspace/Python"
 alias djava="cd $SYNCDRIVE/CodeWorkspace/Java"
 alias dc="cd $SYNCDRIVE/CodeWorkspace/C"
 alias dnet="cd $SYNCDRIVE/CodeWorkspace/NET"
-alias oned="cd $SYNCDRIVE"
 alias ctext="cd $SYNCDRIVE/CurrTextbooks"
 alias gmail="open https://mail.google.com/mail/u/1/#inbox"
-alias buff="open https://buffportal.colorado.edu/"
-alias canvas="open https://canvas.colorado.edu/"
-alias moodle="open https://moodle.cs.colorado.edu/course/view.php?id=1434"
-alias ccal="open https://moodle.cs.colorado.edu/calendar/view.php?view=month&course=1434"
-alias cs2400="cd $SYNCDRIVE/2024-Summer-CUBoulder/CSCD2400-ComputerSystems/Notes && lvim $SYNCDRIVE/2024-Summer-CUBoulder/CSCD2400-ComputerSystems/Notes"
-alias cs2400lab="open https://coding.csel.io/user/mihu5706"
 alias tf="terraform"
 [[ -f $HOME/.aliases.zsh ]] && source $HOME/.aliases.zsh
 if [[ $OS = Linux ]]; then
@@ -318,3 +313,7 @@ export NVM_DIR="$HOME/.nvm"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+# Added by Windsurf
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="/Users/miaxyhunt/.codeium/windsurf/bin:$PATH"

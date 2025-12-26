@@ -1,4 +1,3 @@
-import = ["/Users/miaxyhunt/.config/alacritty/themes/themes/gruvbox_material_medium_dark.yaml"]
 
 [colors.cursor]
 cursor = "CellForeground"
@@ -80,7 +79,7 @@ mods = "Alt"
 [scrolling]
 history = 10000
 
-[shell]
+[terminal.shell]
 args = ["-l", "-c", "[[ ! -z $(tmux list-clients) ]] && tmux || tmux attach || tmux"]
 program = "/bin/zsh"
 
@@ -93,3 +92,8 @@ opacity = 0.95
 [window.padding]
 x = 10
 y = 10
+
+[general]
+import = ["/Users/miaxyhunt/.config/alacritty/themes/themes/gruvbox_material_medium_dark.yaml"]
+
+[terminal]
