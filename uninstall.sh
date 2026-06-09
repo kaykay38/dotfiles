@@ -1,30 +1,58 @@
 #!/bin/bash
 
-if [[ -n "$@" ]]; then
-    files="$@"
+repo="$(pwd)"
 
-    # Redefine myvar to files using parenthesis
-    file_arr=($files)
+unlink_config() {
+    local source="$1"
+    local target="$2"
 
-    # echo "My array: ${file_arr[@]}"
-    # echo "Number of elements in the array: ${#file_arr[@]}"
-    for file in "${file_arr[@]}"
-    do 
-        [[ $file = .* ]] && file="$HOME/$file" || file="$HOME/.config/$file"
-        if [[ -L "$file" ]]; then
-            unlink "$file" && echo "Unlinked $file"
-        fi
+    [[ -L "$target" ]] || return
+
+    if [[ $(readlink "$target") != "$source" ]]; then
+        echo "Skipped $target; points somewhere else"
+        return
+    fi
+
+    unlink "$target" && echo "Unlinked $target"
+}
+
+should_skip() {
+    local name="$1"
+
+    [[ $name == "." || $name == ".." || $name == ".git" || $name == ".gitignore" || $name == *.bak ]]
+}
+
+unlink_name() {
+    local name="$1"
+
+    if should_skip "$name"; then
+        echo "Skipped $name"
+        return
+    fi
+
+    if [[ $name = .* ]]; then
+        unlink_config "$repo/$name" "$HOME/$name"
+    else
+        unlink_config "$repo/.config/$name" "$HOME/.config/$name"
+    fi
+}
+
+if (( $# > 0 )); then
+    for name in "$@"; do
+        unlink_name "$name"
     done
 else
-    for file in $HOME/.*
-    do
-       ## echo "$file"
-        [[ -L "$file" ]] && unlink "$file" && echo "Unlinked $file"
+    for source in "$repo"/.*; do
+        name="$(basename "$source")"
+
+        should_skip "$name" && continue
+
+        unlink_config "$source" "$HOME/$name"
     done
 
-    for dir in $HOME/.config/*
-    do
-       ## echo "$dir"
-        [[ -L "$dir" ]] && unlink "$dir" && echo "Unlinked $dir"
+    for source in "$repo"/.config/*; do
+        name="$(basename "$source")"
+
+        unlink_config "$source" "$HOME/.config/$name"
     done
 fi

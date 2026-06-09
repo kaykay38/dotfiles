@@ -1,28 +1,56 @@
 #!/bin/bash
 
-if [[ -n "$@" ]]; then
-    files="$@"
+repo="$(pwd)"
 
-    # Redefine myvar to files using parenthesis
-    file_arr=($files)
+link_config() {
+    local source="$1"
+    local target="$2"
 
-    # echo "My array: ${file_arr[@]}"
-    # echo "Number of elements in the array: ${#file_arr[@]}"
-    for file in "${file_arr[@]}"
-    do 
-        if [[ $file = .* ]]; then 
-            ln -s "$(pwd)/$file" "$HOME/$file" && echo "Linked $(pwd)/$file -> $HOME/$file"
-        else
-            ln -s "$(pwd)/.config/$file" "$HOME/.config/" && echo "Linked $(pwd)/.config/$file -> $HOME/.config/$file"
-        fi
+    if [[ -e "$target" || -L "$target" ]]; then
+        echo "Skipped $target; already exists"
+        return
+    fi
+
+    ln -s "$source" "$target" && echo "Linked $source -> $target"
+}
+
+should_skip() {
+    local name="$1"
+
+    [[ $name == "." || $name == ".." || $name == ".git" || $name == ".gitignore" || $name == *.bak ]]
+}
+
+link_name() {
+    local name="$1"
+
+    if should_skip "$name"; then
+        echo "Skipped $name"
+        return
+    fi
+
+    if [[ $name = .* ]]; then
+        link_config "$repo/$name" "$HOME/$name"
+    else
+        link_config "$repo/.config/$name" "$HOME/.config/$name"
+    fi
+}
+
+if (( $# > 0 )); then
+    for name in "$@"; do
+        link_name "$name"
     done
 else
-    for file in $(pwd)/.*
-    do 
-        [[ $file = .git* ]] && ln -s "$file" "$HOME/" && echo "Linked $file -> $HOME/$file"
+    for source in "$repo"/.*; do
+        name="$(basename "$source")"
+
+        should_skip "$name" && continue
+
+        link_config "$source" "$HOME/$name"
     done
-    for file in $(pwd)/.config/*
-    do 
-        ln -s "$file" "$HOME/.config/" && echo "Linked $file -> $HOME/.config/$file"
+
+    for source in "$repo"/.config/*; do
+        name="$(basename "$source")"
+
+        link_config "$source" "$HOME/.config/$name"
     done
 fi
