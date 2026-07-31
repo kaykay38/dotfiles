@@ -1,0 +1,50 @@
+# Ghostty config 
+# Symlinked to ~/.config/ghostty
+
+###########
+# FONT    #
+###########
+# Keeping Ghostty's built-in JetBrains Mono Nerd Font (preferred over Hasklug,
+# whose italics rendered too thin). `font-thicken` boosts overall glyph weight
+# so **bold** reads closer to Hasklug's heavier bold in Alacritty.
+
+font-size = 16
+font-thicken = true
+# 0..255; lower = subtler. Uncomment to tune.
+font-thicken-strength = 50
+font-family = Hasklug Nerd Font
+font-family-italic = "Hasklug Nerd Font SemiBold Italic"
+
+# For an even heavier *bold* specifically, install a Nerd Font that ships an
+# ExtraBold weight and point bold at it, e.g.:
+
+# font-family = "JetBrainsMono Nerd Font"
+# font-family-bold = "JetBrainsMono Nerd Font ExtraBold"
+
+
+##########
+# WINDOW #
+##########
+background-opacity = 1
+macos-titlebar-style = tabs
+
+#########
+# THEME #
+#########
+theme = Gruvbox Dark
+
+###############
+# KEYBINDINGS #
+###############
+# Alacritty bound Alt+F and Alt+0..9 to send Esc-prefixed sequences. On macOS
+# that is exactly what "Option as Alt" does, so this one line replaces all of
+# them (and makes every Meta/Alt shortcut work in zsh/tmux). Use `left` instead
+# of `true` if you want to keep the right Option key for typing accented chars.
+
+macos-option-as-alt = left
+
+#########
+# SHELL #
+#########
+command = /opt/homebrew/bin/tmux new-session -A -s 0
+

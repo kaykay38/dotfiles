@@ -1,0 +1,11 @@
+[mgr]
+linemode = "custom_mtime"
+
+[plugin]
+# prepend_previewers = [
+  # { name = "*.epub", run = "epub" },
+# ]
+
+# prepend_preloaders= [
+  # { name = "*.epub", run = "epub" },
+# ]
