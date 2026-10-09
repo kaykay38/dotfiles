@@ -48,8 +48,29 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 -- format on save (LSP formatting; silently no-ops when no formatter is attached)
+-- Toggle with :FormatOnSave — session-only, back to on at the next launch.
+vim.g.format_on_save = true
+
 vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("custom-format-on-save", { clear = true }),
     callback = function(args)
+        if not vim.g.format_on_save then return end
         pcall(vim.lsp.buf.format, { bufnr = args.buf, timeout_ms = 800 })
     end,
+})
+
+vim.api.nvim_create_user_command("FormatOnSave", function(opts)
+    local arg = opts.args
+    if arg == "on" then
+        vim.g.format_on_save = true
+    elseif arg == "off" then
+        vim.g.format_on_save = false
+    else
+        vim.g.format_on_save = not vim.g.format_on_save
+    end
+    vim.notify("Format on save: " .. (vim.g.format_on_save and "ON" or "OFF"))
+end, {
+    nargs = "?",
+    complete = function() return { "on", "off" } end,
+    desc = "Toggle LSP format-on-save for this session",
 })

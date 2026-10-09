@@ -152,12 +152,15 @@ end
 
 -- Readable inline code in Markdown (hover floats and .md files alike). Tree-sitter
 -- capture groups can't be scoped to a single window, so this is global and
--- re-applied whenever the colorscheme changes. Inline `code` becomes neutral text
--- on a faint background "chip" (à la VS Code) instead of gruvbox's hard-to-read
--- olive foreground. Only the inline-specific group is touched, so headings keep
--- their gruvbox colour + bold and code blocks keep their syntax colours.
+-- re-applied whenever the colorscheme changes. Inline `code` becomes aqua on a
+-- faint background "chip" (à la VS Code) instead of the hard-to-read olive
+-- foreground. Aqua is deliberate: gruvbox-material spends every other accent on
+-- heading levels (h1 red, h2 orange, h3 yellow, h4 green, h5 blue, h6 purple),
+-- so it is the one colour that never collides with a heading. Only the
+-- inline-specific group is touched, so headings keep their colour + bold and
+-- fenced code blocks keep their syntax colours.
 local function style_markdown_hl()
-    vim.api.nvim_set_hl(0, "@markup.raw.markdown_inline", { fg = "#d4be98", bg = "#3c3836" })
+    vim.api.nvim_set_hl(0, "@markup.raw.markdown_inline", { fg = "#89b482", bg = "#3c3836" })
 end
 style_markdown_hl()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = style_markdown_hl })

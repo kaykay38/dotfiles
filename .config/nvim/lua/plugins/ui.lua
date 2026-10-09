@@ -73,12 +73,7 @@ return {
         opts = { view = { width = 34 }, renderer = { group_empty = true } },
     },
 
-    -- gitsigns: only when editing files
-    {
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        opts = {},
-    },
+    -- git tooling (gitsigns, diffview) lives in plugins/git.lua
 
     -- indent guides after file open
     {
@@ -97,7 +92,8 @@ return {
             wk.setup({ delay = 150, notify = false })
             wk.add({
                 { "<leader>f", group = "Find" },
-                { "<leader>d", group = "Diagnostics" },
+                { "<leader>g", group = "Git" },
+                { "<leader>d", group = "Debug" },
                 { "<leader>s", group = "Splits" },
                 { "<leader>l", group = "LSP" },
                 { "<leader>o", group = "OpenCode" },
