@@ -1,6 +1,6 @@
 #!/bin/bash
 
-repo="$(pwd)"
+repo="$(dirname $0)"
 
 link_config() {
     local source="$1"
